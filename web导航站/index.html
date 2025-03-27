@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>独立开发者导航站 - 工具资源集合</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* 新布局结构 */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .site-title {
+            text-align: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .site-title h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .site-title p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: rgba(255,255,255,0.8);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* 主内容区域 */
+        .content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #4a90e2, #6344e2);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-header-left h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .content-header-left p {
+            opacity: 0.9;
+        }
+
+        /* 搜索框样式 */
+        .search-box {
+            display: flex;
+            max-width: 300px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 0.9rem;
+        }
+
+        .search-box button {
+            padding: 10px 15px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .search-box button:hover {
+            background-color: #ff5252;
+        }
+
+        /* 工具卡片和网格样式保留 */
+        .category-section {
+            margin-bottom: 40px;
+            display: none; /* 默认隐藏所有分类 */
+        }
+
+        .category-section.active {
+            display: block; /* 显示当前激活的分类 */
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card h3 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .tool-card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .tool-card .tool-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tool-card .visit-btn {
+            display: inline-block;
+            background-color: #4a90e2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .tool-card .visit-btn:hover {
+            background-color: #3a7bd5;
+        }
+
+        .tool-card .tool-tag {
+            background-color: #f0f4f8;
+            color: #5a6d8a;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* 页脚样式 */
+        footer {
+            margin-left: 250px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* 语言切换按钮 */
+        .language-switcher {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+
+        .language-switcher button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .language-switcher button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 高亮显示搜索结果 */
+        .highlight {
+            background-color: #fff3cd;
+        }
+
+        /* 热门标签 */
+        .hot-tag {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .layout {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 10px 0;
+            }
+            
+            .content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            
+            .content-header {
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-box {
+                max-width: 100%;
+                margin-top: 15px;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            footer {
+                margin-left: 0;
+            }
+        }
+
+        .sub-category-title {
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a90e2;
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    </style>
+
+    <!-- Google Analytics 跟踪代码 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HB1L1L7592"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        // 替换为您的跟踪ID
+        gtag('config', 'G-HB1L1L7592');
+    </script>
+    
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="layout">
+        <!-- 侧边栏导航 -->
+        <aside class="sidebar">
+            <div class="site-title">
+                <h1>独立开发者导航</h1>
+                <p>工具资源集合</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#dev-tools" class="nav-link active" data-section="dev-tools">
+                        <i class="fas fa-tools"></i> 开发工具
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#research" class="nav-link" data-section="research">
+                        <i class="fas fa-search"></i> 需求与调研
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#website" class="nav-link" data-section="website">
+                        <i class="fas fa-laptop-code"></i> 网站建设
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#seo" class="nav-link" data-section="seo">
+                        <i class="fas fa-chart-line"></i> SEO与推广
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#ai" class="nav-link" data-section="ai">
+                        <i class="fas fa-robot"></i> AI与创新
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#community" class="nav-link" data-section="community">
+                        <i class="fas fa-users"></i> 社区资源
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#templates" class="nav-link" data-section="templates">
+                        <i class="fas fa-file-code"></i> 网站模板
+                    </a>
+                </li>
+            </ul>
+
+            <div class="language-switcher">
+                <button id="langToggle">English</button>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="content">
+            <!-- 顶部搜索区 -->
+            <div class="content-header">
+                <div class="content-header-left">
+                    <h2>开发工具</h2>
+                    <p>提升开发效率的必备工具</p>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜索工具、资源或关键词...">
+                    <button id="searchBtn">搜索</button>
+                </div>
+            </div>
+            
+            <!-- 开发工具分类 -->
+            <section id="dev-tools" class="category-section active">
+                <div class="tools-grid">
+                    <!-- 快速开发工具 -->
+                    <div class="tool-card">
+                        <h3>Bolt.new</h3>
+                        <p>无需配置环境的云端AI开发工具，可以在几分钟内从想法到完整网站，一键部署上线</p>
+                        <div class="tool-links">
+                            <a href="https://bolt.new/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI开发</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Cursor</h3>
+                        <p>专为生成式AI优化的代码编辑器，可以加速开发过程，迭代代码</p>
+                        <div class="tool-links">
+                            <a href="https://cursor.sh/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI编辑器</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 独立开发必备工具 -->
+                    <div class="tool-card">
+                        <h3>GitHub</h3>
+                        <p>代码托管平台，提供版本控制和协作功能</p>
+                        <div class="tool-links">
+                            <a href="https://github.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">代码管理</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Notion</h3>
+                        <p>all-in-one工作空间，用于笔记、项目管理和文档</p>
+                        <div class="tool-links">
+                            <a href="https://www.notion.so" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">生产力工具</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>ChatGPT</h3>
+                        <p>AI对话模型，辅助编程、内容创作和问题解决</p>
+                        <div class="tool-links">
+                            <a href="https://chat.openai.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI助手</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 需求与调研分类 -->
+            <section id="research" class="category-section">
+                <div class="tools-grid">
+                    <!-- 需求收集和关键词调研 -->
+                    <div class="tool-card">
+                        <h3>谷歌下拉词</h3>
+                        <p>用于获取谷歌搜索建议的关键词，帮助发现用户真实搜索需求</p>
+                        <div class="tool-links">
+                            <a href="https://www.searchsuggest.tips/?keyword=" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">关键词研究</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Toolify 榜单</h3>
+                        <p>提供AI工具收入排名，可以发现哪些AI产品最赚钱</p>
+                        <div class="tool-links">
+                            <a href="https://www.toolify.ai/Best-AI-Tools-revenue" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">市场分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>AI导航站需求列表</h3>
+                        <p>提供AI导航站的需求列表，了解用户对AI工具的真实需求</p>
+                        <div class="tool-links">
+                            <a href="https://theresaforthat.com/requests" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">需求分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>关键词难度分析</h3>
+                        <p>用于检查关键词的难度，帮助SEO优化和内容策略</p>
+                        <div class="tool-links">
+                            <a href="https://ahrefs.com/keyword-difficulty" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Google Trends</h3>
+                        <p>发现新兴趋势和热门搜索，把握市场机会</p>
+                        <div class="tool-links">
+                            <a href="https://trends.google.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">趋势分析</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 竞品调研工具 -->
+                    <div class="tool-card">
+                        <h3>AITDK</h3>
+                        <p>分析网站的流量和网页关键词，了解竞争对手的SEO策略和流量来源</p>
+                        <div class="tool-links">
+                            <a href="https://aitdk.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">竞品分析</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Ahrefs</h3>
+                        <p>SEO工具，提供外链分析功能，帮助了解竞争对手的外链策略</p>
+                        <div class="tool-links">
+                            <a href="https://ahrefs.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">外链分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>SEMrush</h3>
+                        <p>全面的SEO和市场分析工具，帮助了解竞争对手和市场状况</p>
+                        <div class="tool-links">
+                            <a href="https://zh.semrush.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">市场分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Reddit</h3>
+                        <p>社区讨论平台，可以发现用户真实痛点和需求</p>
+                        <div class="tool-links">
+                            <a href="https://www.reddit.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">用户研究</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Product Hunt</h3>
+                        <p>发现新产品和创新项目，了解市场动态</p>
+                        <div class="tool-links">
+                            <a href="https://www.producthunt.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">产品发现</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 网站建设分类 -->
+            <section id="website" class="category-section">
+                <div class="tools-grid">
+                    <!-- 上站必备工具 -->
+                    <div class="tool-card">
+                        <h3>Cloudflare</h3>
+                        <p>提供CDN、DNS和网站安全服务，加速网站访问并提供DDoS防护</p>
+                        <div class="tool-links">
+                            <a href="https://www.cloudflare.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">网站加速</span>
+                        </div>
+                        <span class="hot-tag">热门</span>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Vercel</h3>
+                        <p>前端项目部署平台，提供免费托管服务，适合React、Vue等项目</p>
+                        <div class="tool-links">
+                            <a href="https://vercel.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">网站部署</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Netlify</h3>
+                        <p>静态网站托管服务，自动化构建和部署，集成CI/CD</p>
+                        <div class="tool-links">
+                            <a href="https://www.netlify.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">网站部署</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>GitHub Pages</h3>
+                        <p>免费静态网站托管服务，直接从GitHub仓库部署</p>
+                        <div class="tool-links">
+                            <a href="https://pages.github.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">网站托管</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>LeanDomainSearch</h3>
+                        <p>帮助查找可用的域名，为你的项目找到合适的网址</p>
+                        <div class="tool-links">
+                            <a href="https://leandomainsearch.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">域名查询</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>InstantDomainSearch</h3>
+                        <p>快速查询域名可用性的工具</p>
+                        <div class="tool-links">
+                            <a href="https://instantdomainsearch.com/?q=" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">域名查询</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Spaceship</h3>
+                        <p>域名注册和管理服务</p>
+                        <div class="tool-links">
+                            <a href="https://spaceship.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">域名服务</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Namecheap</h3>
+                        <p>经济实惠的域名注册和网络主机服务</p>
+                        <div class="tool-links">
+                            <a href="https://namecheap.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">域名服务</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Porkbun</h3>
+                        <p>价格实惠且提供免费隐私保护的域名注册服务</p>
+                        <div class="tool-links">
+                            <a href="https://porkbun.com" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">域名服务</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SEO与推广分类 -->
+            <section id="seo" class="category-section">
+                <div class="tools-grid">
+                    <!-- SEO与推广工具 -->
+                    <div class="tool-card">
+                        <h3>Google Search Console</h3>
+                        <p>监控和优化网站在Google搜索结果中的表现，跟踪索引状态</p>
+                        <div class="tool-links">
+                            <a href="https://search.google.com/search-console" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO监控</span>
+                        </div>
+                        <span class="hot-tag">必备</span>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Google Analytics</h3>
+                        <p>网站流量分析工具，跟踪用户行为、来源和转化率</p>
+                        <div class="tool-links">
+                            <a href="https://analytics.google.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">流量分析</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Bing Webmaster Tools</h3>
+                        <p>提交并管理您的网站在Bing搜索引擎中的表现，获取SEO建议</p>
+                        <div class="tool-links">
+                            <a href="https://www.bing.com/webmasters/submiturl" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO工具</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Semrush</h3>
+                        <p>综合SEO工具，提供竞争对手分析、关键词研究和网站审核</p>
+                        <div class="tool-links">
+                            <a href="https://www.semrush.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>GTmetrix</h3>
+                        <p>网站性能分析工具，提供页面加载速度评分和优化建议</p>
+                        <div class="tool-links">
+                            <a href="https://gtmetrix.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">性能测试</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Google Core Web Vitals</h3>
+                        <p>检查和优化网站核心网页性能指标</p>
+                        <div class="tool-links">
+                            <a href="https://search.google.com/search-console/core-web-vitals" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">性能优化</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Moz</h3>
+                        <p>全面的SEO工具平台，提供关键词研究、网站审核和反向链接分析</p>
+                        <div class="tool-links">
+                            <a href="https://moz.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Intent SEO指南</h3>
+                        <p>帮助理解和优化搜索意图的SEO实践指南</p>
+                        <div class="tool-links">
+                            <a href="https://moz.com/blog/search-intent-and-seo-a-quick-guide" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO教程</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Google Passage Ranking</h3>
+                        <p>了解Google如何将网页转换为Passage，提升内容在搜索中的排名</p>
+                        <div class="tool-links">
+                            <a href="https://blog.google/products/search/search-on/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO技巧</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Neil Patel - Passage Indexing</h3>
+                        <p>提升Google Passage Ranking的技巧，优化内容结构</p>
+                        <div class="tool-links">
+                            <a href="https://neilpatel.com/blog/passage-indexing/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO指南</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Seosly</h3>
+                        <p>关于Google Passage Ranking的专业指南和实用技巧</p>
+                        <div class="tool-links">
+                            <a href="https://seosly.com/google-passage-ranking/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO教程</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- AI与创新分类 -->
+            <section id="ai" class="category-section">
+                <div class="tools-grid">
+                    <!-- AI与创新工具 -->
+                    <div class="tool-card">
+                        <h3>OpenAI API</h3>
+                        <p>提供GPT模型API接口，用于开发聊天机器人、内容生成和AI集成</p>
+                        <div class="tool-links">
+                            <a href="https://openai.com/api/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI开发</span>
+                        </div>
+                        <span class="hot-tag">热门</span>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Midjourney</h3>
+                        <p>AI图像生成工具，通过文本描述创建高质量艺术图像</p>
+                        <div class="tool-links">
+                            <a href="https://www.midjourney.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI图像</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Hugging Face</h3>
+                        <p>AI模型共享平台，提供开源模型、数据集和API</p>
+                        <div class="tool-links">
+                            <a href="https://huggingface.co/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI开源</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Replicate</h3>
+                        <p>云端AI模型运行平台，提供API接口调用各种开源模型</p>
+                        <div class="tool-links">
+                            <a href="https://replicate.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI API</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>There's An AI For That</h3>
+                        <p>全球最大的AI工具导航网站，发现各种AI应用</p>
+                        <div class="tool-links">
+                            <a href="https://theresanaiforthat.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI导航</span>
+                        </div>
+                        <span class="hot-tag">热门</span>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Toolify AI</h3>
+                        <p>中文友好的AI工具导航网站，收录优质AI工具</p>
+                        <div class="tool-links">
+                            <a href="https://www.toolify.ai/zh/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI导航</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Eleven Labs</h3>
+                        <p>使用AI技术克隆和生成逼真的人声</p>
+                        <div class="tool-links">
+                            <a href="https://elevenlabs.io/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">语音技术</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>AvatarAI.me</h3>
+                        <p>AI生成专业头像，上线十天入账10万美元的爆款产品</p>
+                        <div class="tool-links">
+                            <a href="https://avatarai.me/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI图像</span>
+                        </div>
+                        <span class="hot-tag">爆款</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 社区资源分类 -->
+            <section id="community" class="category-section">
+                <div class="tools-grid">
+                    <!-- 社区与学习平台 -->
+                    <div class="tool-card">
+                        <h3>Indie Hackers</h3>
+                        <p>独立开发者社区，分享创业经验和盈利方式</p>
+                        <div class="tool-links">
+                            <a href="https://www.indiehackers.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">开发社区</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Product Hunt</h3>
+                        <p>新产品发布平台，获取早期用户和反馈</p>
+                        <div class="tool-links">
+                            <a href="https://www.producthunt.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">产品推广</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>V2EX</h3>
+                        <p>创意工作者社区，讨论技术和创业话题</p>
+                        <div class="tool-links">
+                            <a href="https://v2ex.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">技术社区</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 资讯资源链接 -->
+                    <div class="tool-card">
+                        <h3>Hacker News</h3>
+                        <p>技术新闻聚合平台，关注创业和技术前沿</p>
+                        <div class="tool-links">
+                            <a href="https://news.ycombinator.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">科技资讯</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Dev.to</h3>
+                        <p>开发者博客平台，分享技术文章和经验</p>
+                        <div class="tool-links">
+                            <a href="https://dev.to/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">技术博客</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>生财有术</h3>
+                        <p>中文互联网最大的创业社区之一，分享实战经验</p>
+                        <div class="tool-links">
+                            <a href="https://scys.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">创业社区</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>SEO Box</h3>
+                        <p>收集通过Stripe平台收款的Top 100赚钱产品</p>
+                        <div class="tool-links">
+                            <a href="https://seo.box/referring/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">产品分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Google Search Docs</h3>
+                        <p>谷歌搜索中心提供的SEO基础知识，帮助创建有价值内容</p>
+                        <div class="tool-links">
+                            <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=zh-cn" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO教程</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Ahrefs趋势网站</h3>
+                        <p>Ahrefs提供的当前趋势网站列表，了解热门网站</p>
+                        <div class="tool-links">
+                            <a href="https://ahrefs.com/websites#trending" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">趋势分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>500MRRR</h3>
+                        <p>展示那些通过副业每月赚取500的人的故事和经验</p>
+                        <div class="tool-links">
+                            <a href="https://www.500mrrr.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">创业故事</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Reddit子社区导航</h3>
+                        <p>精选的Reddit子社区列表，帮助发现相关讨论和资源</p>
+                        <div class="tool-links">
+                            <a href="https://librating-doll-b8a.notion.site/Reddit-1a8e8aed91b180218399ecbab874e530b" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">社区资源</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>AI视频SaaS工具集</h3>
+                        <p>AI视频SaaS工具的详细整理，包含功能和价格对比</p>
+                        <div class="tool-links">
+                            <a href="https://docs.google.com/spreadsheets/d/1Qodq9KbjQj1J2O43xc1pir2rnfEEsMUxZTDATNgid=0#gid=0" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">工具集合</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Solopreneur报告</h3>
+                        <p>Starter Story的高级版独立创业者报告，包含创业数据和分析</p>
+                        <div class="tool-links">
+                            <a href="https://docs.google.com/spreadsheets/d/1eUni44pIURML2WwFFXKzNmm-WKuuam9_ynr5Fo_Q74M/edit?gid=83151001#gid=83151001" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">创业分析</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 网站模板分类 -->
+            <section id="templates" class="category-section">
+                <!-- 添加一些额外的CSS样式 -->
+                <style>
+                    .sub-category-title {
+                        margin: 30px 0 20px;
+                        padding-bottom: 10px;
+                        border-bottom: 2px solid #4a90e2;
+                        color: #2c3e50;
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                    }
+                </style>
+
+                <!-- 导航站模板子分类 -->
+                <h2 class="sub-category-title">导航站模板</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>WebStack.cc</h3>
+                        <p>免费开源的导航网站模板，响应式设计，可自定义</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/WebStackPage/WebStackPage.github.io" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">导航模板</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>OneNav</h3>
+                        <p>开源导航网址管理系统，支持多用户和在线编辑</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/helloxz/onenav" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">导航系统</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>FRE123 导航</h3>
+                        <p>免费资源共享平台导航，可以一键搭建你的导航网站</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/fre123-com/fre123-nav" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">开源模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>OSS Gallery</h3>
+                        <p>互联网上最佳开源项目的众包列表，基于Dub TypeScript SDK构建</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/dubinc/oss-gallery?ref=ossgallery" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">开源模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>tap4-ai-webui</h3>
+                        <p>一键部署你自己的AI工具目录的开源web-ui解决方案</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/6677-ai/tap4-ai-webui" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">开源模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>GPTs Works</h3>
+                        <p>第三方GPTs商店，开源且易于定制</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/all-in-aigc/gpts-works" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">开源模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>DokeyAI Data</h3>
+                        <p>网站用公共AI工具数据，可用于构建自己的AI工具导航站</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/DokeyAI/dokeyai-data" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">开源数据</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 开源模板子分类 -->
+                <h2 class="sub-category-title">开源模板</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>Bootstrap 模板</h3>
+                        <p>基于Bootstrap框架的免费响应式网站模板集合</p>
+                        <div class="tool-links">
+                            <a href="https://startbootstrap.com/themes" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">响应式模板</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>HTML5 UP</h3>
+                        <p>设计精美的免费HTML5响应式网站模板</p>
+                        <div class="tool-links">
+                            <a href="https://html5up.net/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">HTML5模板</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3>Gatsby Starters</h3>
+                        <p>Gatsby框架的开源启动模板，适合博客和静态网站</p>
+                        <div class="tool-links">
+                            <a href="https://www.gatsbyjs.com/starters/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">React模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>UI Libs</h3>
+                        <p>用于Vue 3和Nuxt 3的UI库选择器，帮助开发者快速挑选合适的UI库</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/ddahan/ui-libs" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">开源模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Vercel 模板中心</h3>
+                        <p>Vercel提供的各种现代网站模板，包含多种导航类型的模板</p>
+                        <div class="tool-links">
+                            <a href="https://vercel.com/templates" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">模板集合</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Bolt.new</h3>
+                        <p>提供即时可部署的网站模板，包括各类导航站模板</p>
+                        <div class="tool-links">
+                            <a href="https://bolt.new/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">快速部署</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Tailwind UI</h3>
+                        <p>提供高质量收费模板，如Salient等专业导航站模板</p>
+                        <div class="tool-links">
+                            <a href="https://tailwindui.com/templates/salient" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">付费模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>ThemeForest</h3>
+                        <p>最大的模板市场之一，提供各类网站模板，包括导航站模板</p>
+                        <div class="tool-links">
+                            <a href="https://themeforest.net/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">付费模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Rin 动态博客</h3>
+                        <p>基于Cloudflare Pages、Workers、D1和R2的动态博客模板</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/openRun/Rin" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">博客模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Next.js 15 模板</h3>
+                        <p>支持App Router和Page Router的Next.js 15模板和启动器</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/xartz/Next-js-Boilerplate" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">Next.js</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>SaaS 模板</h3>
+                        <p>使用Next.js、Tailwind CSS、Shadcn UI和TypeScript构建的SaaS模板</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/xartz/SaaS-Boilerplate" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SaaS模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Open SaaS</h3>
+                        <p>免费、开源的React和Node.js SaaS应用启动器，功能强大</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/wasp-lang/open-saas" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SaaS模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>NextJS Landing Page</h3>
+                        <p>免费的Next.Js登陆页面模板，快速构建营销页面</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/xartz/Next-JS-Landing-Page-Starter-Template" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">着陆页</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Astro Boilerplate</h3>
+                        <p>带有响应式博客和作品集的Astro模板，性能优异</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/xartz/Astro-boilerplate" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">Astro模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Landing Page Boilerplate</h3>
+                        <p>多功能的登陆页面模板，适用于各种项目和营销活动</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/weijunext/landing-page-boilerplate" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">着陆页</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Wiggle AI WebUI</h3>
+                        <p>开源的wiggle ai web客户端，易于定制和部署</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/ai-aigc-studio/Wiggle-AI-WebUI" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI Web</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>周刊博客模板</h3>
+                        <p>适合发布周刊内容的博客模板，结构简洁清晰</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/weijunext/new-blog" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">博客模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Gapis Money</h3>
+                        <p>API服务管理和计费平台，适合构建API服务</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/weijunext/gapis.money" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">API平台</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>HuntScreens</h3>
+                        <p>自动截取Producthunt、YC和Indiehackers上新项目截图的工具</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/daimajia/huntscreens" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">截图工具</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Smart Excel AI</h3>
+                        <p>使用ChatGPT在几秒钟内生成所需的Excel公式</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/weijunext/smart-excel-ai" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI工具</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>NextJS VPS</h3>
+                        <p>Next.js VPS示例，帮助开发者理解VPS部署流程</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/ashleyrudland/nextjs_vps" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">部署示例</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>AI换发型工具</h3>
+                        <p>几秒钟内获得新发型效果的AI工具</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/Pwntus/change-hairstyle-ai" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI应用</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Green Screen Creator</h3>
+                        <p>在视频中跟踪对象并添加绿幕背景的工具</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/replicate/green-screen-creator" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">视频工具</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>JustShip</h3>
+                        <p>Svelte 5和SvelteKit SaaS模板，快速启动SaaS项目</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/oclufi/justship" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">Svelte</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Supanuxt SaaS</h3>
+                        <p>集成Nuxt3、Supabase、OAuth等技术的SaaS模板</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/javascriptMick/supanuxt-saas" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">Nuxt</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>SaasFly</h3>
+                        <p>用于创建SaaS应用的模板或启动器</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/saasfly/saasfly" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SaaS模板</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>ShipFast TypeScript</h3>
+                        <p>使用TypeScript的ShipFast模板，加速SaaS开发</p>
+                        <div class="tool-links">
+                            <a href="https://github.com/mundane799699/xlike-web" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+    
+    <footer>
+        <p>© 2023 独立开发者导航站 - 为创业者和开发者提供便捷资源导航</p>
+    </footer>
+
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航点击事件
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.category-section');
+            const contentHeader = document.querySelector('.content-header-left');
+            
+            // 语言设置
+            let currentLang = 'zh'; // 默认中文
+            
+            // 定义双语内容
+            const translations = {
+                // 导航菜单
+                nav: {
+                    'dev-tools': {
+                        zh: '开发工具',
+                        en: 'Dev Tools'
+                    },
+                    'research': {
+                        zh: '需求与调研',
+                        en: 'Research'
+                    },
+                    'website': {
+                        zh: '网站建设',
+                        en: 'Website Building'
+                    },
+                    'seo': {
+                        zh: 'SEO与推广',
+                        en: 'SEO & Marketing'
+                    },
+                    'ai': {
+                        zh: 'AI与创新',
+                        en: 'AI & Innovation'
+                    },
+                    'community': {
+                        zh: '社区资源',
+                        en: 'Community'
+                    },
+                    'templates': {
+                        zh: '网站模板',
+                        en: 'Templates'
+                    }
+                },
+                // 内容描述
+                desc: {
+                    'dev-tools': {
+                        zh: '提升开发效率的必备工具',
+                        en: 'Essential tools to improve development efficiency'
+                    },
+                    'research': {
+                        zh: '需求收集和竞品分析工具',
+                        en: 'Tools for demand collection and competitor analysis'
+                    },
+                    'website': {
+                        zh: '网站建设和上线必备工具',
+                        en: 'Essential tools for website building and deployment'
+                    },
+                    'seo': {
+                        zh: '提升网站流量和曝光的工具',
+                        en: 'Tools to boost website traffic and exposure'
+                    },
+                    'ai': {
+                        zh: '人工智能和创新技术工具',
+                        en: 'AI and innovative technology tools'
+                    },
+                    'community': {
+                        zh: '开发者社区和学习资源',
+                        en: 'Developer communities and learning resources'
+                    },
+                    'templates': {
+                        zh: '优质开源和付费网站模板',
+                        en: 'High-quality open source and paid website templates'
+                    }
+                },
+                // 界面元素
+                ui: {
+                    'site-title': {
+                        zh: '独立开发者导航',
+                        en: 'Indie Dev Navigator'
+                    },
+                    'site-subtitle': {
+                        zh: '工具资源集合',
+                        en: 'Tools & Resources Collection'
+                    },
+                    'search-placeholder': {
+                        zh: '搜索工具、资源或关键词...',
+                        en: 'Search tools, resources or keywords...'
+                    },
+                    'search-button': {
+                        zh: '搜索',
+                        en: 'Search'
+                    },
+                    'visit-button': {
+                        zh: '访问',
+                        en: 'Visit'
+                    },
+                    'no-results': {
+                        zh: '未找到与 "{query}" 相关的工具。',
+                        en: 'No tools related to "{query}" found.'
+                    },
+                    'search-results': {
+                        zh: '搜索结果',
+                        en: 'Search Results'
+                    },
+                    'found-count': {
+                        zh: '找到 {count} 个与 "{query}" 相关的工具',
+                        en: 'Found {count} tools related to "{query}"'
+                    },
+                    'footer': {
+                        zh: '© 2023 独立开发者导航站 - 为创业者和开发者提供便捷资源导航',
+                        en: '© 2023 Indie Dev Navigator - Convenient resource navigation for entrepreneurs and developers'
+                    }
+                }
+            };
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // 更新导航激活状态
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 更新内容区显示
+                    sections.forEach(section => section.classList.remove('active'));
+                    document.getElementById(targetSection).classList.add('active');
+                    
+                    // 更新内容头部
+                    updateContentHeader(targetSection);
+                });
+            });
+            
+            // 更新内容头部
+            function updateContentHeader(sectionId) {
+                let title = translations.nav[sectionId][currentLang];
+                let desc = translations.desc[sectionId][currentLang];
+                contentHeader.innerHTML = `<h2>${title}</h2><p>${desc}</p>`;
+            }
+            
+            // 搜索功能
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            // 更新搜索框占位符
+            function updateSearchPlaceholder() {
+                searchInput.placeholder = translations.ui['search-placeholder'][currentLang];
+                searchBtn.textContent = translations.ui['search-button'][currentLang];
+            }
+            
+            searchBtn.addEventListener('click', function() {
+                performSearch(searchInput.value);
+            });
+            
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    performSearch(searchInput.value);
+                }
+            });
+            
+            // 执行搜索
+            function performSearch(query) {
+                query = query.toLowerCase().trim();
+                
+                if (!query) {
+                    resetSearch();
+                    return;
+                }
+                
+                let foundCount = 0;
+                
+                // 搜索所有工具卡片
+                const allCards = document.querySelectorAll('.tool-card');
+                allCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('p').textContent.toLowerCase();
+                    const tag = card.querySelector('.tool-tag').textContent.toLowerCase();
+                    
+                    if (title.includes(query) || desc.includes(query) || tag.includes(query)) {
+                        card.classList.add('highlight');
+                        card.style.display = 'block';
+                        foundCount++;
+                        
+                        // 确保包含该卡片的分类显示
+                        const parentSection = card.closest('.category-section');
+                        parentSection.classList.add('active');
+                        
+                        // 激活相应的导航项
+                        const sectionId = parentSection.id;
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('data-section') === sectionId) {
+                                link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
+                            }
+                        });
+                    } else {
+                        card.classList.remove('highlight');
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // 显示搜索结果提示
+                if (foundCount === 0) {
+                    const noResultsMsg = translations.ui['no-results'][currentLang].replace('{query}', query);
+                    alert(noResultsMsg);
+                    resetSearch();
+                } else {
+                    // 滚动到第一个匹配结果
+                    const firstMatch = document.querySelector('.highlight');
+                    if (firstMatch) {
+                        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    
+                    // 更新内容头部
+                    const resultsTitle = translations.ui['search-results'][currentLang];
+                    const resultsDesc = translations.ui['found-count'][currentLang]
+                        .replace('{count}', foundCount)
+                        .replace('{query}', query);
+                    contentHeader.innerHTML = `<h2>${resultsTitle}</h2><p>${resultsDesc}</p>`;
+                }
+            }
+            
+            // 重置搜索结果
+            function resetSearch() {
+                // 恢复默认显示
+                navLinks.forEach(link => link.classList.remove('active'));
+                navLinks[0].classList.add('active');
+                
+                sections.forEach(section => section.classList.remove('active'));
+                sections[0].classList.add('active');
+                
+                // 显示所有卡片
+                document.querySelectorAll('.tool-card').forEach(card => {
+                    card.classList.remove('highlight');
+                    card.style.display = 'block';
+                });
+                
+                // 恢复内容头部
+                updateContentHeader('dev-tools');
+            }
+            
+            // 语言切换功能
+            const langToggle = document.getElementById('langToggle');
+            
+            // 切换语言
+            function switchLanguage() {
+                currentLang = currentLang === 'zh' ? 'en' : 'zh';
+                langToggle.textContent = currentLang === 'zh' ? 'English' : '中文';
+                
+                // 更新网站标题
+                document.querySelector('.site-title h1').textContent = translations.ui['site-title'][currentLang];
+                document.querySelector('.site-title p').textContent = translations.ui['site-subtitle'][currentLang];
+                
+                // 更新导航菜单
+                navLinks.forEach(link => {
+                    const section = link.getAttribute('data-section');
+                    const text = translations.nav[section][currentLang];
+                    // 保留图标，仅更新文本
+                    const icon = link.innerHTML.split('</i>')[0] + '</i> ';
+                    link.innerHTML = icon + text;
+                });
+                
+                // 更新搜索框
+                updateSearchPlaceholder();
+                
+                // 更新当前页面标题和描述
+                const activeSection = document.querySelector('.nav-link.active').getAttribute('data-section');
+                updateContentHeader(activeSection);
+                
+                // 更新访问按钮文本
+                document.querySelectorAll('.visit-btn').forEach(btn => {
+                    btn.textContent = translations.ui['visit-button'][currentLang];
+                });
+                
+                // 更新页脚
+                document.querySelector('footer p').textContent = translations.ui['footer'][currentLang];
+            }
+            
+            langToggle.addEventListener('click', function() {
+                switchLanguage();
+            });
+            
+            // 初始化
+            updateSearchPlaceholder();
+        });
+    </script>
+</body>
+</html>
+  
