@@ -2,6 +2,10 @@
   Content-Type: application/xml
   Cache-Control: no-cache, no-store, must-revalidate
 
+/sitemap.html
+  Content-Type: application/xml
+  Cache-Control: no-cache, no-store, must-revalidate
+
 /robots.txt
   Content-Type: text/plain 
   Cache-Control: public, max-age=86400 
