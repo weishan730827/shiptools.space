@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>独立开发者导航站 - 工具资源集合</title>
+    <title>独立开发者导航站 | 精选开发工具和资源 | 提升开发效率</title>
+    <meta name="description" content="独立开发者导航站 - 收集精选工具和资源，助力开发者提高效率，加速项目开发。包括设计工具、开发资源、营销推广、生产力工具等分类。">
+    <meta name="keywords" content="独立开发者,开发工具,设计资源,AI工具,营销工具,程序员导航,开发者资源,免费工具">
+    <meta name="author" content="独立开发者导航站团队">
+    
+    <!-- Open Graph 标签(社交分享优化) -->
+    <meta property="og:title" content="独立开发者导航站 | 精选开发工具和资源">
+    <meta property="og:description" content="发现独立开发者必备的优质工具和资源，提升工作效率和项目质量">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shiptools.space">
+    <meta property="og:image" content="https://shiptools.space/images/og-image.jpg">
+    
+    <!-- Twitter 卡片标签 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="独立开发者导航站 | 精选开发工具和资源">
+    <meta name="twitter:description" content="发现独立开发者必备的优质工具和资源，提升工作效率和项目质量">
+    <meta name="twitter:image" content="https://shiptools.space/images/twitter-image.jpg">
+    
+    <!-- 规范链接 -->
+    <link rel="canonical" href="https://shiptools.space">
+    
     <style>
         /* 全局样式 */
         * {
@@ -172,6 +192,15 @@
             color: #333;
             font-size: 1.3rem;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-card .tool-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            border-radius: 4px;
         }
 
         .tool-card p {
@@ -180,11 +209,97 @@
             margin-bottom: 15px;
             line-height: 1.5;
         }
+        
+        .tool-card .tool-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        
+        .tool-card .tool-rating {
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-card .stars {
+            color: #ffc107;
+            margin-right: 5px;
+        }
+        
+        .tool-card .price-tag {
+            background-color: #e6f7ff;
+            color: #1890ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
 
         .tool-card .tool-links {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 15px;
+        }
+        
+        .tool-card .tool-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .tool-card .action-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .tool-card .action-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .tool-card .action-btn i {
+            margin-right: 4px;
+        }
+        
+        .tool-card .related-tools {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #eee;
+            font-size: 0.85rem;
+        }
+        
+        .tool-card .related-tools h4 {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .tool-card .related-tools-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tool-card .related-tool-link {
+            color: #1890ff;
+            text-decoration: none;
+            padding: 2px 6px;
+            background-color: #f0f7ff;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transition: background-color 0.2s;
+        }
+        
+        .tool-card .related-tool-link:hover {
+            background-color: #e0f0ff;
         }
 
         .tool-card .visit-btn {
@@ -320,12 +435,43 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        // 替换为您的跟踪ID
-        gtag('config', 'G-HB1L1L7592');
+        // 设置更详细的分析配置
+        gtag('config', 'G-HB1L1L7592', {
+          'page_title': '独立开发者导航站首页',
+          'anonymize_ip': true,
+          'cookie_expires': 63072000 // 2年，单位为秒
+        });
+        
+        // 添加工具点击跟踪
+        function trackToolClick(toolName, category) {
+          gtag('event', 'tool_click', {
+            'tool_name': toolName,
+            'category': category
+          });
+        }
     </script>
     
     <!-- Font Awesome 图标 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "独立开发者导航站",
+      "url": "https://shiptools.space",
+      "description": "收集精选工具和资源，助力独立开发者提高效率，加速项目开发",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://shiptools.space?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- 引入自定义脚本 -->
+    <script src="main.js"></script>
 </head>
 <body>
     <div class="layout">
@@ -395,51 +541,149 @@
             
             <!-- 开发工具分类 -->
             <section id="dev-tools" class="category-section active">
+                <div class="section-intro">
+                    <p>这里收集了独立开发者必备的开发工具，帮助你提高开发效率、加速项目进度。从代码编辑器到AI辅助工具，让你的开发过程更加顺畅。</p>
+                </div>
                 <div class="tools-grid">
                     <!-- 快速开发工具 -->
                     <div class="tool-card">
-                        <h3>Bolt.new</h3>
-                        <p>无需配置环境的云端AI开发工具，可以在几分钟内从想法到完整网站，一键部署上线</p>
+                        <h3><img src="https://bolt.new/favicon.ico" class="tool-icon" alt="Bolt.new">Bolt.new</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>5.0</span>
+                            </div>
+                            <span class="price-tag">免费启动</span>
+                        </div>
+                        <p>无需配置环境的云端AI开发工具，可以在几分钟内从想法到完整网站，一键部署上线。支持40+框架，内置100+模板，适合快速验证产品创意和构建MVP。使用ChatGPT技术，只需描述你想要的功能，它就能自动生成代码，并提供实时预览。</p>
                         <div class="tool-links">
-                            <a href="https://bolt.new/" class="visit-btn" target="_blank">访问</a>
+                            <a href="https://bolt.new/" class="visit-btn" target="_blank" onclick="trackToolClick('Bolt.new', 'AI开发')">访问</a>
                             <span class="tool-tag">AI开发</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Bolt.new"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Bolt.new" data-url="https://bolt.new/"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="Cursor">Cursor</a>
+                                <a href="#" class="related-tool-link" data-tool="Vercel">Vercel</a>
+                                <a href="#" class="related-tool-link" data-tool="GitHub">GitHub</a>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="tool-card">
-                        <h3>Cursor</h3>
-                        <p>专为生成式AI优化的代码编辑器，可以加速开发过程，迭代代码</p>
+                        <h3><img src="https://cursor.sh/favicon.ico" class="tool-icon" alt="Cursor">Cursor</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.8</span>
+                            </div>
+                            <span class="price-tag">免费版/Pro版</span>
+                        </div>
+                        <p>专为生成式AI优化的代码编辑器，不仅可以加速开发过程、迭代代码，还能实时解释代码、调试错误并提供优化建议。基于VS Code构建，支持所有主流编程语言和扩展。内置Claude和GPT模型，能理解整个代码库上下文，生成完整函数和复杂算法，是独立开发者提升效率的必备工具。</p>
                         <div class="tool-links">
-                            <a href="https://cursor.sh/" class="visit-btn" target="_blank">访问</a>
+                            <a href="https://cursor.sh/" class="visit-btn" target="_blank" onclick="trackToolClick('Cursor', 'AI编辑器')">访问</a>
                             <span class="tool-tag">AI编辑器</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Cursor"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Cursor" data-url="https://cursor.sh/"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="GitHub">GitHub</a>
+                                <a href="#" class="related-tool-link" data-tool="OpenAI API">OpenAI API</a>
+                                <a href="#" class="related-tool-link" data-tool="Bolt.new">Bolt.new</a>
+                            </div>
                         </div>
                     </div>
                     
                     <!-- 独立开发必备工具 -->
                     <div class="tool-card">
-                        <h3>GitHub</h3>
-                        <p>代码托管平台，提供版本控制和协作功能</p>
+                        <h3><img src="https://github.com/favicon.ico" class="tool-icon" alt="GitHub">GitHub</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.9</span>
+                            </div>
+                            <span class="price-tag">免费/团队版</span>
+                        </div>
+                        <p>全球最大的代码托管平台，提供强大的版本控制和协作功能。支持Git仓库管理、Issue跟踪、PR审核、Actions自动化工作流和Pages网站托管。拥有超过8300万开发者用户和2亿+代码仓库，是开源项目的首选平台。提供免费私有仓库，支持GitHub Copilot集成，大幅提升独立开发者的工作效率。</p>
                         <div class="tool-links">
-                            <a href="https://github.com" class="visit-btn" target="_blank">访问</a>
+                            <a href="https://github.com" class="visit-btn" target="_blank" onclick="trackToolClick('GitHub', '代码管理')">访问</a>
                             <span class="tool-tag">代码管理</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="GitHub"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="GitHub" data-url="https://github.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="GitHub Pages">GitHub Pages</a>
+                                <a href="#" class="related-tool-link" data-tool="Vercel">Vercel</a>
+                                <a href="#" class="related-tool-link" data-tool="Netlify">Netlify</a>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="tool-card">
-                        <h3>Notion</h3>
-                        <p>all-in-one工作空间，用于笔记、项目管理和文档</p>
+                        <h3><img src="https://www.notion.so/images/favicon.ico" class="tool-icon" alt="Notion">Notion</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.7</span>
+                            </div>
+                            <span class="price-tag">免费/付费</span>
+                        </div>
+                        <p>功能强大的all-in-one工作空间，集成笔记、项目管理和文档功能于一体。支持数据库、看板、日历、表格等多种视图，可自定义工作流和模板。对独立开发者特别有用的功能包括产品路线图规划、API文档编写、用户反馈收集、Bug追踪以及团队协作。最新版本支持AI助手，帮助内容创建和优化。</p>
                         <div class="tool-links">
-                            <a href="https://www.notion.so" class="visit-btn" target="_blank">访问</a>
+                            <a href="https://www.notion.so" class="visit-btn" target="_blank" onclick="trackToolClick('Notion', '生产力工具')">访问</a>
                             <span class="tool-tag">生产力工具</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Notion"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Notion" data-url="https://www.notion.so"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="GitHub">GitHub</a>
+                                <a href="#" class="related-tool-link" data-tool="ChatGPT">ChatGPT</a>
+                                <a href="#" class="related-tool-link" data-tool="Ahrefs">Ahrefs</a>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="tool-card">
-                        <h3>ChatGPT</h3>
-                        <p>AI对话模型，辅助编程、内容创作和问题解决</p>
+                        <h3><img src="https://chat.openai.com/favicon.ico" class="tool-icon" alt="ChatGPT">ChatGPT</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.9</span>
+                            </div>
+                            <span class="price-tag">免费/Plus</span>
+                        </div>
+                        <p>OpenAI开发的强大AI对话模型，不仅能辅助编程、内容创作和问题解决，还能帮助产品规划、市场调研和用户体验设计。最新GPT-4版本支持分析图片、编写复杂代码、生成创意内容和优化SEO文案。独立开发者可将其用于自动化文档生成、代码调试、产品命名和用户调研，极大提升工作效率和创意质量。</p>
                         <div class="tool-links">
-                            <a href="https://chat.openai.com" class="visit-btn" target="_blank">访问</a>
+                            <a href="https://chat.openai.com" class="visit-btn" target="_blank" onclick="trackToolClick('ChatGPT', 'AI助手')">访问</a>
                             <span class="tool-tag">AI助手</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="ChatGPT"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="ChatGPT" data-url="https://chat.openai.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="OpenAI API">OpenAI API</a>
+                                <a href="#" class="related-tool-link" data-tool="Cursor">Cursor</a>
+                                <a href="#" class="related-tool-link" data-tool="Midjourney">Midjourney</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1270,9 +1514,304 @@
                 </div>
             </section>
             
+            <!-- 设计工具分类 -->
+            <section id="design-tools" class="category-section">
+                <div class="section-intro">
+                    <p>精选设计工具集合，帮助独立开发者快速创建专业级别的UI/UX设计、图标、插图和品牌资产。即使没有专业设计背景，也能轻松完成从原型到最终设计的全过程。</p>
+                </div>
+                <div class="tools-grid">
+                    <!-- 设计神器 -->
+                    <div class="tool-card">
+                        <h3><img src="https://static.figma.com/app/icon/1/favicon.png" class="tool-icon" alt="Figma">Figma</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.9</span>
+                            </div>
+                            <span class="price-tag">免费/专业版</span>
+                        </div>
+                        <p>基于浏览器的全能设计工具，可同时进行UI设计、原型制作和设计系统管理。支持实时协作、自动布局、组件系统和插件生态。对独立开发者特别有用的是其强大的交互原型功能，可以直接模拟最终产品体验。免费计划提供三个文件和两个编辑者，足够小型项目使用。</p>
+                        <div class="tool-links">
+                            <a href="https://www.figma.com" class="visit-btn" target="_blank" onclick="trackToolClick('Figma', 'UI设计')">访问</a>
+                            <span class="tool-tag">UI设计</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Figma"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Figma" data-url="https://www.figma.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="Canva">Canva</a>
+                                <a href="#" class="related-tool-link" data-tool="Midjourney">Midjourney</a>
+                                <a href="#" class="related-tool-link" data-tool="Penpot">Penpot</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3><img src="https://midjourney.com/favicon.ico" class="tool-icon" alt="Midjourney">Midjourney</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.8</span>
+                            </div>
+                            <span class="price-tag">付费</span>
+                        </div>
+                        <p>强大的AI图像生成工具，通过文本描述创建高质量、独特的视觉内容。最新V6版本支持超高清图像生成、更精准的文本理解和风格控制。独立开发者可用它快速创建产品界面、应用插图、品牌元素和营销素材。与其他工具相比，Midjourney的艺术性和美感更强，生成的图像极具创意和专业感。</p>
+                        <div class="tool-links">
+                            <a href="https://www.midjourney.com" class="visit-btn" target="_blank" onclick="trackToolClick('Midjourney', 'AI图像')">访问</a>
+                            <span class="tool-tag">AI图像</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Midjourney"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Midjourney" data-url="https://www.midjourney.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="DALL-E">DALL-E</a>
+                                <a href="#" class="related-tool-link" data-tool="ChatGPT">ChatGPT</a>
+                                <a href="#" class="related-tool-link" data-tool="Figma">Figma</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3><img src="https://www.canva.com/favicon.ico" class="tool-icon" alt="Canva">Canva</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.7</span>
+                            </div>
+                            <span class="price-tag">免费/Pro</span>
+                        </div>
+                        <p>简单易用的在线平面设计工具，提供超过100万个模板和大量素材库，适合非设计专业人士。支持创建社交媒体图片、演示文稿、海报、网站原型等内容。新增的Magic Studio功能利用AI技术生成设计、编辑图片和创建品牌形象，让独立开发者一站式完成从Logo设计到产品宣传材料的制作。</p>
+                        <div class="tool-links">
+                            <a href="https://www.canva.com" class="visit-btn" target="_blank" onclick="trackToolClick('Canva', '平面设计')">访问</a>
+                            <span class="tool-tag">平面设计</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Canva"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Canva" data-url="https://www.canva.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="Figma">Figma</a>
+                                <a href="#" class="related-tool-link" data-tool="Midjourney">Midjourney</a>
+                                <a href="#" class="related-tool-link" data-tool="Pixlr">Pixlr</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3><img src="https://penpot.app/images/favicon.ico" class="tool-icon" alt="Penpot">Penpot</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.5</span>
+                            </div>
+                            <span class="price-tag">开源免费</span>
+                        </div>
+                        <p>完全开源的设计和原型工具，适合设计师和开发者协作。基于SVG标准，使设计到代码的转换更加无缝。支持自托管，保证数据隐私和安全。独立开发者尤其喜欢它的开发者友好特性，如组件库、设计系统管理、CSS导出和精确的交互原型功能。作为Figma的开源替代品，提供无限项目和团队成员。</p>
+                        <div class="tool-links">
+                            <a href="https://penpot.app" class="visit-btn" target="_blank" onclick="trackToolClick('Penpot', '开源设计')">访问</a>
+                            <span class="tool-tag">开源设计</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Penpot"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Penpot" data-url="https://penpot.app"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="Figma">Figma</a>
+                                <a href="#" class="related-tool-link" data-tool="GitHub">GitHub</a>
+                                <a href="#" class="related-tool-link" data-tool="SVGator">SVGator</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3><img src="https://framerusercontent.com/images/1Txo8CbeYoYVskcMZKNXVMZRg.png" class="tool-icon" alt="Framer">Framer</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.6</span>
+                            </div>
+                            <span class="price-tag">免费/付费</span>
+                        </div>
+                        <p>面向设计师和开发者的高级交互原型工具，以其强大的动画效果和组件系统著称。除了设计功能，Framer还可直接创建完整网站，无需编码。新版内置的AI网站生成器，只需描述需求即可生成专业级网站，极大加速产品创意验证过程。对独立开发者而言，它是快速构建网站原型和线上作品集的理想选择。</p>
+                        <div class="tool-links">
+                            <a href="https://www.framer.com" class="visit-btn" target="_blank" onclick="trackToolClick('Framer', '网站构建')">访问</a>
+                            <span class="tool-tag">网站构建</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Framer"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Framer" data-url="https://www.framer.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="Webflow">Webflow</a>
+                                <a href="#" class="related-tool-link" data-tool="Figma">Figma</a>
+                                <a href="#" class="related-tool-link" data-tool="Bolt.new">Bolt.new</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 部署和托管工具分类 -->
+            <section id="hosting-tools" class="category-section">
+                <div class="section-intro">
+                    <p>精选部署和托管解决方案，帮助独立开发者快速高效地将项目从本地环境推送到线上。无论是静态网站、全栈应用还是微服务架构，这些工具都能提供简便的部署流程和可靠的运行环境。</p>
+                </div>
+                <div class="tools-grid">
+                    <!-- Vercel -->
+                    <div class="tool-card">
+                        <h3><img src="https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/180x180.png" class="tool-icon" alt="Vercel">Vercel</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.9</span>
+                            </div>
+                            <span class="price-tag">免费/专业版</span>
+                        </div>
+                        <p>专为前端和全栈应用优化的云平台，提供极简的部署体验和全球CDN加速。自动化的CI/CD流程、边缘函数、预览环境和分析工具使其成为React、Vue、Next.js等框架项目的理想托管解决方案。免费计划支持无限个人项目，包含基本分析和全球CDN，适合个人开发者和小型项目起步。</p>
+                        <div class="tool-links">
+                            <a href="https://vercel.com" class="visit-btn" target="_blank" onclick="trackToolClick('Vercel', '前端部署')">访问</a>
+                            <span class="tool-tag">前端部署</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Vercel"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Vercel" data-url="https://vercel.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="Netlify">Netlify</a>
+                                <a href="#" class="related-tool-link" data-tool="GitHub">GitHub</a>
+                                <a href="#" class="related-tool-link" data-tool="Bolt.new">Bolt.new</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3><img src="https://www.netlify.com/v3/static/favicon/favicon-32x32.png" class="tool-icon" alt="Netlify">Netlify</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.8</span>
+                            </div>
+                            <span class="price-tag">免费/团队版</span>
+                        </div>
+                        <p>全功能的Jamstack平台，提供从开发到部署的完整工作流。强大的无服务器函数、身份认证服务、表单处理和CMS解决方案，使其成为复杂静态和动态网站的理想选择。独立开发者特别青睐其持续部署流程、原子部署和即时回滚功能，大幅简化了网站维护和更新工作。</p>
+                        <div class="tool-links">
+                            <a href="https://www.netlify.com" class="visit-btn" target="_blank" onclick="trackToolClick('Netlify', 'Jamstack')">访问</a>
+                            <span class="tool-tag">Jamstack</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Netlify"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Netlify" data-url="https://www.netlify.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="Vercel">Vercel</a>
+                                <a href="#" class="related-tool-link" data-tool="GitHub Pages">GitHub Pages</a>
+                                <a href="#" class="related-tool-link" data-tool="Firebase">Firebase</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3><img src="https://pages.github.com/favicon.ico" class="tool-icon" alt="GitHub Pages">GitHub Pages</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.6</span>
+                            </div>
+                            <span class="price-tag">免费</span>
+                        </div>
+                        <p>GitHub提供的静态网站托管服务，直接从代码仓库构建和部署站点。支持自定义域名、HTTPS和Jekyll静态站点生成器。作为完全免费的解决方案，它是个人网站、项目文档和作品集展示的理想选择。最新功能允许从私有仓库部署公共网站，大大提高了工作流灵活性。</p>
+                        <div class="tool-links">
+                            <a href="https://pages.github.com" class="visit-btn" target="_blank" onclick="trackToolClick('GitHub Pages', '静态托管')">访问</a>
+                            <span class="tool-tag">静态托管</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="GitHub Pages"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="GitHub Pages" data-url="https://pages.github.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="GitHub">GitHub</a>
+                                <a href="#" class="related-tool-link" data-tool="Netlify">Netlify</a>
+                                <a href="#" class="related-tool-link" data-tool="Jekyll">Jekyll</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3><img src="https://firebase.google.com/static/downloads/brand-guidelines/PNG/logo-logomark.png" class="tool-icon" alt="Firebase">Firebase</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.7</span>
+                            </div>
+                            <span class="price-tag">免费/按量付费</span>
+                        </div>
+                        <p>Google提供的应用开发平台，集成了托管、数据库、身份验证等多种服务。实时数据库和Firestore支持即时数据同步，身份验证系统提供多种登录方式，同时还包括云函数、分析和推送通知等功能。对独立开发者而言，Firebase的价值在于它提供了一站式后端解决方案，显著减少了构建全栈应用的时间和复杂度。</p>
+                        <div class="tool-links">
+                            <a href="https://firebase.google.com" class="visit-btn" target="_blank" onclick="trackToolClick('Firebase', '全栈平台')">访问</a>
+                            <span class="tool-tag">全栈平台</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Firebase"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Firebase" data-url="https://firebase.google.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="Supabase">Supabase</a>
+                                <a href="#" class="related-tool-link" data-tool="Vercel">Vercel</a>
+                                <a href="#" class="related-tool-link" data-tool="AWS Amplify">AWS Amplify</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3><img src="https://supabase.com/favicon.ico" class="tool-icon" alt="Supabase">Supabase</h3>
+                        <div class="tool-details">
+                            <div class="tool-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.5</span>
+                            </div>
+                            <span class="price-tag">免费/Pro</span>
+                        </div>
+                        <p>开源的Firebase替代品，基于PostgreSQL数据库提供实时API服务。包含认证系统、数据存储、实时订阅和边缘函数等功能，且完全兼容PostgreSQL生态系统。对于熟悉SQL的独立开发者，Supabase提供了更灵活的数据控制和查询能力，同时保持了简单的API接口。最新版本增加了向量数据库功能，可轻松搭建AI应用。</p>
+                        <div class="tool-links">
+                            <a href="https://supabase.com" class="visit-btn" target="_blank" onclick="trackToolClick('Supabase', '数据平台')">访问</a>
+                            <span class="tool-tag">数据平台</span>
+                            <div class="tool-actions">
+                                <button class="action-btn save-tool" data-tool="Supabase"><i class="far fa-bookmark"></i> 收藏</button>
+                                <button class="action-btn share-tool" data-tool="Supabase" data-url="https://supabase.com"><i class="far fa-share-square"></i> 分享</button>
+                            </div>
+                        </div>
+                        <div class="related-tools">
+                            <h4>相关工具</h4>
+                            <div class="related-tools-list">
+                                <a href="#" class="related-tool-link" data-tool="Firebase">Firebase</a>
+                                <a href="#" class="related-tool-link" data-tool="PostgreSQL">PostgreSQL</a>
+                                <a href="#" class="related-tool-link" data-tool="Vercel">Vercel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
-    </div>
-    
     <footer>
         <p>© 2023 独立开发者导航站 - 为创业者和开发者提供便捷资源导航</p>
     </footer>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双语导航站测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            position: relative;
+            background: #4a90e2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .lang-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .content {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button id="langToggle" class="lang-btn">English</button>
+        <h1 id="title">双语导航站测试</h1>
+        <p id="subtitle">这是一个简单的语言切换测试</p>
+    </header>
+    
+    <div class="content">
+        <h2 id="intro-title">介绍</h2>
+        <p id="intro-text">这是一个测试页面，用于验证语言切换功能是否正常工作。</p>
+        <p id="instruction">点击右上角的按钮可以在中文和英文之间切换。</p>
+        <a href="#" id="link-text">访问网站</a>
+    </div>
+
+    <script>
+        // 翻译数据
+        const translations = {
+            zh: {
+                btnText: "English",
+                title: "双语导航站测试",
+                subtitle: "这是一个简单的语言切换测试",
+                introTitle: "介绍",
+                introText: "这是一个测试页面，用于验证语言切换功能是否正常工作。",
+                instruction: "点击右上角的按钮可以在中文和英文之间切换。",
+                linkText: "访问网站"
+            },
+            en: {
+                btnText: "中文",
+                title: "Bilingual Navigation Test",
+                subtitle: "This is a simple language switch test",
+                introTitle: "Introduction",
+                introText: "This is a test page to verify that the language switching function works properly.",
+                instruction: "Click the button in the upper right corner to switch between Chinese and English.",
+                linkText: "Visit Website"
+            }
+        };
+        
+        // 当前语言
+        let currentLang = 'zh';
+        
+        // 语言切换函数
+        function toggleLanguage() {
+            // 切换语言
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            
+            // 更新界面文本
+            document.getElementById('langToggle').textContent = translations[currentLang].btnText;
+            document.getElementById('title').textContent = translations[currentLang].title;
+            document.getElementById('subtitle').textContent = translations[currentLang].subtitle;
+            document.getElementById('intro-title').textContent = translations[currentLang].introTitle;
+            document.getElementById('intro-text').textContent = translations[currentLang].introText;
+            document.getElementById('instruction').textContent = translations[currentLang].instruction;
+            document.getElementById('link-text').textContent = translations[currentLang].linkText;
+            
+            // 保存语言偏好
+            localStorage.setItem('preferredLang', currentLang);
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 绑定按钮点击事件
+            document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+            
+            // 从本地存储恢复语言偏好
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang && savedLang !== currentLang) {
+                currentLang = savedLang === 'en' ? 'zh' : 'en'; // 反转以便toggleLanguage正确切换
+                toggleLanguage();
+            }
+        });
+    </script>
+</body>
+</html>
