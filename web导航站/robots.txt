@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Sitemap: https://shiptools.space/sitemap.xml
+Sitemap: https://shiptools.space/sitemap-new.xml
 
 # 禁止爬取特定文件类型，但允许sitemap.xml
 User-agent: *
