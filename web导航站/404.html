@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>页面未找到</title>
+    <script>
+        const pathname = window.location.pathname;
+        if (!pathname.endsWith(".xml") && !pathname.endsWith(".txt")) {
+            window.location.href = "/";
+        }
+    </script>
+</head>
+<body>
+    <h1>页面未找到</h1>
+    <p>抱歉，您尝试访问的页面不存在。</p>
+    <p><a href="/">返回首页</a></p>
+</body>
+</html> 
