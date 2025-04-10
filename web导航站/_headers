@@ -1,6 +1,6 @@
 /sitemap.xml
   Content-Type: application/xml
-  Cache-Control: public, max-age=86400
+  Cache-Control: no-cache, no-store, must-revalidate
 
 /robots.txt
   Content-Type: text/plain 
