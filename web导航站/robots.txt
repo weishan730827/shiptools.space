@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Sitemap: https://shiptools.space/sitemap.xml
+
+# 禁止爬取特定文件类型，但允许sitemap.xml
+User-agent: *
+Disallow: /*.json$
+Disallow: /*.txt$
+# 移除对.xml文件的禁止，因为需要允许搜索引擎爬取sitemap.xml
+
+# 允许主要搜索引擎完整爬取
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: / 

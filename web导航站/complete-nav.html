@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>独立开发者导航站 - 工具资源集合</title>
+    
+    <!-- SEO元标签 -->
+    <meta name="description" content="为独立开发者提供的全面工具资源导航站，囊括需求调研、开发工具、SEO推广、AI工具和学习平台等各种实用资源。">
+    <meta name="keywords" content="独立开发者,开发工具,SEO推广,AI工具,需求调研,学习平台,导航站,程序员资源">
+    <meta name="author" content="独立开发者导航站">
+    
+    <!-- Open Graph 标签 -->
+    <meta property="og:title" content="独立开发者导航站 - 工具资源集合">
+    <meta property="og:description" content="发现独立开发者必备的全面工具和资源，助力项目开发和创业成功">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shiptools.space/complete-nav.html">
+    <meta property="og:image" content="https://shiptools.space/assets/og-image.jpg">
+    
+    <!-- Twitter 卡片标签 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="独立开发者导航站 - 工具资源集合">
+    <meta name="twitter:description" content="发现独立开发者必备的全面工具和资源，助力项目开发和创业成功">
+    <meta name="twitter:image" content="https://shiptools.space/assets/twitter-image.jpg">
+    
+    <!-- 规范链接 -->
+    <link rel="canonical" href="https://shiptools.space/complete-nav.html">
+    
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, #4a90e2, #6344e2);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* 搜索框样式 */
+        .search-box {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box button {
+            padding: 15px 25px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .search-box button:hover {
+            background-color: #ff5252;
+        }
+
+        /* 主要内容区域 */
+        main {
+            padding: 40px 0;
+        }
+
+        .category-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .category-container h2 {
+            color: #333;
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            position: relative;
+        }
+
+        .category-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background-color: #4a90e2;
+        }
+
+        /* 工具网格布局 */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card h3 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .tool-card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .tool-card .tool-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tool-card .visit-btn {
+            display: inline-block;
+            background-color: #4a90e2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .tool-card .visit-btn:hover {
+            background-color: #3a7bd5;
+        }
+
+        .tool-card .tool-tag {
+            background-color: #f0f4f8;
+            color: #5a6d8a;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 0;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-container {
+                padding: 20px;
+            }
+        }
+
+        /* 高亮显示搜索结果 */
+        .highlight {
+            background-color: #fff3cd;
+        }
+
+        /* 热门标签 */
+        .hot-tag {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+
+    <!-- Google Analytics 跟踪代码 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        // 替换为您的跟踪ID
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>独立开发者导航站</h1>
+            <p>收集实用的开发、SEO、AI工具和独立开发相关资源</p>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索站内资源...">
+                <button id="searchBtn">搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="categories">
+            <div class="category-container">
+                <h2>快速开发工具</h2>
+                <div class="tools-grid" id="quick-dev-tools">
+                    <!-- 这里将由JavaScript动态填充 -->
+                </div>
+            </div>
+
+            <div class="category-container">
+                <h2>需求收集和关键词调研</h2>
+                <div class="tools-grid" id="research-tools">
+                    <!-- 这里将由JavaScript动态填充 -->
+                </div>
+            </div>
+
+            <div class="category-container">
+                <h2>独立开发必备工具</h2>
+                <div class="tools-grid" id="dev-tools">
+                    <!-- 这里将由JavaScript动态填充 -->
+                </div>
+            </div>
+
+            <div class="category-container">
+                <h2>SEO与推广工具</h2>
+                <div class="tools-grid" id="seo-tools">
+                    <!-- 这里将由JavaScript动态填充 -->
+                </div>
+            </div>
+
+            <div class="category-container">
+                <h2>AI与创新工具</h2>
+                <div class="tools-grid" id="ai-tools">
+                    <!-- 这里将由JavaScript动态填充 -->
+                </div>
+            </div>
+
+            <div class="category-container">
+                <h2>社区与资源平台</h2>
+                <div class="tools-grid" id="community-platforms">
+                    <!-- 这里将由JavaScript动态填充 -->
+                </div>
+            </div>
+
+            <div class="category-container">
+                <h2>开源网站模板</h2>
+                <div class="tools-grid" id="website-templates">
+                    <!-- 这里将由JavaScript动态填充 -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 独立开发者导航站 | 为独立开发者提供有用的资源和工具</p>
+        </div>
+    </footer>
+
+    <script>
+        // 所有工具数据
+        const toolsData = {
+            // 快速开发工具
+            quickDevTools: [
+                {
+                    id: "bolt-new",
+                    name: "Bolt.new",
+                    url: "https://bolt.new/",
+                    description: "无需配置环境的云端AI开发工具，可以在几分钟内从想法到完整网站，一键部署上线",
+                    tag: "AI开发",
+                    isHot: true
+                },
+                {
+                    id: "cursor",
+                    name: "Cursor",
+                    url: "https://cursor.sh/",
+                    description: "专为生成式AI优化的代码编辑器，可以加速开发过程，迭代代码",
+                    tag: "AI编辑器"
+                },
+                {
+                    id: "keywordsea",
+                    name: "KeywordSea",
+                    url: "https://keywordsea.com/",
+                    description: "关键词分析工具，从搜索引擎获取数百个相关搜索词",
+                    tag: "SEO工具"
+                },
+                {
+                    id: "clicktest",
+                    name: "ClickTest",
+                    url: "https://clicktest.me/",
+                    description: "用于测试鼠标点击速度的工具网站",
+                    tag: "测试工具"
+                }
+            ],
+            
+            // 需求收集和关键词调研工具
+            researchTools: [
+                {
+                    id: "google-suggest",
+                    name: "谷歌下拉词",
+                    url: "https://www.searchsuggest.tips/?keyword=",
+                    description: "用于获取谷歌搜索建议的关键词，帮助发现用户真实搜索需求",
+                    tag: "关键词研究"
+                },
+                {
+                    id: "toolify-revenue",
+                    name: "Toolify 榜单",
+                    url: "https://www.toolify.ai/Best-AI-Tools-revenue",
+                    description: "提供AI工具收入排名，可以发现哪些AI产品最赚钱",
+                    tag: "市场分析"
+                },
+                {
+                    id: "ai-requests",
+                    name: "AI导航站需求列表",
+                    url: "https://theresaforthat.com/requests",
+                    description: "提供AI导航站的需求列表，了解用户对AI工具的真实需求",
+                    tag: "需求分析"
+                },
+                {
+                    id: "keyword-difficulty",
+                    name: "关键词难度分析",
+                    url: "https://ahrefs.com/keyword-difficulty",
+                    description: "用于检查关键词的难度，帮助SEO优化和内容策略",
+                    tag: "SEO分析"
+                },
+                {
+                    id: "google-trends",
+                    name: "Google Trends",
+                    url: "https://trends.google.com",
+                    description: "发现新兴趋势和热门搜索，把握市场机会",
+                    tag: "趋势分析"
+                },
+                {
+                    id: "semrush",
+                    name: "SEMrush",
+                    url: "https://zh.semrush.com",
+                    description: "全面的SEO和市场分析工具，帮助了解竞争对手和市场状况",
+                    tag: "市场分析"
+                },
+                {
+                    id: "reddit",
+                    name: "Reddit",
+                    url: "https://www.reddit.com",
+                    description: "社区讨论平台，可以发现用户真实痛点和需求",
+                    tag: "用户研究"
+                },
+                {
+                    id: "product-hunt",
+                    name: "Product Hunt",
+                    url: "https://www.producthunt.com",
+                    description: "发现新产品和创新项目，了解市场动态",
+                    tag: "产品发现"
+                }
+            ],
+            
+            // 独立开发必备工具
+            devTools: [
+                {
+                    id: "lean-domain-search",
+                    name: "LeanDomainSearch",
+                    url: "https://leandomainsearch.com",
+                    description: "帮助查找可用的域名，为你的项目找到合适的网址",
+                    tag: "域名查询"
+                },
+                {
+                    id: "logo-creator",
+                    name: "Logo Creator",
+                    url: "https://www.logo-creator.io/",
+                    description: "AI驱动的Logo制作工具，快速创建专业Logo",
+                    tag: "品牌设计"
+                },
+                {
+                    id: "looka",
+                    name: "Looka",
+                    url: "https://looka.com/",
+                    description: "AI设计工具，可以创建专业的品牌标识和视觉形象",
+                    tag: "品牌设计"
+                },
+                {
+                    id: "github",
+                    name: "GitHub",
+                    url: "https://github.com",
+                    description: "代码托管平台，提供版本控制和协作功能",
+                    tag: "代码管理"
+                },
+                {
+                    id: "notion",
+                    name: "Notion",
+                    url: "https://www.notion.so",
+                    description: "all-in-one工作空间，用于笔记、项目管理和文档",
+                    tag: "生产力工具"
+                },
+                {
+                    id: "chatgpt",
+                    name: "ChatGPT",
+                    url: "https://chat.openai.com",
+                    description: "AI对话模型，辅助编程、内容创作和问题解决",
+                    tag: "AI助手"
+                },
+                {
+                    id: "netlify",
+                    name: "Netlify",
+                    url: "https://www.netlify.com/",
+                    description: "自动化的网站部署和托管平台，支持CI/CD流程",
+                    tag: "网站托管"
+                },
+                {
+                    id: "spaceship",
+                    name: "Spaceship",
+                    url: "https://www.spaceship.com/",
+                    description: "域名注册和管理服务",
+                    tag: "域名服务"
+                }
+            ],
+            
+            // SEO与推广工具
+            seoTools: [
+                {
+                    id: "google-ads",
+                    name: "Google Ads 关键词规划师",
+                    url: "https://ads.google.com/home/tools/keyword-planner/",
+                    description: "发现新的关键词并查看搜索量估算",
+                    tag: "关键词规划"
+                },
+                {
+                    id: "ahrefs",
+                    name: "Ahrefs",
+                    url: "https://ahrefs.com",
+                    description: "全面的SEO工具，帮助分析网站、竞争对手和关键词",
+                    tag: "SEO分析"
+                },
+                {
+                    id: "semrush-projects",
+                    name: "SEMrush Projects",
+                    url: "https://zh.semrush.com/projects/",
+                    description: "用于创建和管理SEO项目的工具",
+                    tag: "SEO管理"
+                },
+                {
+                    id: "google-search-console",
+                    name: "Google Search Console",
+                    url: "https://search.google.com/search-console",
+                    description: "监控网站在Google搜索结果中的表现",
+                    tag: "SEO监控"
+                },
+                {
+                    id: "google-analytics",
+                    name: "Google Analytics",
+                    url: "https://analytics.google.com/",
+                    description: "网站流量分析工具，了解用户行为和来源",
+                    tag: "流量分析"
+                },
+                {
+                    id: "gtmetrix",
+                    name: "GTmetrix",
+                    url: "https://gtmetrix.com/",
+                    description: "网站性能分析工具，提供页面加载速度评分和优化建议，帮助提升网站用户体验",
+                    tag: "性能测试"
+                },
+                {
+                    id: "moz",
+                    name: "Moz",
+                    url: "https://moz.com/",
+                    description: "全面的SEO工具平台，提供关键词研究、网站审核、反向链接分析和搜索意图优化指南",
+                    tag: "SEO分析"
+                }
+            ],
+            
+            // AI与创新工具
+            aiTools: [
+                {
+                    id: "theresanaiforthat",
+                    name: "There's An AI For That",
+                    url: "https://theresanaiforthat.com/",
+                    description: "全球最大的AI工具导航网站，发现各种AI应用",
+                    tag: "AI导航",
+                    isHot: true
+                },
+                {
+                    id: "toolify-ai",
+                    name: "Toolify AI",
+                    url: "https://www.toolify.ai/zh/",
+                    description: "中文友好的AI工具导航网站，收录优质AI工具",
+                    tag: "AI导航"
+                },
+                {
+                    id: "gpt-voice-clone",
+                    name: "Eleven Labs",
+                    url: "https://elevenlabs.io/",
+                    description: "使用AI技术克隆和生成逼真的人声",
+                    tag: "语音技术"
+                },
+                {
+                    id: "deepswap",
+                    name: "AI换脸工具",
+                    url: "https://www.deepswap.ai/",
+                    description: "AI驱动的视频和图片换脸技术",
+                    tag: "视觉AI"
+                },
+                {
+                    id: "avatarai",
+                    name: "AvatarAI.me",
+                    url: "https://avatarai.me/",
+                    description: "AI生成专业头像，上线十天入账10万美元的爆款产品",
+                    tag: "AI图像",
+                    isHot: true
+                }
+            ],
+            
+            // 社区与资源平台
+            communityPlatforms: [
+                {
+                    id: "indie-hackers",
+                    name: "Indie Hackers",
+                    url: "https://www.indiehackers.com/",
+                    description: "独立开发者社区，分享经验和故事",
+                    tag: "开发者社区"
+                },
+                {
+                    id: "hacker-news",
+                    name: "Hacker News",
+                    url: "https://news.ycombinator.com/show",
+                    description: "技术社区，展示个人项目和讨论",
+                    tag: "技术社区"
+                },
+                {
+                    id: "seo-box",
+                    name: "SEO Box",
+                    url: "https://seo.box/referring/",
+                    description: "收集通过Stripe平台收款的Top 100赚钱产品",
+                    tag: "产品分析"
+                },
+                {
+                    id: "shengcai",
+                    name: "生财有术",
+                    url: "https://scys.com/",
+                    description: "中文互联网最大的创业社区之一，分享实战经验",
+                    tag: "创业社区"
+                }
+            ],
+            
+            // 开源网站模板
+            websiteTemplates: [
+                {
+                    id: "rin",
+                    name: "Rin 动态博客",
+                    url: "https://github.com/openRun/Rin",
+                    description: "基于 Cloudflare Pages、Workers、D1 和 R2 的动态博客模板",
+                    tag: "博客模板"
+                },
+                {
+                    id: "nextjs-boilerplate",
+                    name: "Next.js 15 模板",
+                    url: "https://github.com/xartz/Next-js-Boilerplate",
+                    description: "支持 App Router 和 Page Router 的 Next.js 15 模板和启动器",
+                    tag: "Next.js"
+                },
+                {
+                    id: "saas-boilerplate",
+                    name: "SaaS 模板",
+                    url: "https://github.com/xartz/SaaS-Boilerplate",
+                    description: "使用 Next.js、Tailwind CSS、Shadcn UI 和 TypeScript 构建的 SaaS 模板",
+                    tag: "SaaS模板"
+                },
+                {
+                    id: "nextjs-landing",
+                    name: "Next.js 登陆页面",
+                    url: "https://github.com/xartz/Next-JS-Landing-Page-Starter-Template",
+                    description: "免费的 Next.js 登陆页面模板",
+                    tag: "着陆页"
+                },
+                {
+                    id: "astro-boilerplate",
+                    name: "Astro 模板",
+                    url: "https://github.com/xartz/Astro-boilerplate",
+                    description: "带有响应式博客和作品集的 Astro 模板",
+                    tag: "博客模板"
+                },
+                {
+                    id: "landing-page",
+                    name: "通用着陆页模板",
+                    url: "https://github.com/weijunext/landing-page-boilerplate",
+                    description: "多功能的登陆页面模板，适用于各种项目和营销活动",
+                    tag: "着陆页"
+                },
+                {
+                    id: "wiggle-ai",
+                    name: "Wiggle AI WebUI",
+                    url: "https://github.com/ai-aigc-studio/Wiggle-AI-WebUI",
+                    description: "用于wiggle ai web客户端的开源模板",
+                    tag: "AI界面"
+                },
+                {
+                    id: "blog-template",
+                    name: "周刊博客模板",
+                    url: "https://github.com/weijunext/new-blog",
+                    description: "一个周刊博客模板",
+                    tag: "博客模板"
+                },
+                {
+                    id: "gapis-money",
+                    name: "GAPIs Money",
+                    url: "https://github.com/weijunext/gapis.money",
+                    description: "API 货币化平台模板",
+                    tag: "API平台"
+                },
+                {
+                    id: "open-saas",
+                    name: "Open SaaS",
+                    url: "https://github.com/wasp-lang/open-saas",
+                    description: "免费、开源的React & Node.js SaaS应用启动器",
+                    tag: "SaaS模板"
+                },
+                {
+                    id: "fre123-nav",
+                    name: "FRE123 导航模板",
+                    url: "https://github.com/fre123-com/fre123-nav",
+                    description: "免费资源共享平台导航，可以一键搭建你的导航网站",
+                    tag: "导航站"
+                },
+                {
+                    id: "oss-gallery",
+                    name: "开源项目画廊",
+                    url: "https://github.com/dubinc/oss-gallery",
+                    description: "基于Dub TypeScript SDK构建的互联网最佳开源项目众包列表",
+                    tag: "资源目录"
+                },
+                {
+                    id: "webstack",
+                    name: "WebStack导航",
+                    url: "https://github.com/WebStackPage/WebStackPage.github.io",
+                    description: "静态响应式网址导航网站模板",
+                    tag: "导航站"
+                },
+                {
+                    id: "ai-tools-directory",
+                    name: "AI工具目录",
+                    url: "https://github.com/6677-ai/tap4-ai-webui",
+                    description: "一键部署你自己的AI工具目录的开源web-ui",
+                    tag: "AI工具目录"
+                },
+                {
+                    id: "gpts-works",
+                    name: "第三方GPTs商店",
+                    url: "https://github.com/all-in-aigc/gpts-works",
+                    description: "一个第三方GPTs商店模板",
+                    tag: "AI工具"
+                }
+            ]
+        };
+
+        // DOM 加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化工具卡片
+            initializeToolsCards();
+            
+            // 搜索功能
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            searchBtn.addEventListener('click', function() {
+                performSearch(searchInput.value);
+            });
+            
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    performSearch(searchInput.value);
+                }
+            });
+        });
+
+        // 初始化所有工具卡片
+        function initializeToolsCards() {
+            // 添加快速开发工具
+            renderToolsSection('quick-dev-tools', toolsData.quickDevTools);
+            
+            // 添加需求收集和关键词调研工具
+            renderToolsSection('research-tools', toolsData.researchTools);
+            
+            // 添加开发者工具
+            renderToolsSection('dev-tools', toolsData.devTools);
+            
+            // 添加SEO工具
+            renderToolsSection('seo-tools', toolsData.seoTools);
+            
+            // 添加AI工具
+            renderToolsSection('ai-tools', toolsData.aiTools);
+            
+            // 添加社区平台
+            renderToolsSection('community-platforms', toolsData.communityPlatforms);
+            
+            // 新增模板分类渲染
+            renderToolsSection('website-templates', toolsData.websiteTemplates);
+        }
+
+        // 渲染工具部分
+        function renderToolsSection(sectionId, tools) {
+            const section = document.getElementById(sectionId);
+            
+            tools.forEach(tool => {
+                const toolCard = createToolCard(tool);
+                section.appendChild(toolCard);
+            });
+        }
+
+        // 创建工具卡片
+        function createToolCard(tool) {
+            const card = document.createElement('div');
+            card.className = 'tool-card';
+            card.dataset.id = tool.id;
+            
+            let hotTag = '';
+            if (tool.isHot) {
+                hotTag = '<div class="hot-tag">热门</div>';
+            }
+            
+            card.innerHTML = `
+                ${hotTag}
+                <h3>${tool.name}</h3>
+                <p>${tool.description}</p>
+                <div class="tool-links">
+                    <a href="${tool.url}" class="visit-btn" target="_blank">访问网站</a>
+                    <span class="tool-tag">${tool.tag}</span>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // 执行搜索
+        function performSearch(query) {
+            query = query.toLowerCase().trim();
+            
+            if (!query) {
+                resetSearch();
+                return;
+            }
+            
+            let foundCount = 0;
+            
+            // 在所有类别中搜索
+            searchInCategory('quick-dev-tools', toolsData.quickDevTools, query, result => {
+                foundCount += result;
+            });
+            
+            searchInCategory('research-tools', toolsData.researchTools, query, result => {
+                foundCount += result;
+            });
+            
+            searchInCategory('dev-tools', toolsData.devTools, query, result => {
+                foundCount += result;
+            });
+            
+            searchInCategory('seo-tools', toolsData.seoTools, query, result => {
+                foundCount += result;
+            });
+            
+            searchInCategory('ai-tools', toolsData.aiTools, query, result => {
+                foundCount += result;
+            });
+            
+            searchInCategory('community-platforms', toolsData.communityPlatforms, query, result => {
+                foundCount += result;
+            });
+            
+            searchInCategory('website-templates', toolsData.websiteTemplates, query, result => {
+                foundCount += result;
+            });
+            
+            // 显示搜索结果提示
+            if (foundCount === 0) {
+                alert(`未找到与 "${query}" 相关的工具。`);
+            } else {
+                // 滚动到第一个匹配结果
+                const firstMatch = document.querySelector('.highlight');
+                if (firstMatch) {
+                    firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }
+
+        // 在特定类别中搜索
+        function searchInCategory(sectionId, tools, query, callback) {
+            const section = document.getElementById(sectionId);
+            const cards = section.querySelectorAll('.tool-card');
+            let foundCount = 0;
+            
+            tools.forEach((tool, index) => {
+                const card = cards[index];
+                const matchName = tool.name.toLowerCase().includes(query);
+                const matchDesc = tool.description.toLowerCase().includes(query);
+                const matchTag = tool.tag.toLowerCase().includes(query);
+                
+                if (matchName || matchDesc || matchTag) {
+                    card.classList.add('highlight');
+                    card.style.display = 'block';
+                    foundCount++;
+                } else {
+                    card.classList.remove('highlight');
+                    card.style.display = 'none';
+                }
+            });
+            
+            // 如果类别中没有找到匹配项，隐藏整个类别
+            const categoryContainer = section.parentElement;
+            categoryContainer.style.display = foundCount > 0 ? 'block' : 'none';
+            
+            callback(foundCount);
+            return foundCount;
+        }
+
+        // 重置搜索结果
+        function resetSearch() {
+            // 显示所有类别和卡片
+            document.querySelectorAll('.category-container').forEach(container => {
+                container.style.display = 'block';
+            });
+            
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.remove('highlight');
+                card.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html> 
