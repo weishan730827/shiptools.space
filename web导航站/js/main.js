@@ -19,6 +19,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // 当前激活的导航项
     let activeSection = 'dev-tools';
     
+    // 导航ID映射表 - 将导航项data-section映射到实际的内容ID
+    const sectionIdMap = {
+        'research': 'research',
+        'dev-tools': 'dev-tools',
+        'website': 'website',
+        'seo': 'seo',
+        'ai': 'ai',
+        'community': 'community',
+        'templates': 'templates'
+    };
+    
+    // 工具数据ID映射表 - 将导航项ID映射到对应的工具数据
+    const toolsDataMap = {
+        'research': 'researchTools',
+        'dev-tools': 'devTools',
+        'website': 'websiteTools',
+        'seo': 'seoTools',
+        'ai': 'aiTools',
+        'community': 'communityPlatforms',
+        'templates': 'websiteTemplates'
+    };
+    
     // 导航切换功能
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -38,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const sectionId = this.getAttribute('data-section');
             if (sectionId) {
                 activeSection = sectionId;
-            
+                
                 // 更新标题和描述
                 const linkText = this.textContent.trim();
                 if (contentHeaderTitle) contentHeaderTitle.textContent = linkText;
@@ -62,11 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
+                // 获取实际的section ID
+                const actualSectionId = sectionIdMap[sectionId] || sectionId;
+                
                 // 隐藏所有部分，然后显示当前部分
                 sections.forEach(section => section.classList.remove('active'));
-                const targetSection = document.getElementById(sectionId);
+                const targetSection = document.getElementById(actualSectionId);
                 if (targetSection) {
                     targetSection.classList.add('active');
+                } else {
+                    console.warn(`未找到ID为${actualSectionId}的分类section`);
                 }
             }
         });
@@ -163,11 +190,16 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.display = 'block';
         });
         
+        // 获取实际的section ID
+        const actualSectionId = sectionIdMap[activeSection] || activeSection;
+        
         // 恢复到当前激活的导航项
         sections.forEach(section => section.classList.remove('active'));
-        const activeElement = document.getElementById(activeSection);
+        const activeElement = document.getElementById(actualSectionId);
         if (activeElement) {
             activeElement.classList.add('active');
+        } else {
+            console.warn(`重置搜索时未找到ID为${actualSectionId}的分类section`);
         }
         
         // 找到当前激活的导航链接
@@ -200,6 +232,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // 初始化所有工具卡片
 function initializeToolsCards() {
     try {
+        console.log('开始初始化工具卡片...');
+        
         // 添加需求收集和关键词调研工具
         renderToolsSection('research-tools', toolsData.researchTools);
         
@@ -217,6 +251,8 @@ function initializeToolsCards() {
         
         // 新增模板分类渲染
         renderToolsSection('website-templates', toolsData.websiteTemplates);
+        
+        console.log('工具卡片初始化完成');
     } catch (error) {
         console.error('初始化工具卡片时出错:', error);
     }
@@ -224,6 +260,7 @@ function initializeToolsCards() {
 
 // 渲染工具部分
 function renderToolsSection(sectionId, tools) {
+    console.log(`尝试渲染section: ${sectionId}`);
     const section = document.getElementById(sectionId);
     if (!section) {
         console.warn(`未找到ID为${sectionId}的元素`);
@@ -235,6 +272,7 @@ function renderToolsSection(sectionId, tools) {
         return;
     }
     
+    console.log(`为${sectionId}渲染${tools.length}个工具`);
     tools.forEach(tool => {
         if (tool) {
             const toolCard = createToolCard(tool);
