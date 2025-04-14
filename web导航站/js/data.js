@@ -586,4 +586,5 @@ const toolsData = {
     ]
 };
 
-export default toolsData; 
+// 改为全局变量方式，不使用ES6模块导出
+window.toolsData = toolsData; 

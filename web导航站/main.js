@@ -2,8 +2,8 @@
  * 导航站主脚本 - 工具数据加载与初始化
  */
 
-// 导入工具数据
-import toolsData from './js/data.js';
+// 不再使用import语句
+// 直接使用全局变量toolsData
 
 // 工具点击跟踪函数
 function trackToolClick(toolName, category) {
@@ -17,6 +17,9 @@ function trackToolClick(toolName, category) {
     
     console.log(`工具点击: ${toolName}, 分类: ${category}`);
 }
+
+// 使函数全局可用，解决内联onclick问题
+window.trackToolClick = trackToolClick;
 
 // 在页面加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
