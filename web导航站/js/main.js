@@ -28,7 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
         'seo': 'seo',
         'ai': 'ai',
         'community': 'community',
-        'templates': 'templates'
+        'templates': 'templates',
+        'browser-extensions': 'browser-extensions',
+        'design-tools': 'design-tools'
     };
     
     // 工具数据ID映射表 - 将导航项ID映射到对应的工具数据
@@ -39,7 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
         'seo': 'seoTools',
         'ai': 'aiTools',
         'community': 'communityPlatforms',
-        'templates': 'websiteTemplates'
+        'templates': 'websiteTemplates',
+        'browser-extensions': 'browserExtensions',
+        'design-tools': 'designTools'
     };
     
     // 初始化页面状态 - 确保页面加载时状态正确
@@ -92,6 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         contentHeaderDesc.textContent = '独立开发者社区和学习资源';
                     } else if (sectionId === 'templates') {
                         contentHeaderDesc.textContent = '优质网站模板和组件库';
+                    } else if (sectionId === 'browser-extensions') {
+                        contentHeaderDesc.textContent = '提高开发效率的浏览器插件';
+                    } else if (sectionId === 'design-tools') {
+                        contentHeaderDesc.textContent = '高效设计工具和视觉资源';
                     }
                 }
                 
@@ -300,6 +308,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     contentHeaderDesc.textContent = '独立开发者社区和学习资源';
                 } else if (activeSection === 'templates') {
                     contentHeaderDesc.textContent = '优质网站模板和组件库';
+                } else if (activeSection === 'browser-extensions') {
+                    contentHeaderDesc.textContent = '提高开发效率的浏览器插件';
+                } else if (activeSection === 'design-tools') {
+                    contentHeaderDesc.textContent = '高效设计工具和视觉资源';
                 }
             } else {
                 console.warn('恢复标题和描述时出现问题');
@@ -337,8 +349,14 @@ function initializeToolsCards() {
         // 添加社区平台
         renderToolsSection('community-platforms', toolsData.communityPlatforms);
         
-        // 新增模板分类渲染
+        // 添加模板分类渲染
         renderToolsSection('website-templates', toolsData.websiteTemplates);
+        
+        // 添加浏览器插件分类渲染
+        renderToolsSection('browser-extensions-grid', toolsData.browserExtensions);
+        
+        // 添加设计工具分类渲染
+        renderToolsSection('design-tools-grid', toolsData.designTools);
         
         console.log('工具卡片初始化完成');
     } catch (error) {

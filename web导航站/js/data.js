@@ -103,6 +103,90 @@ const toolsData = {
             url: "https://chat.openai.com",
             description: "AI对话模型，辅助编程、内容创作和问题解决",
             tag: "AI助手"
+        },
+        {
+            id: "railway",
+            name: "Railway",
+            url: "https://railway.app/",
+            description: "简化云服务部署的平台，一键部署后端、数据库和前端项目，支持自动化CI/CD",
+            tag: "部署平台"
+        },
+        {
+            id: "supabase",
+            name: "Supabase",
+            url: "https://supabase.com/",
+            description: "开源的Firebase替代品，提供PostgreSQL数据库、身份验证和实时订阅功能",
+            tag: "后端服务"
+        },
+        {
+            id: "mongodb-atlas",
+            name: "MongoDB Atlas",
+            url: "https://www.mongodb.com/atlas/database",
+            description: "MongoDB的云数据库服务，提供自动扩展、备份和安全功能，有免费层可用",
+            tag: "数据库服务"
+        },
+        {
+            id: "render",
+            name: "Render",
+            url: "https://render.com/",
+            description: "现代云平台，支持静态站点、Web服务、后端API和数据库的快速部署和扩展",
+            tag: "云平台"
+        },
+        {
+            id: "planetscale",
+            name: "PlanetScale",
+            url: "https://planetscale.com/",
+            description: "基于Vitess的MySQL兼容的无服务器数据库平台，提供分支和无停机架构更改",
+            tag: "数据库服务"
+        },
+        {
+            id: "upstash",
+            name: "Upstash",
+            url: "https://upstash.com/",
+            description: "无服务器的Redis和Kafka解决方案，按请求计费，适合Serverless和Edge部署",
+            tag: "数据库服务"
+        },
+        {
+            id: "clerk",
+            name: "Clerk",
+            url: "https://clerk.com/",
+            description: "完整的用户管理和身份验证系统，为Web应用提供登录、注册和用户管理功能",
+            tag: "身份认证"
+        },
+        {
+            id: "splitbee",
+            name: "Splitbee",
+            url: "https://splitbee.io/",
+            description: "简单易用的网站分析工具，提供用户行为跟踪、转化漏斗和A/B测试功能",
+            tag: "分析工具"
+        },
+        {
+            id: "stripe",
+            name: "Stripe",
+            url: "https://stripe.com/",
+            description: "完整的支付解决方案，为独立开发者提供在线支付处理、订阅管理和发票功能",
+            tag: "支付服务"
+        },
+        {
+            id: "linear",
+            name: "Linear",
+            url: "https://linear.app/",
+            description: "现代化的项目和问题跟踪工具，优雅的界面和快捷键支持，为软件团队提供高效工作流程",
+            tag: "项目管理"
+        },
+        {
+            id: "raycast",
+            name: "Raycast",
+            url: "https://www.raycast.com/",
+            description: "Mac上的生产力工具，可通过快捷键快速访问应用和服务，支持自定义脚本和工作流扩展",
+            tag: "效率工具"
+        },
+        {
+            id: "gumroad",
+            name: "Gumroad",
+            url: "https://gumroad.com/",
+            description: "简单易用的数字产品销售平台，让创作者轻松销售电子书、课程、软件和订阅服务",
+            tag: "销售平台"
         }
     ],
     
@@ -160,6 +244,55 @@ const toolsData = {
             url: "https://www.deepswap.ai/",
             description: "AI驱动的视频和图片换脸技术",
             tag: "视觉AI"
+        },
+        {
+            id: "dify-ai",
+            name: "Dify.AI",
+            url: "https://dify.ai/",
+            description: "开源的LLM应用开发平台，快速构建AI助手、聊天机器人和Agent应用，提供完整的开发运维能力",
+            tag: "AI开发平台"
+        },
+        {
+            id: "claude",
+            name: "Claude",
+            url: "https://claude.ai/",
+            description: "Anthropic开发的AI助手，专注于有益、无害和诚实的对话体验，在长文本理解和安全性方面表现出色",
+            tag: "AI助手"
+        },
+        {
+            id: "groq",
+            name: "Groq",
+            url: "https://groq.com/",
+            description: "超高速AI推理引擎，提供毫秒级LLM响应速度，支持Llama和Mixtral等开源模型的超快速处理",
+            tag: "AI基础设施"
+        },
+        {
+            id: "replicate",
+            name: "Replicate",
+            url: "https://replicate.com/",
+            description: "在云端运行开源AI模型的平台，支持Stable Diffusion、Llama和其他流行模型，提供简单API访问",
+            tag: "AI部署"
+        },
+        {
+            id: "perplexity",
+            name: "Perplexity AI",
+            url: "https://www.perplexity.ai/",
+            description: "AI驱动的智能搜索引擎，结合大语言模型提供实时、可引用的网络搜索结果和完整解答",
+            tag: "AI搜索"
+        },
+        {
+            id: "ollama",
+            name: "Ollama",
+            url: "https://ollama.com/",
+            description: "在本地运行大型语言模型的开源工具，支持Llama、Mistral等模型的本地部署和使用",
+            tag: "AI本地部署"
+        },
+        {
+            id: "together-ai",
+            name: "Together AI",
+            url: "https://www.together.ai/",
+            description: "AI基础设施平台，提供开源模型的托管和微调服务，支持模型部署和推理API",
+            tag: "AI基础设施"
         }
     ],
     
@@ -252,6 +385,203 @@ const toolsData = {
             url: "https://seo.box/referring/",
             description: "收集通过Stripe平台收款的Top 100赚钱产品",
             tag: "产品分析"
+        }
+    ],
+    
+    // 浏览器插件工具
+    browserExtensions: [
+        {
+            id: "tampermonkey",
+            name: "篡改猴 (Tampermonkey)",
+            url: "https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo",
+            description: "强大的用户脚本管理器，可运行自定义JavaScript脚本，增强网站功能，自动化重复任务",
+            tag: "开发工具"
+        },
+        {
+            id: "wappalyzer",
+            name: "Wappalyzer",
+            url: "https://chrome.google.com/webstore/detail/wappalyzer-technology-pro/gppongmhjkpfnbhagpmjfkannfbllamg",
+            description: "识别网站使用的技术栈、框架和库，了解竞争对手的技术实现",
+            tag: "技术分析"
+        },
+        {
+            id: "live-css-editor",
+            name: "Live CSS Editor",
+            url: "https://chrome.google.com/webstore/detail/live-editor-for-css-less/ifhikkcafabcgolfjegfcgloomalapol",
+            description: "实时编辑和预览CSS样式，无需刷新页面，大幅提高前端开发效率",
+            tag: "前端开发"
+        },
+        {
+            id: "json-formatter",
+            name: "JSON Formatter",
+            url: "https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa",
+            description: "格式化和可视化JSON数据，提高API调试和数据分析效率",
+            tag: "开发工具"
+        },
+        {
+            id: "react-devtools",
+            name: "React Developer Tools",
+            url: "https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi",
+            description: "React应用调试工具，检查组件层次结构、props和state",
+            tag: "前端开发"
+        },
+        {
+            id: "tailwind-devtools",
+            name: "Tailwind CSS DevTools",
+            url: "https://chrome.google.com/webstore/detail/tailwind-css-devtools/hdibiejochkophpjigdcgobcdekghcgc",
+            description: "Tailwind CSS开发工具，帮助检查和应用Tailwind类",
+            tag: "前端开发"
+        },
+        {
+            id: "gofullpage",
+            name: "GoFullPage",
+            url: "https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl",
+            description: "捕获整个网页的高质量截图，用于UI文档和错误报告",
+            tag: "设计工具"
+        },
+        {
+            id: "colorzilla",
+            name: "ColorZilla",
+            url: "https://chrome.google.com/webstore/detail/colorzilla/bhlhnicpbhignbdhedgjhgdocnmhomnp",
+            description: "高级颜色拾取器和分析工具，快速获取网页上任何元素的颜色",
+            tag: "设计工具"
+        },
+        {
+            id: "web-data-scraper",
+            name: "Easy Web Data Scraper",
+            url: "https://chrome.google.com/webstore/detail/easy-web-data-scraper/ddabenjldcoegcnnbpaiafhbnkllnhih",
+            description: "轻松提取网页数据为CSV或Excel格式，无需编写爬虫代码",
+            tag: "数据工具"
+        },
+        {
+            id: "get-cookies",
+            name: "Get cookies.txt",
+            url: "https://chrome.google.com/webstore/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgbibeiafp",
+            description: "导出网站cookie为Netscape格式文件，用于API测试和会话调试",
+            tag: "开发工具"
+        },
+        {
+            id: "crx-extractor",
+            name: "CRX Extractor/Downloader",
+            url: "https://chrome.google.com/webstore/detail/crx-extractordownloader/ajkhmmldknmfjnmeedkbkkojgobmljda",
+            description: "提取和下载Chrome扩展的CRX文件，学习和研究扩展实现",
+            tag: "开发工具"
+        },
+        {
+            id: "sider-chatgpt",
+            name: "Sider: ChatGPT",
+            url: "https://chrome.google.com/webstore/detail/sider-chatgpt-sidebar-gpt/difoiogjjojoaoomphldepapgpbgkhng",
+            description: "在浏览器侧边栏直接访问ChatGPT，辅助编程和问题解决",
+            tag: "AI工具"
+        },
+        {
+            id: "prompt-navigator",
+            name: "Prompt Navigator",
+            url: "https://chrome.google.com/webstore/detail/promptnavigator/ineglkdaijjnebignbdajaajjdccfono",
+            description: "管理和优化AI提示词，提高AI辅助编程效率",
+            tag: "AI工具"
+        },
+        {
+            id: "gptzero",
+            name: "GPTZero",
+            url: "https://chrome.google.com/webstore/detail/gptzero/likflbdnlpdfbplamedpeogakckiegei",
+            description: "检测内容是否由AI生成，确保内容的真实性和原创性",
+            tag: "AI工具"
+        },
+        {
+            id: "aitdk-seo",
+            name: "AITDK SEO Extension",
+            url: "https://chrome.google.com/webstore/detail/aitdk/kekoinogcphaljhiohppffpbgeciflec",
+            description: "AI驱动的SEO分析工具，提供网站优化建议和关键词分析",
+            tag: "SEO工具"
+        },
+        {
+            id: "seoquake",
+            name: "SEOquake",
+            url: "https://chrome.google.com/webstore/detail/seoquake/akdgnmcogleenhbclghghlkkdndkjdjc",
+            description: "全面的SEO审查工具，分析网页SEO指标和排名因素",
+            tag: "SEO工具"
+        },
+        {
+            id: "similarweb",
+            name: "Similarweb",
+            url: "https://chrome.google.com/webstore/detail/similarweb-traffic-rank-w/hoklmmgfnpapgjgcpechhaamimifchmp",
+            description: "分析网站流量、用户行为和竞争情报的工具",
+            tag: "分析工具"
+        },
+        {
+            id: "trends-radar",
+            name: "Trends Radar",
+            url: "https://chrome.google.com/webstore/detail/trends-radar/bfjmolbnaknkoiecpkgcmhgkmanffjnp",
+            description: "发现和追踪技术趋势和热门话题，把握技术方向",
+            tag: "分析工具"
+        },
+        {
+            id: "obsidian-web",
+            name: "Obsidian Web",
+            url: "https://chrome.google.com/webstore/detail/obsidian-web/edoacekkjanmingkbkgjndalhkpgmgno",
+            description: "将网页内容直接保存到Obsidian知识库，构建开发资源库",
+            tag: "生产力工具"
+        },
+        {
+            id: "gmail-checker",
+            name: "Checker Plus for Gmail",
+            url: "https://chrome.google.com/webstore/detail/checker-plus-for-gmail/oeopbcgkkoapgobdbedcemjljbihmemj",
+            description: "无需打开Gmail即可管理邮件，减少工作中断提高专注度",
+            tag: "生产力工具"
+        },
+        {
+            id: "ublock-origin",
+            name: "uBlock Origin",
+            url: "https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm",
+            description: "高效的广告拦截器，提高浏览速度和安全性，减少干扰",
+            tag: "生产力工具"
+        },
+        {
+            id: "game-site-monitor",
+            name: "Game Site Monitor",
+            url: "https://chrome.google.com/webstore/detail/game-site-monitor/nlmmmmpllclkhkcoiihcgbhidpnddpnj",
+            description: "监控网站变化和更新，自动跟踪竞品和依赖更新",
+            tag: "监控工具"
+        }
+    ],
+    
+    // 设计工具（新增分类）
+    designTools: [
+        {
+            id: "figma",
+            name: "Figma",
+            url: "https://www.figma.com/",
+            description: "基于云的协作设计工具，支持UI/UX设计、原型制作和设计系统管理，实时多人协作功能",
+            tag: "UI设计"
+        },
+        {
+            id: "canva",
+            name: "Canva",
+            url: "https://www.canva.com/",
+            description: "简易平面设计工具，提供模板和拖放式编辑器，适合非专业设计师创建营销图片和社交媒体内容",
+            tag: "平面设计"
+        },
+        {
+            id: "adobe-xd",
+            name: "Adobe XD",
+            url: "https://www.adobe.com/products/xd.html",
+            description: "Adobe的UI/UX设计工具，提供矢量设计、线框图和交互原型功能，与Creative Cloud无缝集成",
+            tag: "UI设计"
+        },
+        {
+            id: "sketch",
+            name: "Sketch",
+            url: "https://www.sketch.com/",
+            description: "Mac专属的矢量图形编辑器，适用于UI、移动端、Web和图标设计，强大的插件生态系统",
+            tag: "UI设计"
+        },
+        {
+            id: "midjourney",
+            name: "Midjourney",
+            url: "https://www.midjourney.com/",
+            description: "AI图像生成工具，通过文本描述创建专业级别的艺术作品和视觉内容，适合概念设计和灵感收集",
+            tag: "AI设计"
         }
     ]
 };

@@ -505,6 +505,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="#browser-extensions" class="nav-link" data-section="browser-extensions">
+                        <i class="fas fa-puzzle-piece"></i> 浏览器插件
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#design-tools" class="nav-link" data-section="design-tools">
+                        <i class="fas fa-paint-brush"></i> 设计工具
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#seo" class="nav-link" data-section="seo">
                         <i class="fas fa-chart-line"></i> SEO与推广
                     </a>
@@ -1070,63 +1080,31 @@
 
             <!-- 社区资源分类 -->
             <section id="community" class="category-section">
+                <div class="section-intro">
+                    <p>探索独立开发者社区，与志同道合的开发者交流，分享经验和资源。</p>
+                </div>
                 <div class="tools-grid">
-                    <!-- 社区与学习平台 -->
+                    <!-- Indie Hackers -->
                     <div class="tool-card">
                         <h3>Indie Hackers</h3>
-                        <p>独立开发者社区，分享创业经验和盈利方式</p>
+                        <p>独立创业者和开发者社区，分享经验、讨论策略和互相支持</p>
                         <div class="tool-links">
                             <a href="https://www.indiehackers.com/" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">开发社区</span>
+                            <span class="tool-tag">开发者社区</span>
                         </div>
                     </div>
-                    
+
+                    <!-- Hacker News -->
                     <div class="tool-card">
-                        <h3>Product Hunt</h3>
-                        <p>新产品发布平台，获取早期用户和反馈</p>
+                        <h3>Hacker News</h3>
+                        <p>技术社区，展示个人项目和讨论</p>
                         <div class="tool-links">
-                            <a href="https://www.producthunt.com/" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">产品推广</span>
-                        </div>
-                    </div>
-                    
-                    <div class="tool-card">
-                        <h3>V2EX</h3>
-                        <p>创意工作者社区，讨论技术和创业话题</p>
-                        <div class="tool-links">
-                            <a href="https://v2ex.com/" class="visit-btn" target="_blank">访问</a>
+                            <a href="https://news.ycombinator.com/show" class="visit-btn" target="_blank">访问</a>
                             <span class="tool-tag">技术社区</span>
                         </div>
                     </div>
-                    
-                    <!-- 资讯资源链接 -->
-                    <div class="tool-card">
-                        <h3>Hacker News</h3>
-                        <p>技术新闻聚合平台，关注创业和技术前沿</p>
-                        <div class="tool-links">
-                            <a href="https://news.ycombinator.com/" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">科技资讯</span>
-                        </div>
-                    </div>
-                    
-                    <div class="tool-card">
-                        <h3>Dev.to</h3>
-                        <p>开发者博客平台，分享技术文章和经验</p>
-                        <div class="tool-links">
-                            <a href="https://dev.to/" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">技术博客</span>
-                        </div>
-                    </div>
 
-                    <div class="tool-card">
-                        <h3>生财有术</h3>
-                        <p>中文互联网最大的创业社区之一，分享实战经验</p>
-                        <div class="tool-links">
-                            <a href="https://scys.com/" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">创业社区</span>
-                        </div>
-                    </div>
-
+                    <!-- SEO Box -->
                     <div class="tool-card">
                         <h3>SEO Box</h3>
                         <p>收集通过Stripe平台收款的Top 100赚钱产品</p>
@@ -1520,151 +1498,56 @@
                     </div>
                 </div>
             </section>
-            
+
             <!-- 设计工具分类 -->
             <section id="design-tools" class="category-section">
                 <div class="section-intro">
-                    <p>精选设计工具集合，帮助独立开发者快速创建专业级别的UI/UX设计、图标、插图和品牌资产。即使没有专业设计背景，也能轻松完成从原型到最终设计的全过程。</p>
+                    <p>收集独立开发者必备的设计工具，帮助你高效创建精美的UI/UX设计、图标和品牌素材，即使没有设计背景也能轻松打造专业视觉效果。</p>
                 </div>
-                <div class="tools-grid">
-                    <!-- 设计神器 -->
+                <div class="tools-grid" id="design-tools-grid">
+                    <!-- 核心设计工具 -->
                     <div class="tool-card">
-                        <h3><img src="https://static.figma.com/app/icon/1/favicon.png" class="tool-icon" alt="Figma">Figma</h3>
-                        <div class="tool-details">
-                            <div class="tool-rating">
-                                <span class="stars">★★★★★</span>
-                                <span>4.9</span>
-                            </div>
-                            <span class="price-tag">免费/专业版</span>
-                        </div>
-                        <p>基于浏览器的全能设计工具，可同时进行UI设计、原型制作和设计系统管理。支持实时协作、自动布局、组件系统和插件生态。对独立开发者特别有用的是其强大的交互原型功能，可以直接模拟最终产品体验。免费计划提供三个文件和两个编辑者，足够小型项目使用。</p>
+                        <h3>Figma</h3>
+                        <p>基于云的协作设计工具，支持UI/UX设计、原型制作和设计系统管理，实时多人协作功能</p>
                         <div class="tool-links">
-                            <a href="https://www.figma.com" class="visit-btn" target="_blank" onclick="trackToolClick('Figma', 'UI设计')">访问</a>
+                            <a href="https://www.figma.com/" class="visit-btn" target="_blank">访问</a>
                             <span class="tool-tag">UI设计</span>
-                            <div class="tool-actions">
-                                <button class="action-btn save-tool" data-tool="Figma"><i class="far fa-bookmark"></i> 收藏</button>
-                                <button class="action-btn share-tool" data-tool="Figma" data-url="https://www.figma.com"><i class="far fa-share-square"></i> 分享</button>
-                            </div>
-                        </div>
-                        <div class="related-tools">
-                            <h4>相关工具</h4>
-                            <div class="related-tools-list">
-                                <a href="#" class="related-tool-link" data-tool="Canva">Canva</a>
-                                <a href="#" class="related-tool-link" data-tool="Midjourney">Midjourney</a>
-                                <a href="#" class="related-tool-link" data-tool="Penpot">Penpot</a>
-                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="tool-card">
-                        <h3><img src="https://midjourney.com/favicon.ico" class="tool-icon" alt="Midjourney">Midjourney</h3>
-                        <div class="tool-details">
-                            <div class="tool-rating">
-                                <span class="stars">★★★★★</span>
-                                <span>4.8</span>
-                            </div>
-                            <span class="price-tag">付费</span>
-                        </div>
-                        <p>强大的AI图像生成工具，通过文本描述创建高质量、独特的视觉内容。最新V6版本支持超高清图像生成、更精准的文本理解和风格控制。独立开发者可用它快速创建产品界面、应用插图、品牌元素和营销素材。与其他工具相比，Midjourney的艺术性和美感更强，生成的图像极具创意和专业感。</p>
+                        <h3>Canva</h3>
+                        <p>简易平面设计工具，提供模板和拖放式编辑器，适合非专业设计师创建营销图片和社交媒体内容</p>
                         <div class="tool-links">
-                            <a href="https://www.midjourney.com" class="visit-btn" target="_blank" onclick="trackToolClick('Midjourney', 'AI图像')">访问</a>
-                            <span class="tool-tag">AI图像</span>
-                            <div class="tool-actions">
-                                <button class="action-btn save-tool" data-tool="Midjourney"><i class="far fa-bookmark"></i> 收藏</button>
-                                <button class="action-btn share-tool" data-tool="Midjourney" data-url="https://www.midjourney.com"><i class="far fa-share-square"></i> 分享</button>
-                            </div>
-                        </div>
-                        <div class="related-tools">
-                            <h4>相关工具</h4>
-                            <div class="related-tools-list">
-                                <a href="#" class="related-tool-link" data-tool="DALL-E">DALL-E</a>
-                                <a href="#" class="related-tool-link" data-tool="ChatGPT">ChatGPT</a>
-                                <a href="#" class="related-tool-link" data-tool="Figma">Figma</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="tool-card">
-                        <h3><img src="https://www.canva.com/favicon.ico" class="tool-icon" alt="Canva">Canva</h3>
-                        <div class="tool-details">
-                            <div class="tool-rating">
-                                <span class="stars">★★★★☆</span>
-                                <span>4.7</span>
-                            </div>
-                            <span class="price-tag">免费/Pro</span>
-                        </div>
-                        <p>简单易用的在线平面设计工具，提供超过100万个模板和大量素材库，适合非设计专业人士。支持创建社交媒体图片、演示文稿、海报、网站原型等内容。新增的Magic Studio功能利用AI技术生成设计、编辑图片和创建品牌形象，让独立开发者一站式完成从Logo设计到产品宣传材料的制作。</p>
-                        <div class="tool-links">
-                            <a href="https://www.canva.com" class="visit-btn" target="_blank" onclick="trackToolClick('Canva', '平面设计')">访问</a>
+                            <a href="https://www.canva.com/" class="visit-btn" target="_blank">访问</a>
                             <span class="tool-tag">平面设计</span>
-                            <div class="tool-actions">
-                                <button class="action-btn save-tool" data-tool="Canva"><i class="far fa-bookmark"></i> 收藏</button>
-                                <button class="action-btn share-tool" data-tool="Canva" data-url="https://www.canva.com"><i class="far fa-share-square"></i> 分享</button>
-                            </div>
-                        </div>
-                        <div class="related-tools">
-                            <h4>相关工具</h4>
-                            <div class="related-tools-list">
-                                <a href="#" class="related-tool-link" data-tool="Figma">Figma</a>
-                                <a href="#" class="related-tool-link" data-tool="Midjourney">Midjourney</a>
-                                <a href="#" class="related-tool-link" data-tool="Pixlr">Pixlr</a>
-                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="tool-card">
-                        <h3><img src="https://penpot.app/images/favicon.ico" class="tool-icon" alt="Penpot">Penpot</h3>
-                        <div class="tool-details">
-                            <div class="tool-rating">
-                                <span class="stars">★★★★☆</span>
-                                <span>4.5</span>
-                            </div>
-                            <span class="price-tag">开源免费</span>
-                        </div>
-                        <p>完全开源的设计和原型工具，适合设计师和开发者协作。基于SVG标准，使设计到代码的转换更加无缝。支持自托管，保证数据隐私和安全。独立开发者尤其喜欢它的开发者友好特性，如组件库、设计系统管理、CSS导出和精确的交互原型功能。作为Figma的开源替代品，提供无限项目和团队成员。</p>
+                        <h3>Adobe XD</h3>
+                        <p>Adobe的UI/UX设计工具，提供矢量设计、线框图和交互原型功能，与Creative Cloud无缝集成</p>
                         <div class="tool-links">
-                            <a href="https://penpot.app" class="visit-btn" target="_blank" onclick="trackToolClick('Penpot', '开源设计')">访问</a>
-                            <span class="tool-tag">开源设计</span>
-                            <div class="tool-actions">
-                                <button class="action-btn save-tool" data-tool="Penpot"><i class="far fa-bookmark"></i> 收藏</button>
-                                <button class="action-btn share-tool" data-tool="Penpot" data-url="https://penpot.app"><i class="far fa-share-square"></i> 分享</button>
-                            </div>
-                        </div>
-                        <div class="related-tools">
-                            <h4>相关工具</h4>
-                            <div class="related-tools-list">
-                                <a href="#" class="related-tool-link" data-tool="Figma">Figma</a>
-                                <a href="#" class="related-tool-link" data-tool="GitHub">GitHub</a>
-                                <a href="#" class="related-tool-link" data-tool="SVGator">SVGator</a>
-                            </div>
+                            <a href="https://www.adobe.com/products/xd.html" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">UI设计</span>
                         </div>
                     </div>
-                    
+
                     <div class="tool-card">
-                        <h3><img src="https://framerusercontent.com/images/1Txo8CbeYoYVskcMZKNXVMZRg.png" class="tool-icon" alt="Framer">Framer</h3>
-                        <div class="tool-details">
-                            <div class="tool-rating">
-                                <span class="stars">★★★★☆</span>
-                                <span>4.6</span>
-                            </div>
-                            <span class="price-tag">免费/付费</span>
-                        </div>
-                        <p>面向设计师和开发者的高级交互原型工具，以其强大的动画效果和组件系统著称。除了设计功能，Framer还可直接创建完整网站，无需编码。新版内置的AI网站生成器，只需描述需求即可生成专业级网站，极大加速产品创意验证过程。对独立开发者而言，它是快速构建网站原型和线上作品集的理想选择。</p>
+                        <h3>Sketch</h3>
+                        <p>Mac专属的矢量图形编辑器，适用于UI、移动端、Web和图标设计，强大的插件生态系统</p>
                         <div class="tool-links">
-                            <a href="https://www.framer.com" class="visit-btn" target="_blank" onclick="trackToolClick('Framer', '网站构建')">访问</a>
-                            <span class="tool-tag">网站构建</span>
-                            <div class="tool-actions">
-                                <button class="action-btn save-tool" data-tool="Framer"><i class="far fa-bookmark"></i> 收藏</button>
-                                <button class="action-btn share-tool" data-tool="Framer" data-url="https://www.framer.com"><i class="far fa-share-square"></i> 分享</button>
-                            </div>
+                            <a href="https://www.sketch.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">UI设计</span>
                         </div>
-                        <div class="related-tools">
-                            <h4>相关工具</h4>
-                            <div class="related-tools-list">
-                                <a href="#" class="related-tool-link" data-tool="Webflow">Webflow</a>
-                                <a href="#" class="related-tool-link" data-tool="Figma">Figma</a>
-                                <a href="#" class="related-tool-link" data-tool="Bolt.new">Bolt.new</a>
-                            </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Midjourney</h3>
+                        <p>AI图像生成工具，通过文本描述创建专业级别的艺术作品和视觉内容，适合概念设计和灵感收集</p>
+                        <div class="tool-links">
+                            <a href="https://www.midjourney.com/" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI设计</span>
                         </div>
                     </div>
                 </div>
@@ -1818,6 +1701,69 @@
                     </div>
                 </div>
             </section>
+
+            <!-- 浏览器插件分类 -->
+            <section id="browser-extensions" class="category-section">
+                <div class="section-intro">
+                    <p>精选高效开发必备的浏览器插件，提升开发效率、简化工作流程，让独立开发者的工作更加便捷顺畅。</p>
+                </div>
+                <div class="tools-grid" id="browser-extensions-grid">
+                    <!-- 核心开发插件 -->
+                    <div class="tool-card">
+                        <h3>篡改猴 (Tampermonkey)</h3>
+                        <p>强大的用户脚本管理器，可运行自定义JavaScript脚本，增强网站功能，自动化重复任务</p>
+                        <div class="tool-links">
+                            <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">开发工具</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Wappalyzer</h3>
+                        <p>识别网站使用的技术栈、框架和库，了解竞争对手的技术实现</p>
+                        <div class="tool-links">
+                            <a href="https://chrome.google.com/webstore/detail/wappalyzer-technology-pro/gppongmhjkpfnbhagpmjfkannfbllamg" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">技术分析</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>JSON Formatter</h3>
+                        <p>格式化和可视化JSON数据，提高API调试和数据分析效率</p>
+                        <div class="tool-links">
+                            <a href="https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">开发工具</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>React Developer Tools</h3>
+                        <p>React应用调试工具，检查组件层次结构、props和state</p>
+                        <div class="tool-links">
+                            <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">前端开发</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>AITDK SEO Extension</h3>
+                        <p>AI驱动的SEO分析工具，提供网站优化建议和关键词分析</p>
+                        <div class="tool-links">
+                            <a href="https://chrome.google.com/webstore/detail/aitdk/kekoinogcphaljhiohppffpbgeciflec" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">SEO工具</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <h3>Sider: ChatGPT</h3>
+                        <p>在浏览器侧边栏直接访问ChatGPT，辅助编程和问题解决</p>
+                        <div class="tool-links">
+                            <a href="https://chrome.google.com/webstore/detail/sider-chatgpt-sidebar-gpt/difoiogjjojoaoomphldepapgpbgkhng" class="visit-btn" target="_blank">访问</a>
+                            <span class="tool-tag">AI工具</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     <footer>
         <p>© 2023 独立开发者导航站 - 为创业者和开发者提供便捷资源导航</p>
@@ -1850,6 +1796,14 @@
                         zh: '网站建设',
                         en: 'Website Building'
                     },
+                    'browser-extensions': {
+                        zh: '浏览器插件',
+                        en: 'Browser Extensions'
+                    },
+                    'design-tools': {
+                        zh: '设计工具',
+                        en: 'Design Tools'
+                    },
                     'seo': {
                         zh: 'SEO与推广',
                         en: 'SEO & Marketing'
@@ -1880,6 +1834,14 @@
                     'website': {
                         zh: '网站建设和上线必备工具',
                         en: 'Essential tools for website building and deployment'
+                    },
+                    'browser-extensions': {
+                        zh: '提高工作效率的浏览器插件',
+                        en: 'Browser extensions to improve work efficiency'
+                    },
+                    'design-tools': {
+                        zh: '设计工具',
+                        en: 'Design tools'
                     },
                     'seo': {
                         zh: '提升网站流量和曝光的工具',
