@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 搜索相关元素
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.getElementById('searchBtn');
+    const searchClearBtn = document.getElementById('searchClearBtn'); // 可能存在的清除按钮
     
     // 当前激活的导航项
     let activeSection = 'dev-tools';
@@ -40,6 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
         'community': 'communityPlatforms',
         'templates': 'websiteTemplates'
     };
+    
+    // 初始化页面状态 - 确保页面加载时状态正确
+    // 找到当前激活的导航项
+    const activeNavLink = document.querySelector('.nav-link.active');
+    if (activeNavLink) {
+        activeSection = activeNavLink.getAttribute('data-section') || 'dev-tools';
+    }
+    
+    // 执行一次重置搜索操作，确保初始状态正确
+    resetSearch();
     
     // 导航切换功能
     navLinks.forEach(link => {
@@ -99,11 +110,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 监听搜索框输入变化
+    // 监听搜索框输入变化 - 增强版
     if (searchInput) {
+        // 初始时隐藏清除按钮
+        if (searchClearBtn) {
+            searchClearBtn.style.display = searchInput.value.trim() === '' ? 'none' : 'flex';
+        }
+
+        // 监听输入事件
         searchInput.addEventListener('input', function() {
+            // 根据搜索框是否有内容来显示或隐藏清除按钮
+            if (searchClearBtn) {
+                searchClearBtn.style.display = this.value.trim() === '' ? 'none' : 'flex';
+            }
+            
             if (this.value.trim() === '') {
                 resetSearch();
+            }
+        });
+        
+        // 监听搜索框失去焦点事件，作为额外的保障
+        searchInput.addEventListener('blur', function() {
+            if (this.value.trim() === '') {
+                resetSearch();
+            }
+        });
+        
+        // 添加清除事件，当搜索框被手动清空时
+        searchInput.addEventListener('change', function() {
+            if (this.value.trim() === '') {
+                resetSearch();
+            }
+        });
+    }
+    
+    // 如果有清除按钮，添加点击事件
+    if (searchClearBtn) {
+        searchClearBtn.addEventListener('click', function() {
+            if (searchInput) {
+                searchInput.value = '';
+                searchClearBtn.style.display = 'none';
+                resetSearch();
+                // 聚焦回搜索框
+                searchInput.focus();
             }
         });
     }
@@ -182,49 +231,88 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 重置搜索状态，恢复到搜索前的导航状态
+    // 重置搜索状态，恢复到搜索前的导航状态 - 增强版
     function resetSearch() {
-        // 移除所有工具卡片的高亮和隐藏状态
-        document.querySelectorAll('.tool-card').forEach(card => {
-            card.classList.remove('highlight');
-            card.style.display = 'block';
-        });
+        console.log('重置搜索状态');
         
-        // 获取实际的section ID
-        const actualSectionId = sectionIdMap[activeSection] || activeSection;
-        
-        // 恢复到当前激活的导航项
-        sections.forEach(section => section.classList.remove('active'));
-        const activeElement = document.getElementById(actualSectionId);
-        if (activeElement) {
-            activeElement.classList.add('active');
-        } else {
-            console.warn(`重置搜索时未找到ID为${actualSectionId}的分类section`);
-        }
-        
-        // 找到当前激活的导航链接
-        const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
-        if (activeLink && contentHeaderTitle && contentHeaderDesc) {
-            // 恢复标题和描述
-            const linkText = activeLink.textContent.trim();
-            contentHeaderTitle.textContent = linkText;
+        try {
+            // 移除所有工具卡片的高亮和隐藏状态
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.remove('highlight');
+                card.style.display = 'block';
+            });
             
-            // 根据激活的部分设置描述
-            if (activeSection === 'dev-tools') {
-                contentHeaderDesc.textContent = '提升开发效率的必备工具';
-            } else if (activeSection === 'research') {
-                contentHeaderDesc.textContent = '了解市场和用户需求的工具';
-            } else if (activeSection === 'website') {
-                contentHeaderDesc.textContent = '帮助快速构建网站的资源';
-            } else if (activeSection === 'seo') {
-                contentHeaderDesc.textContent = '优化网站排名和推广的工具';
-            } else if (activeSection === 'ai') {
-                contentHeaderDesc.textContent = 'AI辅助工具和创新资源';
-            } else if (activeSection === 'community') {
-                contentHeaderDesc.textContent = '独立开发者社区和学习资源';
-            } else if (activeSection === 'templates') {
-                contentHeaderDesc.textContent = '优质网站模板和组件库';
+            // 获取实际的section ID
+            const actualSectionId = sectionIdMap[activeSection] || activeSection;
+            
+            // 恢复到当前激活的导航项 - 先确保所有section都不活跃
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // 然后只激活当前选中的section
+            const activeElement = document.getElementById(actualSectionId);
+            if (activeElement) {
+                activeElement.classList.add('active');
+            } else {
+                console.warn(`重置搜索时未找到ID为${actualSectionId}的分类section`);
+                // 默认显示第一个section作为后备
+                if (sections.length > 0) {
+                    sections[0].classList.add('active');
+                    // 更新activeSection以保持一致性
+                    const firstSectionId = sections[0].id;
+                    // 查找firstSectionId对应的数据部分ID
+                    for (const [key, value] of Object.entries(sectionIdMap)) {
+                        if (value === firstSectionId) {
+                            activeSection = key;
+                            break;
+                        }
+                    }
+                }
             }
+            
+            // 更新导航项的激活状态
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            } else if (navLinks.length > 0) {
+                // 如果找不到对应的导航项，激活第一个作为后备
+                navLinks[0].classList.add('active');
+                activeSection = navLinks[0].getAttribute('data-section') || 'dev-tools';
+            }
+            
+            // 恢复标题和描述
+            if (activeLink && contentHeaderTitle && contentHeaderDesc) {
+                const linkText = activeLink.textContent.trim();
+                contentHeaderTitle.textContent = linkText;
+                
+                // 根据激活的部分设置描述
+                if (activeSection === 'dev-tools') {
+                    contentHeaderDesc.textContent = '提升开发效率的必备工具';
+                } else if (activeSection === 'research') {
+                    contentHeaderDesc.textContent = '了解市场和用户需求的工具';
+                } else if (activeSection === 'website') {
+                    contentHeaderDesc.textContent = '帮助快速构建网站的资源';
+                } else if (activeSection === 'seo') {
+                    contentHeaderDesc.textContent = '优化网站排名和推广的工具';
+                } else if (activeSection === 'ai') {
+                    contentHeaderDesc.textContent = 'AI辅助工具和创新资源';
+                } else if (activeSection === 'community') {
+                    contentHeaderDesc.textContent = '独立开发者社区和学习资源';
+                } else if (activeSection === 'templates') {
+                    contentHeaderDesc.textContent = '优质网站模板和组件库';
+                }
+            } else {
+                console.warn('恢复标题和描述时出现问题');
+                // 如果找不到activeLink，尝试使用第一个导航链接
+                if (navLinks.length > 0 && contentHeaderTitle) {
+                    contentHeaderTitle.textContent = navLinks[0].textContent.trim();
+                    if (contentHeaderDesc) {
+                        contentHeaderDesc.textContent = '提升开发效率的必备工具';
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('重置搜索时出错:', error);
         }
     }
 });

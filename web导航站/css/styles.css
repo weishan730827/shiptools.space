@@ -46,6 +46,7 @@ header p {
     display: flex;
     max-width: 600px;
     margin: 0 auto;
+    position: relative;
 }
 
 .search-box input {
@@ -55,6 +56,30 @@ header p {
     border-radius: 8px 0 0 8px;
     font-size: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 清除按钮样式 */
+.search-clear-btn {
+    position: absolute;
+    right: 86px; /* 搜索按钮的宽度加上一些间距 */
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #999;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.search-clear-btn:hover {
+    color: #333;
+    background-color: #f0f0f0;
 }
 
 .search-box button {
