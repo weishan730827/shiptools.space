@@ -6,19 +6,172 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化工具卡片
     initializeToolsCards();
     
-    // 搜索功能
+    // 导航菜单项点击事件
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.category-section');
+    const contentHeaderTitle = document.querySelector('.content-header-left h2');
+    const contentHeaderDesc = document.querySelector('.content-header-left p');
+    
+    // 搜索相关元素
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.getElementById('searchBtn');
     
-    searchBtn.addEventListener('click', function() {
-        performSearch(searchInput.value);
+    // 当前激活的导航项
+    let activeSection = 'dev-tools';
+    
+    // 导航切换功能
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // 如果搜索框不为空，先清空搜索
+            if (searchInput.value.trim() !== '') {
+                searchInput.value = '';
+                resetSearch();
+            }
+            
+            // 更新导航项激活状态
+            navLinks.forEach(item => item.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 获取要显示的部分
+            const sectionId = this.getAttribute('data-section');
+            activeSection = sectionId;
+            
+            // 更新标题和描述
+            const linkText = this.textContent.trim();
+            contentHeaderTitle.textContent = linkText;
+            
+            // 根据部分设置描述
+            if (sectionId === 'dev-tools') {
+                contentHeaderDesc.textContent = '提升开发效率的必备工具';
+            } else if (sectionId === 'research') {
+                contentHeaderDesc.textContent = '了解市场和用户需求的工具';
+            } else if (sectionId === 'website') {
+                contentHeaderDesc.textContent = '帮助快速构建网站的资源';
+            } else if (sectionId === 'seo') {
+                contentHeaderDesc.textContent = '优化网站排名和推广的工具';
+            } else if (sectionId === 'ai') {
+                contentHeaderDesc.textContent = 'AI辅助工具和创新资源';
+            } else if (sectionId === 'community') {
+                contentHeaderDesc.textContent = '独立开发者社区和学习资源';
+            } else if (sectionId === 'templates') {
+                contentHeaderDesc.textContent = '优质网站模板和组件库';
+            }
+            
+            // 隐藏所有部分，然后显示当前部分
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        });
     });
     
-    searchInput.addEventListener('keyup', function(event) {
-        if (event.key === 'Enter') {
-            performSearch(searchInput.value);
+    // 监听搜索框输入变化
+    searchInput.addEventListener('input', function() {
+        if (this.value.trim() === '') {
+            resetSearch();
         }
     });
+    
+    // 搜索按钮点击事件
+    searchBtn.addEventListener('click', function() {
+        performSearch();
+    });
+    
+    // 搜索框按回车搜索
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+    
+    // 执行搜索
+    function performSearch() {
+        const searchTerm = searchInput.value.toLowerCase();
+        if (searchTerm.trim() === '') {
+            resetSearch();
+            return;
+        }
+        
+        // 搜索工具卡片
+        const toolCards = document.querySelectorAll('.tool-card');
+        let foundCount = 0;
+        
+        // 显示所有分类，以便搜索所有工具
+        sections.forEach(section => section.classList.add('active'));
+        
+        toolCards.forEach(card => {
+            const toolName = card.querySelector('h3').textContent.toLowerCase();
+            const toolDesc = card.querySelector('p').textContent.toLowerCase();
+            const toolTag = card.querySelector('.tool-tag').textContent.toLowerCase();
+            
+            if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm) || toolTag.includes(searchTerm)) {
+                card.style.display = 'block';
+                card.classList.add('highlight');
+                foundCount++;
+            } else {
+                card.style.display = 'none';
+                card.classList.remove('highlight');
+            }
+        });
+        
+        // 更新标题显示
+        contentHeaderTitle.textContent = `搜索结果: ${foundCount} 个匹配`;
+        contentHeaderDesc.textContent = `搜索 "${searchInput.value}" 的结果`;
+        
+        // 如果有结果，滚动到第一个匹配项
+        if (foundCount > 0) {
+            const firstMatch = document.querySelector('.tool-card.highlight');
+            if (firstMatch) {
+                firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        // 记录搜索事件
+        if (typeof gtag === 'function') {
+            gtag('event', 'search', {
+                'search_term': searchTerm,
+                'results_count': foundCount
+            });
+        }
+    }
+    
+    // 重置搜索状态，恢复到搜索前的导航状态
+    function resetSearch() {
+        // 移除所有工具卡片的高亮和隐藏状态
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.classList.remove('highlight');
+            card.style.display = 'block';
+        });
+        
+        // 恢复到当前激活的导航项
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(activeSection).classList.add('active');
+        
+        // 找到当前激活的导航链接
+        const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
+        if (activeLink) {
+            // 恢复标题和描述
+            const linkText = activeLink.textContent.trim();
+            contentHeaderTitle.textContent = linkText;
+            
+            // 根据激活的部分设置描述
+            if (activeSection === 'dev-tools') {
+                contentHeaderDesc.textContent = '提升开发效率的必备工具';
+            } else if (activeSection === 'research') {
+                contentHeaderDesc.textContent = '了解市场和用户需求的工具';
+            } else if (activeSection === 'website') {
+                contentHeaderDesc.textContent = '帮助快速构建网站的资源';
+            } else if (activeSection === 'seo') {
+                contentHeaderDesc.textContent = '优化网站排名和推广的工具';
+            } else if (activeSection === 'ai') {
+                contentHeaderDesc.textContent = 'AI辅助工具和创新资源';
+            } else if (activeSection === 'community') {
+                contentHeaderDesc.textContent = '独立开发者社区和学习资源';
+            } else if (activeSection === 'templates') {
+                contentHeaderDesc.textContent = '优质网站模板和组件库';
+            }
+        }
+    }
 });
 
 // 初始化所有工具卡片
@@ -66,129 +219,10 @@ function createToolCard(tool) {
         <h3>${tool.name}</h3>
         <p>${tool.description}</p>
         <div class="tool-links">
-            <a href="${tool.url}" class="visit-btn" target="_blank">访问网站</a>
+            <a href="${tool.url}" class="visit-btn" target="_blank" onclick="trackToolClick('${tool.name}', '${tool.tag}')">访问网站</a>
             <span class="tool-tag">${tool.tag}</span>
         </div>
     `;
     
     return card;
-}
-
-// 执行搜索
-function performSearch(query) {
-    query = query.toLowerCase().trim();
-    
-    if (!query) {
-        resetSearch();
-        return;
-    }
-    
-    let foundCount = 0;
-    
-    // 在所有类别中搜索
-    searchInCategory('research-tools', toolsData.researchTools, query, result => {
-        foundCount += result;
-    });
-    
-    searchInCategory('dev-tools', toolsData.devTools, query, result => {
-        foundCount += result;
-    });
-    
-    searchInCategory('seo-tools', toolsData.seoTools, query, result => {
-        foundCount += result;
-    });
-    
-    searchInCategory('ai-tools', toolsData.aiTools, query, result => {
-        foundCount += result;
-    });
-    
-    searchInCategory('website-templates', toolsData.websiteTemplates, query, result => {
-        foundCount += result;
-    });
-    
-    searchInCategory('community-platforms', toolsData.communityPlatforms, query, result => {
-        foundCount += result;
-    });
-    
-    // 显示搜索结果提示
-    const resultMessage = document.createElement('div');
-    resultMessage.className = 'search-result-message';
-    
-    if (foundCount === 0) {
-        resultMessage.textContent = `未找到与 "${query}" 相关的工具。`;
-    } else {
-        resultMessage.textContent = `找到 ${foundCount} 个与 "${query}" 相关的工具。`;
-        // 滚动到第一个匹配结果
-        const firstMatch = document.querySelector('.highlight');
-        if (firstMatch) {
-            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    }
-    
-    // 添加或替换结果消息
-    const oldMessage = document.querySelector('.search-result-message');
-    if (oldMessage) {
-        oldMessage.parentNode.replaceChild(resultMessage, oldMessage);
-    } else {
-        document.querySelector('.search-box').appendChild(resultMessage);
-    }
-}
-
-// 在特定类别中搜索
-function searchInCategory(sectionId, tools, query, callback) {
-    const section = document.getElementById(sectionId);
-    if (!section) {
-        console.warn(`未找到ID为${sectionId}的元素`);
-        callback(0);
-        return 0;
-    }
-    
-    const cards = section.querySelectorAll('.tool-card');
-    let foundCount = 0;
-    
-    tools.forEach((tool, index) => {
-        if (index >= cards.length) return;
-        
-        const card = cards[index];
-        const matchName = tool.name.toLowerCase().includes(query);
-        const matchDesc = tool.description.toLowerCase().includes(query);
-        const matchTag = tool.tag.toLowerCase().includes(query);
-        
-        if (matchName || matchDesc || matchTag) {
-            card.classList.add('highlight');
-            card.style.display = 'block';
-            foundCount++;
-        } else {
-            card.classList.remove('highlight');
-            card.style.display = 'none';
-        }
-    });
-    
-    // 如果类别中没有找到匹配项，隐藏整个类别
-    const categoryContainer = section.closest('.category-container');
-    if (categoryContainer) {
-        categoryContainer.style.display = foundCount > 0 ? 'block' : 'none';
-    }
-    
-    callback(foundCount);
-    return foundCount;
-}
-
-// 重置搜索结果
-function resetSearch() {
-    // 显示所有类别和卡片
-    document.querySelectorAll('.category-container').forEach(container => {
-        container.style.display = 'block';
-    });
-    
-    document.querySelectorAll('.tool-card').forEach(card => {
-        card.classList.remove('highlight');
-        card.style.display = 'block';
-    });
-    
-    // 移除搜索结果消息
-    const resultMessage = document.querySelector('.search-result-message');
-    if (resultMessage) {
-        resultMessage.remove();
-    }
 } 
