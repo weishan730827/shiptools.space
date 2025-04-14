@@ -3,7 +3,7 @@
  */
 
 // 导入工具数据
-import toolsData from './data.js';
+import toolsData from './js/data.js';
 
 // 工具点击跟踪函数
 function trackToolClick(toolName, category) {
