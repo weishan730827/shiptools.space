@@ -201,6 +201,27 @@ const toolsData = {
             url: "https://home.atlassian.com/",
             description: "企业级协作和开发工具套件，提供Jira、Confluence等项目管理和团队协作解决方案",
             tag: "开发协作"
+        },
+        {
+            id: "cursor",
+            name: "Cursor",
+            url: "https://cursor.sh/",
+            description: "专为AI优化的代码编辑器，提供智能代码补全和AI辅助开发功能",
+            tag: "AI编辑器"
+        },
+        {
+            id: "windsurf",
+            name: "Windsurf IDE",
+            url: "https://windsurf.dev/",
+            description: "现代化的集成开发环境，支持多语言和云端协作开发",
+            tag: "开发工具"
+        },
+        {
+            id: "devv",
+            name: "Devv",
+            url: "https://devv.ai/",
+            description: "面向开发者的AI搜索引擎，提供精准的技术问题解答和代码示例",
+            tag: "AI开发助手"
         }
     ],
     
@@ -328,6 +349,13 @@ const toolsData = {
             url: "https://aistudio.google.com/apikey",
             description: "Google提供的AI模型开发和API访问平台，支持Gemini等先进AI模型的调用和集成",
             tag: "AI开发平台"
+        },
+        {
+            id: "augment-code",
+            name: "Augment Code",
+            url: "https://www.augmentcode.com/",
+            description: "专为大型代码库设计的AI编码助手，提供智能代码理解和生成",
+            tag: "AI编码工具"
         }
     ],
     
@@ -606,6 +634,13 @@ const toolsData = {
             url: "https://chrome.google.com/webstore/detail/game-site-monitor/nlmmmmpllclkhkcoiihcgbhidpnddpnj",
             description: "监控网站变化和更新，自动跟踪竞品和依赖更新",
             tag: "监控工具"
+        },
+        {
+            id: "deepsider",
+            name: "Deepsider Edge插件",
+            url: "https://microsoftedge.microsoft.com/addons/detail/deepsider/",
+            description: "Edge浏览器AI插件，提供网页内容理解、总结和智能交互",
+            tag: "AI工具"
         }
     ],
     
