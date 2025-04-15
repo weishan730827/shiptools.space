@@ -400,7 +400,8 @@
             
             <!-- 开发工具分类 -->
             <section id="dev-tools" class="category-section active">
-                <div class="tools-grid">
+                <h2>开发工具</h2>
+                <div id="dev-tools-grid" class="tools-grid">
                     <!-- 快速开发工具 -->
                     <div class="tool-card">
                         <h3>Bolt.new</h3>
@@ -743,7 +744,8 @@
             
             <!-- AI与创新分类 -->
             <section id="ai" class="category-section">
-                <div class="tools-grid">
+                <h2>AI与创新工具</h2>
+                <div id="ai-tools-grid" class="tools-grid">
                     <!-- AI与创新工具 -->
                     <div class="tool-card">
                         <h3>OpenAI API</h3>
@@ -824,7 +826,8 @@
 
             <!-- 社区资源分类 -->
             <section id="community" class="category-section">
-                <div class="tools-grid">
+                <h2>社区与学习平台</h2>
+                <div id="community-platforms-grid" class="tools-grid">
                     <!-- 社区与学习平台 -->
                     <div class="tool-card">
                         <h3>Indie Hackers</h3>
@@ -948,21 +951,8 @@
             
             <!-- 网站模板分类 -->
             <section id="templates" class="category-section">
-                <!-- 添加一些额外的CSS样式 -->
-                <style>
-                    .sub-category-title {
-                        margin: 30px 0 20px;
-                        padding-bottom: 10px;
-                        border-bottom: 2px solid #4a90e2;
-                        color: #2c3e50;
-                        font-size: 1.5rem;
-                        font-weight: 600;
-                    }
-                </style>
-
-                <!-- 导航站模板子分类 -->
-                <h2 class="sub-category-title">导航站模板</h2>
-                <div class="tools-grid">
+                <h2>开源网站模板</h2>
+                <div id="website-templates-grid" class="tools-grid">
                     <div class="tool-card">
                         <h3>WebStack.cc</h3>
                         <p>免费开源的导航网站模板，响应式设计，可自定义</p>
@@ -1023,253 +1013,6 @@
                         <div class="tool-links">
                             <a href="https://github.com/DokeyAI/dokeyai-data" class="visit-btn" target="_blank">访问</a>
                             <span class="tool-tag">开源数据</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 开源模板子分类 -->
-                <h2 class="sub-category-title">开源模板</h2>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <h3>Bootstrap 模板</h3>
-                        <p>基于Bootstrap框架的免费响应式网站模板集合</p>
-                        <div class="tool-links">
-                            <a href="https://startbootstrap.com/themes" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">响应式模板</span>
-                        </div>
-                    </div>
-                    
-                    <div class="tool-card">
-                        <h3>HTML5 UP</h3>
-                        <p>设计精美的免费HTML5响应式网站模板</p>
-                        <div class="tool-links">
-                            <a href="https://html5up.net/" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">HTML5模板</span>
-                        </div>
-                    </div>
-                    
-                    <div class="tool-card">
-                        <h3>Gatsby Starters</h3>
-                        <p>Gatsby框架的开源启动模板，适合博客和静态网站</p>
-                        <div class="tool-links">
-                            <a href="https://www.gatsbyjs.com/starters/" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">React模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>UI Libs</h3>
-                        <p>用于Vue 3和Nuxt 3的UI库选择器，帮助开发者快速挑选合适的UI库</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/ddahan/ui-libs" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">开源模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Vercel 模板中心</h3>
-                        <p>Vercel提供的各种现代网站模板，包含多种导航类型的模板</p>
-                        <div class="tool-links">
-                            <a href="https://vercel.com/templates" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">模板集合</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Bolt.new</h3>
-                        <p>提供即时可部署的网站模板，包括各类导航站模板</p>
-                        <div class="tool-links">
-                            <a href="https://bolt.new/" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">快速部署</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Tailwind UI</h3>
-                        <p>提供高质量收费模板，如Salient等专业导航站模板</p>
-                        <div class="tool-links">
-                            <a href="https://tailwindui.com/templates/salient" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">付费模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>ThemeForest</h3>
-                        <p>最大的模板市场之一，提供各类网站模板，包括导航站模板</p>
-                        <div class="tool-links">
-                            <a href="https://themeforest.net/" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">付费模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Rin 动态博客</h3>
-                        <p>基于Cloudflare Pages、Workers、D1和R2的动态博客模板</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/openRun/Rin" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">博客模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Next.js 15 模板</h3>
-                        <p>支持App Router和Page Router的Next.js 15模板和启动器</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/xartz/Next-js-Boilerplate" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">Next.js</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>SaaS 模板</h3>
-                        <p>使用Next.js、Tailwind CSS、Shadcn UI和TypeScript构建的SaaS模板</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/xartz/SaaS-Boilerplate" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">SaaS模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Open SaaS</h3>
-                        <p>免费、开源的React和Node.js SaaS应用启动器，功能强大</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/wasp-lang/open-saas" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">SaaS模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>NextJS Landing Page</h3>
-                        <p>免费的Next.Js登陆页面模板，快速构建营销页面</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/xartz/Next-JS-Landing-Page-Starter-Template" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">着陆页</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Astro Boilerplate</h3>
-                        <p>带有响应式博客和作品集的Astro模板，性能优异</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/xartz/Astro-boilerplate" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">Astro模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Landing Page Boilerplate</h3>
-                        <p>多功能的登陆页面模板，适用于各种项目和营销活动</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/weijunext/landing-page-boilerplate" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">着陆页</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Wiggle AI WebUI</h3>
-                        <p>开源的wiggle ai web客户端，易于定制和部署</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/ai-aigc-studio/Wiggle-AI-WebUI" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">AI Web</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>周刊博客模板</h3>
-                        <p>适合发布周刊内容的博客模板，结构简洁清晰</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/weijunext/new-blog" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">博客模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Gapis Money</h3>
-                        <p>API服务管理和计费平台，适合构建API服务</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/weijunext/gapis.money" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">API平台</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>HuntScreens</h3>
-                        <p>自动截取Producthunt、YC和Indiehackers上新项目截图的工具</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/daimajia/huntscreens" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">截图工具</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Smart Excel AI</h3>
-                        <p>使用ChatGPT在几秒钟内生成所需的Excel公式</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/weijunext/smart-excel-ai" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">AI工具</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>NextJS VPS</h3>
-                        <p>Next.js VPS示例，帮助开发者理解VPS部署流程</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/ashleyrudland/nextjs_vps" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">部署示例</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>AI换发型工具</h3>
-                        <p>几秒钟内获得新发型效果的AI工具</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/Pwntus/change-hairstyle-ai" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">AI应用</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Green Screen Creator</h3>
-                        <p>在视频中跟踪对象并添加绿幕背景的工具</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/replicate/green-screen-creator" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">视频工具</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>JustShip</h3>
-                        <p>Svelte 5和SvelteKit SaaS模板，快速启动SaaS项目</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/oclufi/justship" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">Svelte</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>Supanuxt SaaS</h3>
-                        <p>集成Nuxt3、Supabase、OAuth等技术的SaaS模板</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/javascriptMick/supanuxt-saas" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">Nuxt</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>SaasFly</h3>
-                        <p>用于创建SaaS应用的模板或启动器</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/saasfly/saasfly" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">SaaS模板</span>
-                        </div>
-                    </div>
-
-                    <div class="tool-card">
-                        <h3>ShipFast TypeScript</h3>
-                        <p>使用TypeScript的ShipFast模板，加速SaaS开发</p>
-                        <div class="tool-links">
-                            <a href="https://github.com/mundane799699/xlike-web" class="visit-btn" target="_blank">访问</a>
-                            <span class="tool-tag">TypeScript</span>
                         </div>
                     </div>
                 </div>
