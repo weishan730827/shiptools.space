@@ -362,6 +362,7 @@ function initializeToolsCards() {
         renderToolsSection('website-templates', window.toolsData.websiteTemplates);
         
         // 添加浏览器插件分类渲染
+        console.log('浏览器插件数据:', window.toolsData.browserExtensions);
         renderToolsSection('browser-extensions-grid', window.toolsData.browserExtensions);
         
         // 添加设计工具分类渲染
