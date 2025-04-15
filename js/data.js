@@ -87,8 +87,8 @@ const toolsData = {
             id: "github",
             name: "GitHub",
             url: "https://github.com",
-            description: "代码托管平台，提供版本控制和协作功能",
-            tag: "代码管理"
+            description: "全球最大的代码托管平台和协作开发社区",
+            tag: "代码仓库"
         },
         {
             id: "notion",
@@ -205,8 +205,8 @@ const toolsData = {
         {
             id: "cursor",
             name: "Cursor",
-            url: "https://cursor.sh/",
-            description: "专为AI优化的代码编辑器，提供智能代码补全和AI辅助开发功能",
+            url: "https://www.cursor.so/",
+            description: "面向AI编程的现代化代码编辑器",
             tag: "AI编辑器"
         },
         {
@@ -222,6 +222,13 @@ const toolsData = {
             url: "https://devv.ai/",
             description: "面向开发者的AI搜索引擎，提供精准的技术问题解答和代码示例",
             tag: "AI开发助手"
+        },
+        {
+            id: "augment-code",
+            name: "Augment Code",
+            url: "https://www.augmentcode.com/",
+            description: "专为大型代码库设计的AI编码助手，提供智能代码理解和生成",
+            tag: "AI编码工具"
         }
     ],
     
@@ -360,78 +367,215 @@ const toolsData = {
     ],
     
     // 开源网站模板
-    websiteTemplates: [
-        {
-            id: "rin",
-            name: "Rin 动态博客",
-            url: "https://github.com/openRun/Rin",
-            description: "基于 Cloudflare Pages、Workers、D1 和 R2 的动态博客模板",
-            tag: "博客模板"
-        },
-        {
-            id: "nextjs-boilerplate",
-            name: "Next.js 15 模板",
-            url: "https://github.com/xartz/Next-js-Boilerplate",
-            description: "支持 App Router 和 Page Router 的 Next.js 15 模板和启动器",
-            tag: "Next.js"
-        },
-        {
-            id: "saas-boilerplate",
-            name: "SaaS 模板",
-            url: "https://github.com/xartz/SaaS-Boilerplate",
-            description: "使用 Next.js、Tailwind CSS、Shadcn UI 和 TypeScript 构建的 SaaS 模板",
-            tag: "SaaS模板"
-        },
-        {
-            id: "nextjs-landing",
-            name: "Next.js 登陆页面",
-            url: "https://github.com/xartz/Next-JS-Landing-Page-Starter-Template",
-            description: "免费的 Next.js 登陆页面模板",
-            tag: "着陆页"
-        },
-        {
-            id: "astro-boilerplate",
-            name: "Astro 模板",
-            url: "https://github.com/xartz/Astro-boilerplate",
-            description: "带有响应式博客和作品集的 Astro 模板",
-            tag: "博客模板"
-        },
-        {
-            id: "landing-page",
-            name: "通用着陆页模板",
-            url: "https://github.com/weijunext/landing-page-boilerplate",
-            description: "多功能的登陆页面模板，适用于各种项目和营销活动",
-            tag: "着陆页"
-        },
-        {
-            id: "fre123-nav",
-            name: "FRE123 导航模板",
-            url: "https://github.com/fre123-com/fre123-nav",
-            description: "免费资源共享平台导航，可以一键搭建你的导航网站",
-            tag: "导航站"
-        },
-        {
-            id: "webstack",
-            name: "WebStack导航",
-            url: "https://github.com/WebStackPage/WebStackPage.github.io",
-            description: "静态响应式网址导航网站模板",
-            tag: "导航站"
-        },
-        {
-            id: "ai-tools-directory",
-            name: "AI工具目录",
-            url: "https://github.com/6677-ai/tap4-ai-webui",
-            description: "一键部署你自己的AI工具目录的开源web-ui",
-            tag: "AI工具目录"
-        },
-        {
-            id: "wordpress",
-            name: "WordPress",
-            url: "https://wordpress.com/discover",
-            description: "全球最流行的内容管理系统和网站建设平台，提供丰富的主题和插件生态",
-            tag: "建站工具"
-        }
-    ],
+    websiteTemplates: {
+        navigationTemplates: [
+            {
+                id: "fre123-nav",
+                name: "FRE123 导航模板",
+                url: "https://github.com/fre123-com/fre123-nav",
+                description: "免费资源共享平台导航，可以一键搭建你的导航网站",
+                tag: "导航站"
+            },
+            {
+                id: "webstack",
+                name: "WebStack导航",
+                url: "https://github.com/WebStackPage/WebStackPage.github.io",
+                description: "静态响应式网址导航网站模板",
+                tag: "导航站"
+            },
+            {
+                id: "oss-gallery",
+                name: "OSS Gallery",
+                url: "https://github.com/dubinc/oss-gallery",
+                description: "基于Dub TypeScript SDK构建的互联网上最佳开源项目的众包列表",
+                tag: "开源项目导航"
+            },
+            {
+                id: "tap4-ai-webui",
+                name: "AI工具目录",
+                url: "https://github.com/6677-ai/tap4-ai-webui",
+                description: "一键部署你自己的AI工具目录的开源web-ui",
+                tag: "AI工具目录"
+            },
+            {
+                id: "gpts-works",
+                name: "GPTs Store",
+                url: "https://github.com/all-in-aigc/gpts-works",
+                description: "一个第三方GPTs商店",
+                tag: "AI工具导航"
+            },
+            {
+                id: "ui-lib-picker",
+                name: "UI Lib Picker",
+                url: "https://github.com/ddahan/ui-libs",
+                description: "一个用于Vue 3和Nuxt 3的UI库选择器",
+                tag: "UI库导航"
+            },
+            {
+                id: "dokeyai-data",
+                name: "DokeyAI Data",
+                url: "https://github.com/DokeyAI/dokeyai-data",
+                description: "一个用于网站的公共AI工具数据",
+                tag: "AI工具数据"
+            },
+            {
+                id: "tailwindui",
+                name: "Tailwind UI",
+                url: "https://tailwindui.com/templates/salient",
+                description: "收费的Tailwind UI模板",
+                tag: "UI模板"
+            },
+            {
+                id: "themeforest",
+                name: "ThemeForest",
+                url: "http://themeforest.net/",
+                description: "提供各种网站模板的资源平台",
+                tag: "模板市场"
+            }
+        ],
+        openSourceTemplates: [
+            {
+                id: "cloudflare-blog",
+                name: "Cloudflare动态博客",
+                url: "https://github.com/openRun/Rin",
+                description: "一个基于Cloudflare Pages、Workers、D1和R2的动态博客模板",
+                tag: "博客模板"
+            },
+            {
+                id: "nextjs-boilerplate",
+                name: "Next.js 15 模板",
+                url: "https://github.com/xartz/Next-js-Boilerplate",
+                description: "支持 App Router 和 Page Router 的 Next.js 15 模板和启动器",
+                tag: "Next.js"
+            },
+            {
+                id: "saas-boilerplate",
+                name: "SaaS 模板",
+                url: "https://github.com/xartz/SaaS-Boilerplate",
+                description: "使用 Next.js、Tailwind CSS、Shadcn UI 和 TypeScript 构建的 SaaS 模板",
+                tag: "SaaS模板"
+            },
+            {
+                id: "nextjs-landing",
+                name: "Next.js 登陆页面",
+                url: "https://github.com/xartz/Next-JS-Landing-Page-Starter-Template",
+                description: "免费的 Next.js 登陆页面模板",
+                tag: "着陆页"
+            },
+            {
+                id: "astro-boilerplate",
+                name: "Astro 模板",
+                url: "https://github.com/xartz/Astro-boilerplate",
+                description: "带有响应式博客和作品集的 Astro 模板",
+                tag: "博客模板"
+            },
+            {
+                id: "landing-page",
+                name: "通用着陆页模板",
+                url: "https://github.com/weijunext/landing-page-boilerplate",
+                description: "多功能的登陆页面模板，适用于各种项目和营销活动",
+                tag: "着陆页"
+            },
+            {
+                id: "wiggle-ai",
+                name: "Wiggle AI Web客户端",
+                url: "https://github.com/ai-aigc-studio/Wiggle-AI-WebUI",
+                description: "一个用于wiggle ai web客户端的开源模板",
+                tag: "AI工具"
+            },
+            {
+                id: "weekly-blog",
+                name: "周刊博客",
+                url: "https://github.com/weijunext/new-blog",
+                description: "一个周刊博客模板",
+                tag: "博客模板"
+            },
+            {
+                id: "gapis-money",
+                name: "Gapis.money",
+                url: "https://github.com/weijunext/gapis.money",
+                description: "API接口管理和交易平台模板",
+                tag: "API平台"
+            },
+            {
+                id: "huntscreens",
+                name: "项目截图工具",
+                url: "https://github.com/daimajia/huntscreens",
+                description: "一个用于在Producthunt、YC和Indiehackers上截取新项目截图的工具",
+                tag: "工具"
+            },
+            {
+                id: "excel-ai",
+                name: "Excel公式生成器",
+                url: "https://github.com/weijunext/smart-excel-ai",
+                description: "使用ChatGPT在几秒钟内生成所需的Excel公式",
+                tag: "AI工具"
+            },
+            {
+                id: "nextjs-vps",
+                name: "NextJS VPS示例",
+                url: "https://github.com/ashleyrudland/nextjs_vps",
+                description: "一个Next.js VPS部署示例",
+                tag: "部署示例"
+            },
+            {
+                id: "hairstyle-ai",
+                name: "AI换发型工具",
+                url: "https://github.com/Pwntus/change-hairstyle-ai",
+                description: "一个可以在几秒钟内获得新发型的AI工具",
+                tag: "AI工具"
+            },
+            {
+                id: "green-screen",
+                name: "视频绿幕工具",
+                url: "https://github.com/replicate/green-screen-creator",
+                description: "一个可以在视频中跟踪对象并添加绿幕背景的工具",
+                tag: "视频工具"
+            },
+            {
+                id: "open-saas",
+                name: "开源SaaS启动器",
+                url: "https://github.com/wasp-lang/open-saas",
+                description: "一个免费的、开源的React和Node.js SaaS应用启动器",
+                tag: "SaaS模板"
+            },
+            {
+                id: "svelte-saas",
+                name: "Svelte SaaS模板",
+                url: "https://github.com/oclufi/justship",
+                description: "一个Svelte 5和SvelteKit SaaS模板",
+                tag: "SaaS模板"
+            },
+            {
+                id: "nuxt-saas",
+                name: "Nuxt3 SaaS模板",
+                url: "https://github.com/javascriptMick/supanuxt-saas",
+                description: "一个简单的SAAS、Nuxt3、Supabase、OAuth、Prisma、TRPC、Pinia、Stripe、Tailwind和OpenAI模板",
+                tag: "SaaS模板"
+            },
+            {
+                id: "saasfly",
+                name: "SaaS模板",
+                url: "https://github.com/saasfly/saasfly",
+                description: "一个用于创建SaaS应用的模板或启动器",
+                tag: "SaaS模板"
+            },
+            {
+                id: "shipfast",
+                name: "ShipFast TypeScript",
+                url: "https://github.com/mundane799699/xlike-web",
+                description: "一个使用TypeScript的ShipFast模板",
+                tag: "SaaS模板"
+            },
+            {
+                id: "ai-tools-directory",
+                name: "AI工具目录",
+                url: "https://github.com/6677-ai/tap4-ai-webui",
+                description: "一键部署你自己的AI工具目录的开源web-ui",
+                tag: "AI工具目录"
+            }
+        ]
+    },
     
     // 社区与学习平台
     communityPlatforms: [
@@ -639,7 +783,7 @@ const toolsData = {
             id: "deepsider",
             name: "Deepsider Edge插件",
             url: "https://microsoftedge.microsoft.com/addons/detail/deepsider/",
-            description: "Edge浏览器AI插件，提供网页内容理解、总结和智能交互",
+            description: "Edge浏览器的AI增强插件，提供智能网页分析和总结",
             tag: "AI工具"
         }
     ],
