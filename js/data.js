@@ -187,6 +187,20 @@ const toolsData = {
             url: "https://gumroad.com/",
             description: "简单易用的数字产品销售平台，让创作者轻松销售电子书、课程、软件和订阅服务",
             tag: "销售平台"
+        },
+        {
+            id: "nextjs",
+            name: "Next.js",
+            url: "https://nextjs.org/",
+            description: "现代化的React框架，提供高性能的Web应用开发解决方案，支持服务端渲染和静态站点生成",
+            tag: "Web框架"
+        },
+        {
+            id: "atlassian",
+            name: "Atlassian",
+            url: "https://home.atlassian.com/",
+            description: "企业级协作和开发工具套件，提供Jira、Confluence等项目管理和团队协作解决方案",
+            tag: "开发协作"
         }
     ],
     
@@ -220,7 +234,7 @@ const toolsData = {
         {
             id: "theresanaiforthat",
             name: "There's An AI For That",
-            url: "https://theresanaiforthat.com/",
+            url: "https://theresanaiforthat.com/requests/",
             description: "全球最大的AI工具导航网站，发现各种AI应用",
             tag: "AI导航"
         },
@@ -293,6 +307,27 @@ const toolsData = {
             url: "https://www.together.ai/",
             description: "AI基础设施平台，提供开源模型的托管和微调服务，支持模型部署和推理API",
             tag: "AI基础设施"
+        },
+        {
+            id: "openrouter",
+            name: "OpenRouter.ai",
+            url: "https://openrouter.ai/",
+            description: "AI模型聚合平台，提供多种大语言模型的统一接口，支持灵活的模型选择和调用",
+            tag: "AI模型平台"
+        },
+        {
+            id: "siliconflow",
+            name: "SiliconFlow",
+            url: "https://siliconflow.cn/zh-cn/models",
+            description: "中国本地的AI模型平台，提供高性能的AI模型和云服务，专注于加速AGI技术普惠人类",
+            tag: "AI模型平台"
+        },
+        {
+            id: "google-ai-studio",
+            name: "Google AI Studio",
+            url: "https://aistudio.google.com/apikey",
+            description: "Google提供的AI模型开发和API访问平台，支持Gemini等先进AI模型的调用和集成",
+            tag: "AI开发平台"
         }
     ],
     
@@ -360,6 +395,13 @@ const toolsData = {
             url: "https://github.com/6677-ai/tap4-ai-webui",
             description: "一键部署你自己的AI工具目录的开源web-ui",
             tag: "AI工具目录"
+        },
+        {
+            id: "wordpress",
+            name: "WordPress",
+            url: "https://wordpress.com/discover",
+            description: "全球最流行的内容管理系统和网站建设平台，提供丰富的主题和插件生态",
+            tag: "建站工具"
         }
     ],
     
@@ -385,6 +427,27 @@ const toolsData = {
             url: "https://seo.box/referring/",
             description: "收集通过Stripe平台收款的Top 100赚钱产品",
             tag: "产品分析"
+        },
+        {
+            id: "juejin",
+            name: "掘金",
+            url: "https://juejin.cn/",
+            description: "中国最大的开发者技术社区，分享技术文章、项目经验和职场见解",
+            tag: "技术社区"
+        },
+        {
+            id: "csdn",
+            name: "CSDN",
+            url: "https://www.csdn.net/",
+            description: "中国最大的IT技术社区，提供技术博客、论坛和技术资讯",
+            tag: "技术社区"
+        },
+        {
+            id: "quora",
+            name: "Quora",
+            url: "https://fr.quora.com/",
+            description: "全球知名的问答社区平台，用户可以分享知识、交流经验和探讨各种话题",
+            tag: "问答社区"
         }
     ],
     
