@@ -1,8 +1,17 @@
-// 导入工具数据
-import toolsData from './data.js';
+// 不再使用import语句，改用全局变量
+// import toolsData from './data.js';
 
 // DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM加载完成，初始化工具数据...");
+    console.log("全局toolsData对象:", window.toolsData);
+    
+    // 确保toolsData可用
+    if (!window.toolsData) {
+        console.error("toolsData未定义！请检查data.js是否正确加载");
+        return;
+    }
+    
     // 初始化工具卡片
     initializeToolsCards();
     
@@ -335,28 +344,28 @@ function initializeToolsCards() {
         console.log('开始初始化工具卡片...');
         
         // 添加需求收集和关键词调研工具
-        renderToolsSection('research-tools', toolsData.researchTools);
+        renderToolsSection('research-tools', window.toolsData.researchTools);
         
         // 添加开发者工具
-        renderToolsSection('dev-tools', toolsData.devTools);
+        renderToolsSection('dev-tools', window.toolsData.devTools);
         
         // 添加SEO工具
-        renderToolsSection('seo-tools', toolsData.seoTools);
+        renderToolsSection('seo-tools', window.toolsData.seoTools);
         
         // 添加AI工具
-        renderToolsSection('ai-tools', toolsData.aiTools);
+        renderToolsSection('ai-tools', window.toolsData.aiTools);
         
         // 添加社区平台
-        renderToolsSection('community-platforms', toolsData.communityPlatforms);
+        renderToolsSection('community-platforms', window.toolsData.communityPlatforms);
         
         // 添加模板分类渲染
-        renderToolsSection('website-templates', toolsData.websiteTemplates);
+        renderToolsSection('website-templates', window.toolsData.websiteTemplates);
         
         // 添加浏览器插件分类渲染
-        renderToolsSection('browser-extensions-grid', toolsData.browserExtensions);
+        renderToolsSection('browser-extensions-grid', window.toolsData.browserExtensions);
         
         // 添加设计工具分类渲染
-        renderToolsSection('design-tools-grid', toolsData.designTools);
+        renderToolsSection('design-tools-grid', window.toolsData.designTools);
         
         console.log('工具卡片初始化完成');
     } catch (error) {
