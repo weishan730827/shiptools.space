@@ -336,6 +336,9 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('重置搜索时出错:', error);
         }
     }
+
+    // 添加网站模版渲染
+    renderWebsiteTemplates();
 });
 
 // 初始化所有工具卡片
@@ -418,4 +421,23 @@ function createToolCard(tool) {
     `;
     
     return card;
+}
+
+function renderWebsiteTemplates() {
+    const navigationTemplatesSection = document.getElementById('navigation-templates');
+    const openSourceTemplatesSection = document.getElementById('open-source-templates');
+    
+    if (navigationTemplatesSection && window.toolsData.websiteTemplates.navigationTemplates) {
+        window.toolsData.websiteTemplates.navigationTemplates.forEach(template => {
+            const templateCard = createToolCard(template);
+            navigationTemplatesSection.appendChild(templateCard);
+        });
+    }
+    
+    if (openSourceTemplatesSection && window.toolsData.websiteTemplates.openSourceTemplates) {
+        window.toolsData.websiteTemplates.openSourceTemplates.forEach(template => {
+            const templateCard = createToolCard(template);
+            openSourceTemplatesSection.appendChild(templateCard);
+        });
+    }
 } 
