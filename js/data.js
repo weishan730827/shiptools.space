@@ -347,8 +347,8 @@ const toolsData = {
             id: "siliconflow",
             name: "SiliconFlow",
             url: "https://siliconflow.cn/zh-cn/models",
-            description: "中国本地的AI模型平台，提供高性能的AI模型和云服务，专注于加速AGI技术普惠人类",
-            tag: "AI模型平台"
+            description: "提供开源AI模型和高性能GPU算力服务的平台，助力开发者构建和部署AI应用",
+            tag: "AI开发平台"
         },
         {
             id: "google-ai-studio",
@@ -369,6 +369,20 @@ const toolsData = {
     // 开源网站模板
     websiteTemplates: {
         navigationTemplates: [
+            {
+                id: "wordpress",
+                name: "WordPress",
+                url: "https://wordpress.com/discover",
+                description: "世界上最流行的内容管理系统，提供丰富的模板和插件，适合建设各类网站",
+                tag: "建站平台"
+            },
+            {
+                id: "wix",
+                name: "WIX",
+                url: "https://www.wix.com/",
+                description: "直观的拖拽式网站建设平台，提供丰富的模板和自定义选项，无需编程技能即可创建专业网站",
+                tag: "建站平台"
+            },
             {
                 id: "fre123-nav",
                 name: "FRE123 导航模板",
@@ -611,8 +625,8 @@ const toolsData = {
             id: "csdn",
             name: "CSDN",
             url: "https://www.csdn.net/",
-            description: "中国最大的IT技术社区，提供技术博客、论坛和技术资讯",
-            tag: "技术社区"
+            description: "中国专业的IT技术社区，提供博客、问答、课程、资源下载等服务，涵盖各类编程技术",
+            tag: "开发社区"
         },
         {
             id: "quora",
