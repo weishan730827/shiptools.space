@@ -1103,18 +1103,34 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const targetSection = this.getAttribute('data-section');
+                    const sectionId = this.getAttribute('data-section');
                     
                     // 更新导航激活状态
                     navLinks.forEach(link => link.classList.remove('active'));
                     this.classList.add('active');
                     
+                    // 定义导航ID映射表 - 与main.js中相同
+                    const sectionIdMap = {
+                        'research': 'research',
+                        'dev-tools': 'dev-tools',
+                        'website': 'website',
+                        'seo': 'seo',
+                        'ai': 'ai',
+                        'community': 'community',
+                        'templates': 'website-templates',
+                        'browser-extensions': 'browser-extensions',
+                        'design-tools': 'design-tools'
+                    };
+                    
+                    // 获取实际的section ID
+                    const actualSectionId = sectionIdMap[sectionId] || sectionId;
+                    
                     // 更新内容区显示
                     sections.forEach(section => section.classList.remove('active'));
-                    document.getElementById(targetSection).classList.add('active');
+                    document.getElementById(actualSectionId).classList.add('active');
                     
                     // 更新内容头部
-                    updateContentHeader(targetSection);
+                    updateContentHeader(sectionId);
                 });
             });
             

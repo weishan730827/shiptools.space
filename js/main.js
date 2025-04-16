@@ -261,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 获取实际的section ID
             const actualSectionId = sectionIdMap[activeSection] || activeSection;
+            console.log(`当前激活的导航项: ${activeSection}, 对应的section ID: ${actualSectionId}`);
             
             // 恢复到当前激活的导航项 - 先确保所有section都不活跃
             sections.forEach(section => section.classList.remove('active'));
@@ -425,20 +426,42 @@ function createToolCard(tool) {
 }
 
 function renderWebsiteTemplates() {
-    const navigationTemplatesSection = document.getElementById('navigation-templates');
-    const openSourceTemplatesSection = document.getElementById('open-source-templates');
-    
-    if (navigationTemplatesSection && window.toolsData.websiteTemplates.navigationTemplates) {
-        window.toolsData.websiteTemplates.navigationTemplates.forEach(template => {
-            const templateCard = createToolCard(template);
-            navigationTemplatesSection.appendChild(templateCard);
-        });
-    }
-    
-    if (openSourceTemplatesSection && window.toolsData.websiteTemplates.openSourceTemplates) {
-        window.toolsData.websiteTemplates.openSourceTemplates.forEach(template => {
-            const templateCard = createToolCard(template);
-            openSourceTemplatesSection.appendChild(templateCard);
-        });
+    try {
+        console.log('开始渲染网站模板...');
+        const navigationTemplatesSection = document.getElementById('navigation-templates');
+        const openSourceTemplatesSection = document.getElementById('open-source-templates');
+        
+        if (!window.toolsData || !window.toolsData.websiteTemplates) {
+            console.error('无法找到websiteTemplates数据');
+            return;
+        }
+        
+        console.log('websiteTemplates数据:', window.toolsData.websiteTemplates);
+        
+        if (navigationTemplatesSection && window.toolsData.websiteTemplates.navigationTemplates) {
+            window.toolsData.websiteTemplates.navigationTemplates.forEach(template => {
+                if (template) {
+                    const templateCard = createToolCard(template);
+                    navigationTemplatesSection.appendChild(templateCard);
+                }
+            });
+        } else {
+            console.warn('未找到navigation-templates区域或数据');
+        }
+        
+        if (openSourceTemplatesSection && window.toolsData.websiteTemplates.openSourceTemplates) {
+            window.toolsData.websiteTemplates.openSourceTemplates.forEach(template => {
+                if (template) {
+                    const templateCard = createToolCard(template);
+                    openSourceTemplatesSection.appendChild(templateCard);
+                }
+            });
+        } else {
+            console.warn('未找到open-source-templates区域或数据');
+        }
+        
+        console.log('网站模板渲染完成');
+    } catch (error) {
+        console.error('渲染网站模板时出错:', error);
     }
 } 
