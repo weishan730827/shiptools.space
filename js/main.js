@@ -361,8 +361,9 @@ function initializeToolsCards() {
         // 添加社区平台
         renderToolsSection('community-platforms', window.toolsData.communityPlatforms);
         
-        // 添加模板分类渲染
-        renderToolsSection('website-templates', window.toolsData.websiteTemplates);
+        // 注意：websiteTemplates是一个包含两个数组的对象，不是数组
+        // 使用专门的renderWebsiteTemplates函数来处理它，而不是这里
+        // renderToolsSection('website-templates', window.toolsData.websiteTemplates);
         
         // 添加浏览器插件分类渲染
         console.log('浏览器插件数据:', window.toolsData.browserExtensions);
