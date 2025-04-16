@@ -261,26 +261,132 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        console.log(`开始搜索: "${searchTerm}"`);
+        
+        // 确保模板区域是可见的，因为这一部分包含WordPress和WIX
+        const templateSection = document.getElementById('website-templates');
+        if (templateSection) {
+            // 强制进行一次模板渲染，确保数据已加载
+            renderWebsiteTemplates();
+            // 确保模板区域可见，这样其中的卡片才会被搜索到
+            templateSection.classList.add('active');
+            console.log('已激活网站模板区域以确保搜索到WordPress和WIX');
+        }
+        
         // 搜索工具卡片
         const toolCards = document.querySelectorAll('.tool-card');
         let foundCount = 0;
         
+        // 添加特定工具搜索日志
+        const specificTerms = ['wordpress', 'wix', 'siliconflow', 'csdn'];
+        const specificToolsFound = {};
+        specificTerms.forEach(term => {
+            specificToolsFound[term] = false;
+        });
+        
         // 显示所有分类，以便搜索所有工具
         sections.forEach(section => section.classList.add('active'));
         
+        console.log(`搜索范围: 找到 ${toolCards.length} 个工具卡片`);
+        
+        // 特殊处理：直接检查是否有需要特别关注的工具被搜索
+        if (specificTerms.includes(searchTerm)) {
+            console.log(`检测到搜索特定工具: ${searchTerm}`);
+            const specialToolSearch = searchTerm;
+            
+            // 如果搜索的是wordpress或wix，确保网站模板部分被检查
+            if (specialToolSearch === 'wordpress' || specialToolSearch === 'wix') {
+                // 再次确认模板节点存在并显示
+                if (templateSection && !templateSection.classList.contains('active')) {
+                    templateSection.classList.add('active');
+                    console.log('强制激活网站模板区域');
+                }
+                
+                // 直接从数据源查找对应工具
+                if (window.toolsData && window.toolsData.websiteTemplates && 
+                    window.toolsData.websiteTemplates.navigationTemplates) {
+                    
+                    // 获取对应工具数据
+                    const matchingTemplate = window.toolsData.websiteTemplates.navigationTemplates.find(
+                        t => t.id === specialToolSearch || 
+                             t.name.toLowerCase().includes(specialToolSearch)
+                    );
+                    
+                    if (matchingTemplate) {
+                        console.log(`在数据中找到${specialToolSearch}工具:`, matchingTemplate);
+                        
+                        // 查找对应卡片，如果没找到则可能需要重新渲染
+                        let toolCard = document.querySelector(`.tool-card[data-id="${matchingTemplate.id}"]`);
+                        
+                        // 如果没找到卡片，可能是因为还没有渲染，尝试重新渲染
+                        if (!toolCard) {
+                            console.log(`未找到${specialToolSearch}卡片，重新渲染...`);
+                            const navigationTemplatesSection = document.getElementById('navigation-templates');
+                            if (navigationTemplatesSection) {
+                                // 创建卡片并添加到DOM
+                                const newCard = createToolCard(matchingTemplate);
+                                newCard.classList.add('highlight');
+                                navigationTemplatesSection.appendChild(newCard);
+                                toolCard = newCard;
+                                console.log(`创建了${specialToolSearch}卡片并添加到DOM`);
+                            }
+                        }
+                        
+                        // 如果找到或创建了卡片，确保其可见
+                        if (toolCard) {
+                            toolCard.style.display = 'block';
+                            toolCard.classList.add('highlight');
+                            foundCount++;
+                            console.log(`成功显示${specialToolSearch}卡片`);
+                            
+                            // 确保卡片在视图中
+                            setTimeout(() => {
+                                toolCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }, 300);
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 继续常规搜索过程
         toolCards.forEach(card => {
             const toolName = card.querySelector('h3') ? card.querySelector('h3').textContent.toLowerCase() : '';
             const toolDesc = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
             const toolTag = card.querySelector('.tool-tag') ? card.querySelector('.tool-tag').textContent.toLowerCase() : '';
+            const toolId = card.dataset.id || '';
             
-            if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm) || toolTag.includes(searchTerm)) {
+            // 检查特定工具
+            specificTerms.forEach(term => {
+                if (toolName.includes(term) || toolDesc.includes(term) || toolTag.includes(term) || toolId.includes(term)) {
+                    specificToolsFound[term] = true;
+                    console.log(`找到特定工具 "${term}": ${toolName}`);
+                }
+            });
+            
+            if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm) || toolTag.includes(searchTerm) || toolId.includes(searchTerm)) {
                 card.style.display = 'block';
                 card.classList.add('highlight');
                 foundCount++;
+                
+                // 详细记录匹配信息
+                console.log(`匹配工具: "${toolName}" (id: ${toolId}, tag: ${toolTag})`);
+                console.log(`匹配原因: ${
+                    toolName.includes(searchTerm) ? '名称匹配' : 
+                    toolDesc.includes(searchTerm) ? '描述匹配' : 
+                    toolTag.includes(searchTerm) ? '标签匹配' : 
+                    'ID匹配'
+                }`);
             } else {
                 card.style.display = 'none';
                 card.classList.remove('highlight');
             }
+        });
+        
+        // 报告特定工具的搜索结果
+        console.log('特定工具搜索结果:');
+        specificTerms.forEach(term => {
+            console.log(`- ${term}: ${specificToolsFound[term] ? '找到' : '未找到'}`);
         });
         
         // 更新标题显示
@@ -292,11 +398,21 @@ document.addEventListener('DOMContentLoaded', function() {
             contentHeaderDesc.textContent = `搜索 "${searchInput.value}" 的结果`;
         }
         
+        console.log(`搜索完成: 找到 ${foundCount} 个匹配项`);
+        
         // 如果有结果，滚动到第一个匹配项
         if (foundCount > 0) {
             const firstMatch = document.querySelector('.tool-card.highlight');
             if (firstMatch) {
                 firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        } else {
+            // 如果没有找到结果，但搜索特定工具，显示特殊消息
+            if (specificTerms.includes(searchTerm)) {
+                if (contentHeaderDesc) {
+                    contentHeaderDesc.textContent = `未找到"${searchInput.value}"，请尝试刷新页面后再搜索`;
+                }
+                console.warn(`未找到${searchTerm}，可能需要刷新页面或检查数据`);
             }
         }
         
@@ -407,6 +523,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 添加网站模版渲染
     renderWebsiteTemplates();
+
+    // 添加模板数据检查
+    checkWebsiteTemplateData();
 });
 
 // 添加HTML结构调试函数
@@ -577,18 +696,152 @@ function renderWebsiteTemplates() {
         
         console.log('websiteTemplates数据:', window.toolsData.websiteTemplates);
         
-        if (navigationTemplatesSection && window.toolsData.websiteTemplates.navigationTemplates) {
+        // 特别检查WordPress和WIX是否存在于数据中
+        const navTemplates = window.toolsData.websiteTemplates.navigationTemplates || [];
+        const wordpressExists = navTemplates.some(t => t.id === 'wordpress' || t.name.toLowerCase().includes('wordpress'));
+        const wixExists = navTemplates.some(t => t.id === 'wix' || t.name.toLowerCase().includes('wix'));
+        
+        console.log(`数据检查: WordPress ${wordpressExists ? '存在' : '不存在'} 于navigationTemplates`);
+        console.log(`数据检查: WIX ${wixExists ? '存在' : '不存在'} 于navigationTemplates`);
+        
+        // 确保WordPress和WIX存在于数据中，如果不存在则手动添加
+        if (!wordpressExists || !wixExists) {
+            console.warn('WordPress或WIX在数据中不存在，尝试添加默认数据');
+            
+            // 如果WordPress不存在，添加默认数据
+            if (!wordpressExists && !navTemplates.some(t => t.id === 'wordpress')) {
+                const wordpressTemplate = {
+                    id: "wordpress",
+                    name: "WordPress",
+                    url: "https://wordpress.com/discover",
+                    description: "世界上最流行的内容管理系统，提供丰富的模板和插件，适合建设各类网站",
+                    tag: "建站平台"
+                };
+                navTemplates.push(wordpressTemplate);
+                console.log('已添加WordPress默认数据');
+            }
+            
+            // 如果WIX不存在，添加默认数据
+            if (!wixExists && !navTemplates.some(t => t.id === 'wix')) {
+                const wixTemplate = {
+                    id: "wix",
+                    name: "WIX",
+                    url: "https://www.wix.com/",
+                    description: "直观的拖拽式网站建设平台，提供丰富的模板和自定义选项，无需编程技能即可创建专业网站",
+                    tag: "建站平台"
+                };
+                navTemplates.push(wixTemplate);
+                console.log('已添加WIX默认数据');
+            }
+        }
+        
+        if (navigationTemplatesSection && navTemplates.length > 0) {
             // 清空导航模板容器
             navigationTemplatesSection.innerHTML = '';
             
-            window.toolsData.websiteTemplates.navigationTemplates.forEach(template => {
+            // 优先渲染WordPress和WIX
+            const priorityTemplates = ['wordpress', 'wix'];
+            
+            // 创建一个独立的函数来渲染单个模板并记录状态
+            const renderSingleTemplate = (template) => {
+                if (!template) return;
+                
+                // 记录特殊模板的渲染
+                if (priorityTemplates.includes(template.id)) {
+                    console.log(`准备渲染特殊模板: ${template.name} (ID: ${template.id})`);
+                }
+                
+                const templateCard = createToolCard(template);
+                navigationTemplatesSection.appendChild(templateCard);
+                
+                if (priorityTemplates.includes(template.id)) {
+                    console.log(`已成功渲染模板: ${template.name} (ID: ${template.id})`);
+                }
+                
+                return templateCard;
+            };
+            
+            // 首先确保渲染优先模板
+            let renderedPriority = false;
+            priorityTemplates.forEach(priorityId => {
+                const template = navTemplates.find(t => t.id === priorityId);
                 if (template) {
-                    const templateCard = createToolCard(template);
-                    navigationTemplatesSection.appendChild(templateCard);
+                    renderSingleTemplate(template);
+                    renderedPriority = true;
                 }
             });
+            
+            if (renderedPriority) {
+                console.log('优先模板已渲染完成');
+            }
+            
+            // 然后渲染其他模板
+            navTemplates.forEach(template => {
+                // 跳过已经渲染的优先模板
+                if (!priorityTemplates.includes(template.id)) {
+                    renderSingleTemplate(template);
+                }
+            });
+            
+            // 检查渲染后的DOM
+            const wordpressCard = navigationTemplatesSection.querySelector('.tool-card[data-id="wordpress"]');
+            const wixCard = navigationTemplatesSection.querySelector('.tool-card[data-id="wix"]');
+            
+            console.log(`DOM检查: WordPress卡片 ${wordpressCard ? '已渲染' : '未渲染'}`);
+            console.log(`DOM检查: WIX卡片 ${wixCard ? '已渲染' : '未渲染'}`);
+            
+            // 如果仍然找不到卡片，尝试最后的挽救措施
+            if (!wordpressCard || !wixCard) {
+                console.warn('即使在渲染后，仍然找不到一些特殊模板卡片，尝试直接创建');
+                
+                if (!wordpressCard) {
+                    const wordpressTemplate = navTemplates.find(t => t.id === 'wordpress') || {
+                        id: "wordpress",
+                        name: "WordPress",
+                        url: "https://wordpress.com/discover",
+                        description: "世界上最流行的内容管理系统，提供丰富的模板和插件，适合建设各类网站",
+                        tag: "建站平台"
+                    };
+                    const wpCard = createToolCard(wordpressTemplate);
+                    navigationTemplatesSection.appendChild(wpCard);
+                    console.log('直接创建并添加WordPress卡片');
+                }
+                
+                if (!wixCard) {
+                    const wixTemplate = navTemplates.find(t => t.id === 'wix') || {
+                        id: "wix",
+                        name: "WIX",
+                        url: "https://www.wix.com/",
+                        description: "直观的拖拽式网站建设平台，提供丰富的模板和自定义选项，无需编程技能即可创建专业网站",
+                        tag: "建站平台"
+                    };
+                    const wxCard = createToolCard(wixTemplate);
+                    navigationTemplatesSection.appendChild(wxCard);
+                    console.log('直接创建并添加WIX卡片');
+                }
+            }
         } else {
-            console.warn('未找到navigation-templates区域或数据');
+            console.warn('未找到navigation-templates区域或数据为空');
+            
+            // 如果模板容器不存在，尝试创建一个
+            if (!navigationTemplatesSection && document.getElementById('website-templates')) {
+                const templateSection = document.getElementById('website-templates');
+                const newNavSection = document.createElement('div');
+                newNavSection.id = 'navigation-templates';
+                newNavSection.className = 'tools-grid';
+                
+                // 添加标题
+                const heading = document.createElement('h3');
+                heading.textContent = '导航模版';
+                templateSection.appendChild(heading);
+                templateSection.appendChild(newNavSection);
+                
+                console.log('创建了新的navigation-templates容器');
+                
+                // 递归调用自身以在新容器中渲染模板
+                setTimeout(renderWebsiteTemplates, 100);
+                return;
+            }
         }
         
         if (openSourceTemplatesSection && window.toolsData.websiteTemplates.openSourceTemplates) {
@@ -647,4 +900,78 @@ function clearAllToolContainers() {
             }
         }
     });
+}
+
+// 添加网站模板数据检查函数
+function checkWebsiteTemplateData() {
+    console.log("%c 检查网站模板数据 ", "background: #6c5ce7; color: white; font-size: 16px; padding: 5px;");
+    
+    if (!window.toolsData) {
+        console.error("无法找到全局toolsData对象");
+        return false;
+    }
+    
+    if (!window.toolsData.websiteTemplates) {
+        console.error("toolsData对象中缺少websiteTemplates属性");
+        return false;
+    }
+    
+    // 检查navigationTemplates
+    if (!window.toolsData.websiteTemplates.navigationTemplates || !Array.isArray(window.toolsData.websiteTemplates.navigationTemplates)) {
+        console.error("websiteTemplates中navigationTemplates不是数组或不存在");
+        return false;
+    }
+    
+    const navTemplates = window.toolsData.websiteTemplates.navigationTemplates;
+    console.log(`navigationTemplates包含 ${navTemplates.length} 个模板`);
+    
+    // 检查特定模板
+    const checkTemplate = (templateId) => {
+        const template = navTemplates.find(t => t.id === templateId);
+        if (template) {
+            console.log(`找到模板 ${templateId}:`, {
+                name: template.name,
+                url: template.url,
+                tag: template.tag
+            });
+            return true;
+        } else {
+            console.warn(`未找到模板 ${templateId}`);
+            return false;
+        }
+    };
+    
+    // 检查重要模板
+    const wordpressExists = checkTemplate('wordpress');
+    const wixExists = checkTemplate('wix');
+    
+    // 如果没找到，遍历所有模板查看是否有类似名称
+    if (!wordpressExists || !wixExists) {
+        console.log("尝试通过名称查找模板:");
+        navTemplates.forEach(t => {
+            if (t.name && (t.name.toLowerCase().includes('wordpress') || t.name.toLowerCase().includes('wix'))) {
+                console.log(`通过名称找到可能的模板:`, {
+                    id: t.id,
+                    name: t.name, 
+                    url: t.url,
+                    tag: t.tag
+                });
+            }
+        });
+    }
+    
+    // 检查HTML结构
+    const navTemplatesContainer = document.getElementById('navigation-templates');
+    if (!navTemplatesContainer) {
+        console.error("未找到navigation-templates容器");
+        return false;
+    }
+    
+    console.log(`navigation-templates容器状态:`, {
+        childNodes: navTemplatesContainer.childNodes.length,
+        isEmpty: navTemplatesContainer.innerHTML.trim() === '',
+        isVisible: window.getComputedStyle(navTemplatesContainer).display !== 'none'
+    });
+    
+    return true;
 }
