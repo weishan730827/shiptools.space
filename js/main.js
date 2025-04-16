@@ -5,19 +5,20 @@
 console.log("%c MAIN.JS STARTED - 唯一导航处理代码开始执行", "background: #4a90e2; color: white; font-size: 20px; padding: 5px;");
 
 // 添加版本号和强制刷新提示，帮助排查缓存问题
-console.log("%c 版本: 1.1.0 - 修复重复渲染问题 ", "background: #2ed573; color: white; font-size: 16px; padding: 5px;");
+console.log("%c 版本: 1.2.0 - WordPress已移至社区平台分类，不再显示在网站模板分类中 ", "background: #ff6b81; color: white; font-size: 16px; padding: 5px;");
+console.log("%c 如果仍然看到WordPress在网站模板分类中，请按Ctrl+F5强制刷新页面 ", "background: #ff6b81; color: white; font-size: 16px; padding: 5px;");
 
 // 强制禁用页面缓存
 if (window.location.search.indexOf('nocache') === -1) {
     console.log("%c 首次加载: 添加nocache参数强制刷新 ", "background: #ff6b81; color: white; font-size: 14px; padding: 3px;");
     
-    // 仅在开发环境或本地调试时启用
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.includes('github.io')) {
-        const separator = window.location.search ? '&' : '?';
-        const nocacheParam = `nocache=${new Date().getTime()}`;
-        // 如果不是通过nocache参数访问的，添加参数并刷新
-        window.location.href = `${window.location.href}${separator}${nocacheParam}`;
-    }
+    // 更新时间戳，确保每次都是新版本
+    const timestamp = new Date().getTime();
+    // 添加强制刷新参数，确保不使用缓存
+    const separator = window.location.search ? '&' : '?';
+    const nocacheParam = `nocache=${timestamp}`;
+    // 强制刷新页面，确保加载最新版本
+    window.location.href = `${window.location.href}${separator}${nocacheParam}`;
 }
 
 // DOM 加载完成后执行
