@@ -370,13 +370,6 @@ const toolsData = {
     websiteTemplates: {
         navigationTemplates: [
             {
-                id: "wordpress",
-                name: "WordPress",
-                url: "https://wordpress.com/discover",
-                description: "世界上最流行的内容管理系统，提供丰富的模板和插件，适合建设各类网站",
-                tag: "建站平台"
-            },
-            {
                 id: "wix",
                 name: "WIX",
                 url: "https://www.wix.com/",
@@ -593,6 +586,13 @@ const toolsData = {
     
     // 社区与学习平台
     communityPlatforms: [
+        {
+            id: "wordpress-community",
+            name: "WordPress",
+            url: "https://wordpress.com/discover",
+            description: "全球最大的博客社区平台之一，拥有数百万博客内容和活跃的创作者社区，用户可以阅读、创作和互动",
+            tag: "博客社区"
+        },
         {
             id: "indie-hackers",
             name: "Indie Hackers",
@@ -843,13 +843,6 @@ const toolsData = {
     
     // 网站建设工具
     websiteTools: [
-        {
-            id: "wordpress-site",
-            name: "WordPress",
-            url: "https://wordpress.com/discover",
-            description: "世界上最流行的内容管理系统，提供丰富的模板和插件，适合建设各类网站",
-            tag: "建站平台"
-        },
         {
             id: "wix-site",
             name: "WIX",
