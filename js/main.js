@@ -433,6 +433,9 @@ function renderToolsSection(sectionId, tools) {
         return;
     }
     
+    // 添加清空容器的代码，解决重复渲染问题
+    section.innerHTML = '';
+    
     if (!tools || !Array.isArray(tools)) {
         console.warn(`工具数据无效: ${sectionId}`);
         return;
@@ -484,6 +487,9 @@ function renderWebsiteTemplates() {
         console.log('websiteTemplates数据:', window.toolsData.websiteTemplates);
         
         if (navigationTemplatesSection && window.toolsData.websiteTemplates.navigationTemplates) {
+            // 清空导航模板容器
+            navigationTemplatesSection.innerHTML = '';
+            
             window.toolsData.websiteTemplates.navigationTemplates.forEach(template => {
                 if (template) {
                     const templateCard = createToolCard(template);
@@ -495,6 +501,9 @@ function renderWebsiteTemplates() {
         }
         
         if (openSourceTemplatesSection && window.toolsData.websiteTemplates.openSourceTemplates) {
+            // 清空开源模板容器
+            openSourceTemplatesSection.innerHTML = '';
+            
             window.toolsData.websiteTemplates.openSourceTemplates.forEach(template => {
                 if (template) {
                     const templateCard = createToolCard(template);
