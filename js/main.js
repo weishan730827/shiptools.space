@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'seo': 'seo',
         'ai': 'ai',
         'community': 'community',
-        'templates': 'templates',
+        'templates': 'website-templates',
         'browser-extensions': 'browser-extensions',
         'design-tools': 'design-tools'
     };
