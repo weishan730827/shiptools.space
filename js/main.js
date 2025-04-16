@@ -894,16 +894,15 @@ function checkWebsiteTemplateData() {
         }
     };
     
-    // 检查重要模板
-    const wordpressExists = checkTemplate('wordpress');
+    // 只检查WIX模板，WordPress已移至社区平台分类
     const wixExists = checkTemplate('wix');
     
-    // 如果没找到，遍历所有模板查看是否有类似名称
-    if (!wordpressExists || !wixExists) {
-        console.log("尝试通过名称查找模板:");
+    // 如果没找到WIX，遍历所有模板查看是否有类似名称
+    if (!wixExists) {
+        console.log("尝试通过名称查找WIX模板:");
         navTemplates.forEach(t => {
-            if (t.name && (t.name.toLowerCase().includes('wordpress') || t.name.toLowerCase().includes('wix'))) {
-                console.log(`通过名称找到可能的模板:`, {
+            if (t.name && t.name.toLowerCase().includes('wix')) {
+                console.log(`通过名称找到可能的WIX模板:`, {
                     id: t.id,
                     name: t.name, 
                     url: t.url,
