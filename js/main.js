@@ -1,6 +1,9 @@
 // 不再使用import语句，改用全局变量
 // import toolsData from './data.js';
 
+// 添加调试输出,用于跟踪脚本执行
+console.log("main.js开始执行...");
+
 // DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM加载完成，初始化工具数据...");
@@ -20,6 +23,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('.category-section');
     const contentHeaderTitle = document.querySelector('.content-header-left h2');
     const contentHeaderDesc = document.querySelector('.content-header-left p');
+    
+    // 调试信息：检查HTML结构
+    console.log("HTML分析: 导航菜单项数量", navLinks.length);
+    console.log("HTML分析: 分类区域数量", sections.length);
+    
+    // 检查导航链接的data-section属性
+    navLinks.forEach(link => {
+        console.log(`HTML分析: 导航项 "${link.textContent.trim()}" 的data-section="${link.getAttribute('data-section')}"`);
+    });
+    
+    // 检查分类区域的ID
+    sections.forEach(section => {
+        console.log(`HTML分析: 分类区域ID="${section.id}"`);
+    });
+    
+    // 特别检查templates相关元素
+    const templatesLink = document.querySelector('.nav-link[data-section="templates"]');
+    console.log("HTML分析: 网站模板导航项:", templatesLink ? "存在" : "不存在");
+    if (templatesLink) {
+        console.log(`HTML分析: 网站模板导航项data-section="${templatesLink.getAttribute('data-section')}"`);
+    }
+    
+    const templatesSection = document.getElementById('website-templates');
+    console.log("HTML分析: 网站模板区域(ID=website-templates):", templatesSection ? "存在" : "不存在");
+    
+    const rawTemplatesSection = document.getElementById('templates');
+    console.log("HTML分析: 网站模板区域(ID=templates):", rawTemplatesSection ? "存在" : "不存在");
     
     // 搜索相关元素
     const searchInput = document.getElementById('searchInput');
@@ -41,6 +71,10 @@ document.addEventListener('DOMContentLoaded', function() {
         'browser-extensions': 'browser-extensions',
         'design-tools': 'design-tools'
     };
+    
+    // 检查映射表是否正确
+    console.log("main.js中的sectionIdMap:", sectionIdMap);
+    console.log("检查 'templates' 映射:", sectionIdMap['templates']);
     
     // 工具数据ID映射表 - 将导航项ID映射到对应的工具数据
     const toolsDataMap = {
@@ -82,6 +116,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 获取要显示的部分
             const sectionId = this.getAttribute('data-section');
+            console.log(`导航点击: 选择section="${sectionId}"`);
+            
             if (sectionId) {
                 activeSection = sectionId;
                 
@@ -114,14 +150,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 获取实际的section ID
                 const actualSectionId = sectionIdMap[sectionId] || sectionId;
+                console.log(`导航点击: 映射后实际ID="${actualSectionId}"`);
                 
                 // 隐藏所有部分，然后显示当前部分
                 sections.forEach(section => section.classList.remove('active'));
                 const targetSection = document.getElementById(actualSectionId);
                 if (targetSection) {
                     targetSection.classList.add('active');
+                    console.log(`导航点击: 成功激活section="${actualSectionId}"`);
                 } else {
                     console.warn(`未找到ID为${actualSectionId}的分类section`);
+                    console.error(`导航错误: 无法找到ID为"${actualSectionId}"的元素，请检查HTML结构和sectionIdMap映射`);
                 }
             }
         });
@@ -261,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 获取实际的section ID
             const actualSectionId = sectionIdMap[activeSection] || activeSection;
-            console.log(`当前激活的导航项: ${activeSection}, 对应的section ID: ${actualSectionId}`);
+            console.log(`重置搜索: 当前激活的导航项="${activeSection}", 映射后ID="${actualSectionId}"`);
             
             // 恢复到当前激活的导航项 - 先确保所有section都不活跃
             sections.forEach(section => section.classList.remove('active'));
@@ -270,17 +309,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const activeElement = document.getElementById(actualSectionId);
             if (activeElement) {
                 activeElement.classList.add('active');
+                console.log(`重置搜索: 成功激活section="${actualSectionId}"`);
             } else {
                 console.warn(`重置搜索时未找到ID为${actualSectionId}的分类section`);
+                console.error(`重置搜索错误: 无法找到ID="${actualSectionId}"的元素，将尝试使用备用方案`);
                 // 默认显示第一个section作为后备
                 if (sections.length > 0) {
                     sections[0].classList.add('active');
+                    console.log(`重置搜索: 使用第一个section="${sections[0].id}"作为备用`);
                     // 更新activeSection以保持一致性
                     const firstSectionId = sections[0].id;
                     // 查找firstSectionId对应的数据部分ID
                     for (const [key, value] of Object.entries(sectionIdMap)) {
                         if (value === firstSectionId) {
                             activeSection = key;
+                            console.log(`重置搜索: 已更新activeSection="${activeSection}"`);
                             break;
                         }
                     }
@@ -292,10 +335,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const activeLink = document.querySelector(`.nav-link[data-section="${activeSection}"]`);
             if (activeLink) {
                 activeLink.classList.add('active');
+                console.log(`重置搜索: 激活导航项data-section="${activeSection}"`);
             } else if (navLinks.length > 0) {
                 // 如果找不到对应的导航项，激活第一个作为后备
                 navLinks[0].classList.add('active');
                 activeSection = navLinks[0].getAttribute('data-section') || 'dev-tools';
+                console.log(`重置搜索: 使用第一个导航项data-section="${activeSection}"作为备用`);
             }
             
             // 恢复标题和描述
