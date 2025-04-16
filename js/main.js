@@ -4,6 +4,22 @@
 // 添加调试输出,用于跟踪脚本执行
 console.log("%c MAIN.JS STARTED - 唯一导航处理代码开始执行", "background: #4a90e2; color: white; font-size: 20px; padding: 5px;");
 
+// 添加版本号和强制刷新提示，帮助排查缓存问题
+console.log("%c 版本: 1.1.0 - 修复重复渲染问题 ", "background: #2ed573; color: white; font-size: 16px; padding: 5px;");
+
+// 强制禁用页面缓存
+if (window.location.search.indexOf('nocache') === -1) {
+    console.log("%c 首次加载: 添加nocache参数强制刷新 ", "background: #ff6b81; color: white; font-size: 14px; padding: 3px;");
+    
+    // 仅在开发环境或本地调试时启用
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.includes('github.io')) {
+        const separator = window.location.search ? '&' : '?';
+        const nocacheParam = `nocache=${new Date().getTime()}`;
+        // 如果不是通过nocache参数访问的，添加参数并刷新
+        window.location.href = `${window.location.href}${separator}${nocacheParam}`;
+    }
+}
+
 // DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM加载完成，初始化工具数据...");
@@ -14,6 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("toolsData未定义！请检查data.js是否正确加载");
         return;
     }
+    
+    // 强制清理所有可能的工具容器
+    clearAllToolContainers();
+    
+    // 添加详细的HTML结构检查，检查渲染目标是否正确
+    debugHtmlStructure();
     
     // 初始化工具卡片
     initializeToolsCards();
@@ -387,29 +409,98 @@ document.addEventListener('DOMContentLoaded', function() {
     renderWebsiteTemplates();
 });
 
+// 添加HTML结构调试函数
+function debugHtmlStructure() {
+    console.log("%c 检查HTML结构中的工具卡片容器 ", "background: #ff6b6b; color: white; font-size: 16px; padding: 5px;");
+    
+    // 检查主要的工具卡片容器
+    const containersToCheck = [
+        'dev-tools', 'dev-tools-grid',
+        'research-tools', 'research-tools-grid',
+        'seo-tools', 'seo-tools-grid',
+        'ai-tools', 'ai-tools-grid',
+        'community-platforms', 'community-platforms-grid',
+        'website-templates', 'navigation-templates', 'open-source-templates',
+        'browser-extensions', 'browser-extensions-grid',
+        'design-tools', 'design-tools-grid'
+    ];
+    
+    containersToCheck.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            console.log(`找到ID为 "${id}" 的元素:`, element.tagName, '包含子元素数:', element.children.length);
+            // 检查是否已经包含工具卡片
+            const cards = element.querySelectorAll('.tool-card');
+            if (cards.length > 0) {
+                console.warn(`注意: ID="${id}"的元素已经包含${cards.length}个工具卡片，可能导致重复渲染`);
+            }
+        } else {
+            console.log(`未找到ID为 "${id}" 的元素`);
+        }
+    });
+}
+
 // 初始化所有工具卡片
 function initializeToolsCards() {
     try {
         console.log('开始初始化工具卡片...');
         
-        // 添加需求收集和关键词调研工具
-        renderToolsSection('research-tools', window.toolsData.researchTools);
+        // 开发工具部分 - 明确指定只渲染一次，选择正确的容器
+        const devToolsGrid = document.getElementById('dev-tools-grid');
+        if (devToolsGrid) {
+            console.log('使用dev-tools-grid渲染开发工具');
+            devToolsGrid.innerHTML = ''; // 再次确保容器为空
+            renderToolsSection('dev-tools-grid', window.toolsData.devTools);
+        } else {
+            const devTools = document.getElementById('dev-tools');
+            if (devTools) {
+                console.log('找不到dev-tools-grid，退而求其次使用dev-tools');
+                // 查找dev-tools下可能的工具网格
+                const gridElement = devTools.querySelector('.tools-grid');
+                if (gridElement) {
+                    console.log('在dev-tools中找到.tools-grid元素，将用它来渲染工具');
+                    gridElement.innerHTML = '';
+                    gridElement.id = 'dev-tools-grid-dynamic'; // 动态设置ID
+                    renderToolsSection('dev-tools-grid-dynamic', window.toolsData.devTools);
+                } else {
+                    console.log('直接在dev-tools中渲染开发工具');
+                    renderToolsSection('dev-tools', window.toolsData.devTools);
+                }
+            } else {
+                console.error('找不到任何可以渲染开发工具的容器!');
+            }
+        }
         
-        // 添加开发者工具
-        renderToolsSection('dev-tools', window.toolsData.devTools);
+        // 添加需求收集和关键词调研工具 - 确认正确的ID
+        if (document.getElementById('research-tools-grid')) {
+            renderToolsSection('research-tools-grid', window.toolsData.researchTools);
+        } else if (document.getElementById('research-tools')) {
+            renderToolsSection('research-tools', window.toolsData.researchTools);
+        }
         
-        // 添加SEO工具
-        renderToolsSection('seo-tools', window.toolsData.seoTools);
+        // 添加SEO工具 - 确认正确的ID
+        if (document.getElementById('seo-tools-grid')) {
+            renderToolsSection('seo-tools-grid', window.toolsData.seoTools);
+        } else if (document.getElementById('seo-tools')) {
+            renderToolsSection('seo-tools', window.toolsData.seoTools);
+        }
         
-        // 添加AI工具
-        renderToolsSection('ai-tools', window.toolsData.aiTools);
+        // 添加AI工具 - 确认正确的ID
+        if (document.getElementById('ai-tools-grid')) {
+            renderToolsSection('ai-tools-grid', window.toolsData.aiTools);
+        } else if (document.getElementById('ai-tools')) {
+            renderToolsSection('ai-tools', window.toolsData.aiTools);
+        }
         
-        // 添加社区平台
-        renderToolsSection('community-platforms', window.toolsData.communityPlatforms);
+        // 添加社区平台 - 确认正确的ID
+        if (document.getElementById('community-platforms-grid')) {
+            renderToolsSection('community-platforms-grid', window.toolsData.communityPlatforms);
+        } else if (document.getElementById('community-platforms')) {
+            renderToolsSection('community-platforms', window.toolsData.communityPlatforms);
+        }
         
         // 注意：websiteTemplates是一个包含两个数组的对象，不是数组
         // 使用专门的renderWebsiteTemplates函数来处理它，而不是这里
-        // renderToolsSection('website-templates', window.toolsData.websiteTemplates);
         
         // 添加浏览器插件分类渲染
         console.log('浏览器插件数据:', window.toolsData.browserExtensions);
@@ -518,4 +609,42 @@ function renderWebsiteTemplates() {
     } catch (error) {
         console.error('渲染网站模板时出错:', error);
     }
-} 
+}
+
+// 添加强制清理函数，清除所有可能的工具容器
+function clearAllToolContainers() {
+    console.log("%c 强制清理所有工具容器，防止重复渲染 ", "background: #ff4757; color: white; font-size: 16px; padding: 5px;");
+    
+    // 所有可能包含工具卡片的容器
+    const allPossibleContainers = [
+        // 开发工具相关容器
+        'dev-tools', 'dev-tools-grid',
+        // 其他所有可能的容器
+        'research-tools', 'research-tools-grid',
+        'seo-tools', 'seo-tools-grid',
+        'ai-tools', 'ai-tools-grid',
+        'community-platforms', 'community-platforms-grid',
+        'website-templates', 'navigation-templates', 'open-source-templates',
+        'browser-extensions', 'browser-extensions-grid',
+        'design-tools', 'design-tools-grid'
+    ];
+    
+    // 清空所有可能的容器
+    allPossibleContainers.forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+            // 保留容器的原始HTML结构（如标题等），仅清除工具卡片
+            const toolCards = container.querySelectorAll('.tool-card');
+            if (toolCards.length > 0) {
+                console.log(`清理容器 "${id}": 移除 ${toolCards.length} 个工具卡片`);
+                toolCards.forEach(card => card.remove());
+            }
+            
+            // 如果是grid容器，则完全清空
+            if (id.endsWith('-grid')) {
+                container.innerHTML = '';
+                console.log(`完全清空grid容器 "${id}"`);
+            }
+        }
+    });
+}
