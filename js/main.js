@@ -263,14 +263,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log(`开始搜索: "${searchTerm}"`);
         
-        // 确保模板区域是可见的，因为这一部分包含WordPress和WIX
+        // 确保模板区域是可见的，这样WIX等工具可以被搜索到
         const templateSection = document.getElementById('website-templates');
         if (templateSection) {
             // 强制进行一次模板渲染，确保数据已加载
             renderWebsiteTemplates();
             // 确保模板区域可见，这样其中的卡片才会被搜索到
             templateSection.classList.add('active');
-            console.log('已激活网站模板区域以确保搜索到WordPress和WIX');
+            console.log('已激活网站模板区域以确保搜索到WIX');
         }
         
         // 搜索工具卡片
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let foundCount = 0;
         
         // 添加特定工具搜索日志
-        const specificTerms = ['wordpress', 'wix', 'siliconflow', 'csdn'];
+        const specificTerms = ['wix', 'siliconflow', 'csdn'];
         const specificToolsFound = {};
         specificTerms.forEach(term => {
             specificToolsFound[term] = false;
@@ -294,57 +294,47 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`检测到搜索特定工具: ${searchTerm}`);
             const specialToolSearch = searchTerm;
             
-            // 如果搜索的是wordpress或wix，确保网站模板部分被检查
-            if (specialToolSearch === 'wordpress' || specialToolSearch === 'wix') {
-                // 再次确认模板节点存在并显示
-                if (templateSection && !templateSection.classList.contains('active')) {
-                    templateSection.classList.add('active');
-                    console.log('强制激活网站模板区域');
-                }
+            // 如果搜索的是wix，确保网站模板部分被检查
+            if (specialToolSearch === 'wix') {
+                activateSection('templates');
+                console.log('已激活网站模板区域以确保搜索到WIX');
                 
-                // 直接从数据源查找对应工具
-                if (window.toolsData && window.toolsData.websiteTemplates && 
-                    window.toolsData.websiteTemplates.navigationTemplates) {
+                // 确保WIX显示在结果中
+                showSpecificToolInTemplates(specialToolSearch);
+                shouldReset = false;
+            }
+            
+            // 如果搜索的是siliconflow或csdn，确保正确的部分被检查
+            if (specialToolSearch === 'siliconflow') {
+                activateSection('ai');
+                console.log('已激活AI工具区域以确保搜索到SiliconFlow');
+                shouldReset = false;
+            }
+            
+            if (specialToolSearch === 'csdn') {
+                activateSection('community');
+                console.log('已激活社区区域以确保搜索到CSDN');
+                shouldReset = false;
+            }
+        } else if (searchTerm === 'wordpress') {
+            // WordPress现在在社区平台分类
+            activateSection('community');
+            console.log('检测到WordPress搜索，已激活社区平台区域');
+            
+            // 查找并高亮显示WordPress卡片
+            const communitySection = document.getElementById('community-platforms');
+            if (communitySection) {
+                const wordpressCard = communitySection.querySelector('.tool-card[data-id="wordpress-community"]');
+                if (wordpressCard) {
+                    wordpressCard.style.display = 'block';
+                    wordpressCard.classList.add('highlight');
                     
-                    // 获取对应工具数据
-                    const matchingTemplate = window.toolsData.websiteTemplates.navigationTemplates.find(
-                        t => t.id === specialToolSearch || 
-                             t.name.toLowerCase().includes(specialToolSearch)
-                    );
+                    // 确保卡片在视图中
+                    setTimeout(() => {
+                        wordpressCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
                     
-                    if (matchingTemplate) {
-                        console.log(`在数据中找到${specialToolSearch}工具:`, matchingTemplate);
-                        
-                        // 查找对应卡片，如果没找到则可能需要重新渲染
-                        let toolCard = document.querySelector(`.tool-card[data-id="${matchingTemplate.id}"]`);
-                        
-                        // 如果没找到卡片，可能是因为还没有渲染，尝试重新渲染
-                        if (!toolCard) {
-                            console.log(`未找到${specialToolSearch}卡片，重新渲染...`);
-                            const navigationTemplatesSection = document.getElementById('navigation-templates');
-                            if (navigationTemplatesSection) {
-                                // 创建卡片并添加到DOM
-                                const newCard = createToolCard(matchingTemplate);
-                                newCard.classList.add('highlight');
-                                navigationTemplatesSection.appendChild(newCard);
-                                toolCard = newCard;
-                                console.log(`创建了${specialToolSearch}卡片并添加到DOM`);
-                            }
-                        }
-                        
-                        // 如果找到或创建了卡片，确保其可见
-                        if (toolCard) {
-                            toolCard.style.display = 'block';
-                            toolCard.classList.add('highlight');
-                            foundCount++;
-                            console.log(`成功显示${specialToolSearch}卡片`);
-                            
-                            // 确保卡片在视图中
-                            setTimeout(() => {
-                                toolCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            }, 300);
-                        }
-                    }
+                    console.log('成功高亮显示WordPress社区卡片');
                 }
             }
         }
@@ -686,17 +676,10 @@ function createToolCard(tool) {
 function renderWebsiteTemplates() {
     try {
         console.log('开始渲染网站模板...');
+        
         const navigationTemplatesSection = document.getElementById('navigation-templates');
         const openSourceTemplatesSection = document.getElementById('open-source-templates');
         
-        if (!window.toolsData || !window.toolsData.websiteTemplates) {
-            console.error('无法找到websiteTemplates数据');
-            return;
-        }
-        
-        console.log('websiteTemplates数据:', window.toolsData.websiteTemplates);
-        
-        // 特别检查WordPress和WIX是否存在于数据中
         const navTemplates = window.toolsData.websiteTemplates.navigationTemplates || [];
         const wordpressExists = navTemplates.some(t => t.id === 'wordpress' || t.name.toLowerCase().includes('wordpress'));
         const wixExists = navTemplates.some(t => t.id === 'wix' || t.name.toLowerCase().includes('wix'));
@@ -704,22 +687,9 @@ function renderWebsiteTemplates() {
         console.log(`数据检查: WordPress ${wordpressExists ? '存在' : '不存在'} 于navigationTemplates`);
         console.log(`数据检查: WIX ${wixExists ? '存在' : '不存在'} 于navigationTemplates`);
         
-        // 确保WordPress和WIX存在于数据中，如果不存在则手动添加
-        if (!wordpressExists || !wixExists) {
-            console.warn('WordPress或WIX在数据中不存在，尝试添加默认数据');
-            
-            // 如果WordPress不存在，添加默认数据
-            if (!wordpressExists && !navTemplates.some(t => t.id === 'wordpress')) {
-                const wordpressTemplate = {
-                    id: "wordpress",
-                    name: "WordPress",
-                    url: "https://wordpress.com/discover",
-                    description: "世界上最流行的内容管理系统，提供丰富的模板和插件，适合建设各类网站",
-                    tag: "建站平台"
-                };
-                navTemplates.push(wordpressTemplate);
-                console.log('已添加WordPress默认数据');
-            }
+        // 只确保WIX存在于数据中，WordPress已移至社区平台分类
+        if (!wixExists) {
+            console.warn('WIX在数据中不存在，尝试添加默认数据');
             
             // 如果WIX不存在，添加默认数据
             if (!wixExists && !navTemplates.some(t => t.id === 'wix')) {
@@ -739,8 +709,8 @@ function renderWebsiteTemplates() {
             // 清空导航模板容器
             navigationTemplatesSection.innerHTML = '';
             
-            // 优先渲染WordPress和WIX
-            const priorityTemplates = ['wordpress', 'wix'];
+            // 现在只优先渲染WIX，WordPress已移至社区平台分类
+            const priorityTemplates = ['wix'];
             
             // 创建一个独立的函数来渲染单个模板并记录状态
             const renderSingleTemplate = (template) => {
@@ -784,41 +754,24 @@ function renderWebsiteTemplates() {
             });
             
             // 检查渲染后的DOM
-            const wordpressCard = navigationTemplatesSection.querySelector('.tool-card[data-id="wordpress"]');
             const wixCard = navigationTemplatesSection.querySelector('.tool-card[data-id="wix"]');
             
-            console.log(`DOM检查: WordPress卡片 ${wordpressCard ? '已渲染' : '未渲染'}`);
             console.log(`DOM检查: WIX卡片 ${wixCard ? '已渲染' : '未渲染'}`);
             
-            // 如果仍然找不到卡片，尝试最后的挽救措施
-            if (!wordpressCard || !wixCard) {
-                console.warn('即使在渲染后，仍然找不到一些特殊模板卡片，尝试直接创建');
+            // 如果仍然找不到卡片，尝试最后的挽救措施 (仅处理WIX)
+            if (!wixCard) {
+                console.warn('即使在渲染后，仍然找不到WIX卡片，尝试直接创建');
                 
-                if (!wordpressCard) {
-                    const wordpressTemplate = navTemplates.find(t => t.id === 'wordpress') || {
-                        id: "wordpress",
-                        name: "WordPress",
-                        url: "https://wordpress.com/discover",
-                        description: "世界上最流行的内容管理系统，提供丰富的模板和插件，适合建设各类网站",
-                        tag: "建站平台"
-                    };
-                    const wpCard = createToolCard(wordpressTemplate);
-                    navigationTemplatesSection.appendChild(wpCard);
-                    console.log('直接创建并添加WordPress卡片');
-                }
-                
-                if (!wixCard) {
-                    const wixTemplate = navTemplates.find(t => t.id === 'wix') || {
-                        id: "wix",
-                        name: "WIX",
-                        url: "https://www.wix.com/",
-                        description: "直观的拖拽式网站建设平台，提供丰富的模板和自定义选项，无需编程技能即可创建专业网站",
-                        tag: "建站平台"
-                    };
-                    const wxCard = createToolCard(wixTemplate);
-                    navigationTemplatesSection.appendChild(wxCard);
-                    console.log('直接创建并添加WIX卡片');
-                }
+                const wixTemplate = navTemplates.find(t => t.id === 'wix') || {
+                    id: "wix",
+                    name: "WIX",
+                    url: "https://www.wix.com/",
+                    description: "直观的拖拽式网站建设平台，提供丰富的模板和自定义选项，无需编程技能即可创建专业网站",
+                    tag: "建站平台"
+                };
+                const wxCard = createToolCard(wixTemplate);
+                navigationTemplatesSection.appendChild(wxCard);
+                console.log('直接创建并添加WIX卡片');
             }
         } else {
             console.warn('未找到navigation-templates区域或数据为空');
@@ -974,4 +927,55 @@ function checkWebsiteTemplateData() {
     });
     
     return true;
+}
+
+// 修复可能被覆盖的网站模板
+function fixPossiblyOverriddenTemplates() {
+    try {
+        const navTemplates = window.toolsData.websiteTemplates.navigationTemplates;
+        if (!navTemplates || !Array.isArray(navTemplates)) {
+            console.warn('navigationTemplates不存在或不是数组');
+            return;
+        }
+        
+        console.log(`检查导航模板完整性，当前有 ${navTemplates.length} 个模板`);
+        
+        const checkTemplate = (templateId) => {
+            return navTemplates.some(t => t.id === templateId);
+        };
+        
+        // 只检查WIX是否存在，WordPress已移至社区平台分类
+        const wixExists = checkTemplate('wix');
+        
+        console.log(`模板检查结果: WIX ${wixExists ? '存在' : '不存在'}`);
+        
+        // 只处理WIX不存在的情况
+        if (!wixExists) {
+            console.warn('WIX在模板中不存在，检查其他可能的来源');
+            
+            // 查找可能在其他地方定义的模板
+            for (const tool of Object.values(window.toolsData)) {
+                if (Array.isArray(tool)) {
+                    const foundTool = tool.find(t => 
+                        t.name && t.name.toLowerCase().includes('wix'));
+                    
+                    if (foundTool) {
+                        console.log('在其他分类中找到WIX工具:', foundTool);
+                        const wixTemplate = {
+                            id: "wix",
+                            name: "WIX",
+                            url: foundTool.url || "https://www.wix.com/",
+                            description: foundTool.description || "直观的拖拽式网站建设平台",
+                            tag: "建站平台"
+                        };
+                        navTemplates.push(wixTemplate);
+                        console.log('已添加WIX到navigationTemplates');
+                        break;
+                    }
+                }
+            }
+        }
+    } catch (error) {
+        console.error('修复模板时出错:', error);
+    }
 }
