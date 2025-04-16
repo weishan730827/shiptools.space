@@ -2,7 +2,7 @@
 // import toolsData from './data.js';
 
 // 添加调试输出,用于跟踪脚本执行
-console.log("main.js开始执行...");
+console.log("%c MAIN.JS STARTED - 唯一导航处理代码开始执行", "background: #4a90e2; color: white; font-size: 20px; padding: 5px;");
 
 // DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
