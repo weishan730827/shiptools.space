@@ -537,5 +537,87 @@ function debugHtmlStructure() {
 5. **优雅降级**：
    - 设计可适应不同HTML结构的代码
    - 在理想选择不可用时提供备选方案
-``` 
-</rewritten_file>
+
+## WordPress分类调整过程
+
+### 背景
+
+在导航站项目中，我们需要将WordPress从"网站模板"分类移动到"社区平台"分类，以更准确地反映其作为博客社区平台的本质。
+
+### 调整过程
+
+#### 1. 数据结构修改
+
+- 从`websiteTemplates.navigationTemplates`数组中移除WordPress
+- 从`websiteTools`数组中移除WordPress
+- 将WordPress添加到`communityPlatforms`数组，更新描述以强调其博客社区特性：
+
+```javascript
+{
+    id: "wordpress-community",
+    name: "WordPress",
+    url: "https://wordpress.com/discover",
+    description: "全球最大的博客社区平台之一，拥有数百万博客内容和活跃的创作者社区，用户可以阅读、创作和互动",
+    tag: "博客社区"
+}
+```
+
+#### 2. JavaScript逻辑修改
+
+- 更新`renderWebsiteTemplates`函数，移除自动添加WordPress的代码
+- 修改`checkWebsiteTemplateData`函数，只检查WIX模板而不再检查WordPress
+- 更新搜索逻辑，使搜索"wordpress"时自动定向到社区平台分类
+- 添加专门的处理逻辑，在社区平台分类中突出显示WordPress卡片
+
+#### 3. 版本和缓存控制
+
+- 更新JavaScript版本号到1.2.0
+- 添加强制刷新功能，确保用户获取最新版本
+- 添加明确的注释和日志输出，说明WordPress已移至社区平台分类
+
+### 技术细节
+
+1. 移除WordPress时保留WIX的处理：
+```javascript
+// 只确保WIX存在于数据中，WordPress已移至社区平台分类
+if (!wixExists) {
+    console.warn('WIX在数据中不存在，尝试添加默认数据');
+    // ... 添加WIX的代码 ...
+}
+```
+
+2. 搜索优化，处理WordPress搜索请求：
+```javascript
+else if (searchTerm === 'wordpress') {
+    // WordPress现在在社区平台分类
+    activateSection('community');
+    console.log('检测到WordPress搜索，已激活社区平台区域');
+    
+    // 查找并高亮显示WordPress卡片
+    const communitySection = document.getElementById('community-platforms');
+    if (communitySection) {
+        const wordpressCard = communitySection.querySelector('.tool-card[data-id="wordpress-community"]');
+        if (wordpressCard) {
+            wordpressCard.style.display = 'block';
+            wordpressCard.classList.add('highlight');
+            // ... 更多代码 ...
+        }
+    }
+}
+```
+
+### 部署注意事项
+
+- 调整后可能需要强制刷新浏览器缓存（Ctrl+F5）
+- 确保CDN缓存已更新
+- 查看浏览器控制台确认加载了最新版本（版本1.2.0）
+
+### 结果
+
+调整完成后，WordPress仅显示在社区平台分类中，不再显示在网站模板分类中，更准确地反映了它作为博客社区平台的特性。
+
+### 相关提交
+
+- "将WordPress从网站模板和建设工具分类移至社区平台分类，更准确反映其博客社区特性"
+- "优化checkWebsiteTemplateData函数：移除WordPress检查，只保留WIX检查"
+- "更新main.js版本号并添加强制刷新功能，解决WordPress分类问题"
