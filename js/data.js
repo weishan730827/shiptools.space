@@ -839,6 +839,24 @@ const toolsData = {
             description: "AI图像生成工具，通过文本描述创建专业级别的艺术作品和视觉内容，适合概念设计和灵感收集",
             tag: "AI设计"
         }
+    ],
+    
+    // 网站建设工具
+    websiteTools: [
+        {
+            id: "wordpress-site",
+            name: "WordPress",
+            url: "https://wordpress.com/discover",
+            description: "世界上最流行的内容管理系统，提供丰富的模板和插件，适合建设各类网站",
+            tag: "建站平台"
+        },
+        {
+            id: "wix-site",
+            name: "WIX",
+            url: "https://www.wix.com/",
+            description: "直观的拖拽式网站建设平台，提供丰富的模板和自定义选项，无需编程技能即可创建专业网站",
+            tag: "建站平台"
+        }
     ]
 };
 
