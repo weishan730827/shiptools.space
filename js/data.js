@@ -19,7 +19,7 @@ const toolsData = {
         {
             id: "ai-requests",
             name: "AI导航站需求列表",
-            url: "https://theresaforthat.com/requests",
+            url: "https://theresanaiforthat.com/requests/",
             description: "提供AI导航站的需求列表，了解用户对AI工具的真实需求",
             tag: "需求分析"
         },
@@ -62,6 +62,13 @@ const toolsData = {
     
     // 独立开发必备工具
     devTools: [
+        {
+            id: "bolt-new",
+            name: "Bolt.new",
+            url: "https://bolt.new/",
+            description: "无需配置环境的云端AI开发工具，可以在几分钟内从想法到完整网站，一键部署上线",
+            tag: "AI开发"
+        },
         {
             id: "lean-domain-search",
             name: "LeanDomainSearch",
