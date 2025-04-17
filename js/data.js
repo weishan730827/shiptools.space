@@ -219,7 +219,7 @@ const toolsData = {
         {
             id: "windsurf",
             name: "Windsurf IDE",
-            url: "https://windsurf.dev/",
+            url: "https://windsurfai.org/zh#google_vignette",
             description: "现代化的集成开发环境，支持多语言和云端协作开发",
             tag: "开发工具"
         },
