@@ -1,0 +1,20 @@
+# 添加XML和XSL的MIME类型
+AddType application/xml .xml
+AddType text/xml .xml
+AddType text/xsl .xsl
+
+# 设置XML文件的正确编码
+AddCharset UTF-8 .xml
+AddCharset UTF-8 .xsl
+
+# 强制Cloudflare和浏览器不缓存XML文件
+<FilesMatch "\.(xml|xsl)$">
+  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  Header set Pragma "no-cache"
+  Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+</FilesMatch>
+
+# 增加对sitemap-text.xml的特殊处理
+<Files "sitemap-text.xml">
+  Header set Content-Type "text/plain; charset=UTF-8"
+</Files> 
