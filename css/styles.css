@@ -276,42 +276,35 @@ footer p {
     margin-bottom: 10px;
 }
 
-/* 修改网站地图链接为白色 */
-footer a {
-    color: #FFFFFF !important; 
+/* 网站地图链接样式 - 修复版 */
+footer a, .footer-link {
+    color: #FFFFFF !important;
     text-decoration: none;
 }
 
-footer a:hover {
-    color: #FF7E00 !important; /* 悬停时变为橙色 */
+footer a:hover, .footer-link:hover {
+    color: #FF7E00 !important;
     text-decoration: underline;
 }
 
+/* 按钮样式 */
 .footer-link {
     display: inline-flex;
     align-items: center;
-    color: #FFFFFF;
-    text-decoration: none;
     padding: 8px 20px;
     border-radius: 4px;
-    background-color: #FF6200;
+    background-color: #444; /* 深灰色背景，不那么突兀 */
     font-weight: 600;
-    font-size: 1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    letter-spacing: 0.5px;
 }
 
 .footer-link:hover {
-    background-color: #FF7E00;
-    color: #FFFFFF;
+    background-color: #555; /* 悬停时稍微变亮 */
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .footer-link svg {
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+    margin-right: 8px;
 }
 
 /* 响应式设计 */
