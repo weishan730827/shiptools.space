@@ -265,6 +265,31 @@ footer {
 
 footer p {
     opacity: 0.8;
+    margin-bottom: 15px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    color: #FF7E00;
+    text-decoration: none;
+    padding: 6px 15px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFA500;
+    transform: translateY(-2px);
 }
 
 /* 响应式设计 */
